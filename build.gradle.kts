@@ -38,7 +38,8 @@ val pylonVersion = project.properties["pylon.version"] as String
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
     compileOnly("io.github.pylonmc:rebar:$rebarVersion")
-    compileOnly("io.github.pylonmc:pylon:$pylonVersion")
+    //compileOnly("io.github.pylonmc:pylon:$pylonVersion")
+    compileOnly(files("D:/project/pylon_plugins/pylon-0.35.0.jar"))
 }
 
 // Settings for IntelliJ

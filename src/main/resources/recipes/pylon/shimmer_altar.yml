@@ -1,0 +1,40 @@
+doramachines:explosion_pickaxe:
+  shape:
+    - "SGS"
+    - "KAK"
+    - " D "
+  key:
+    S: pylon:shimmer_dust_2
+    G: pylon:emerald_dust
+    K: minecraft:tnt
+    A: minecraft:netherite_pickaxe
+    D: pylon:diamond_dust
+  result: doramachines:explosion_pickaxe
+  time-seconds: 45
+
+doramachines:explosion_shovel:
+  shape:
+    - "SGS"
+    - "KAK"
+    - " D "
+  key:
+    S: pylon:shimmer_dust_2
+    G: pylon:emerald_dust
+    K: minecraft:tnt
+    A: minecraft:netherite_shovel
+    D: pylon:diamond_dust
+  result: doramachines:explosion_shovel
+  time-seconds: 45
+
+doramachines:unbreakable_rune:
+  shape:
+    - "SLS"
+    - "FMF"
+    - "SLS"
+  key:
+    S: pylon:shimmer_dust_3
+    L: minecraft:obsidian
+    F: pylon:igneous_composite
+    M: minecraft:netherite_ingot
+  result: doramachines:unbreakable_rune
+  time-seconds: 70

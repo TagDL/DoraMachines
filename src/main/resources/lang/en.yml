@@ -1,13 +1,140 @@
-addon: "Example Addon"
+addon: "Dora Machines"
 
 item:
-  example_item:
-    name: "Example Item"
+  explosion_pickaxe:
+    name: "Explosion Pickaxe"
     lore: |-
-      <arrow> <insn>Right click a block</insn> to summon lightning
+      <arrow> Destory 5x5x5 or 3x3x3 area's block
+      <arrow> Use <yellow>Shift <white>+ <green>Right Click <white>to exchange model
+  explosion_shovel:
+    name: "Explosion Shovel"
+    lore: |-
+      <arrow> Destory 5x5x5 or 3x3x3 area's block
+      <arrow> Use <yellow>Shift <white>+ <green>Right Click <white>to exchange model
+  unbreakable_rune:
+    name: "Unbreakable Rune"
+    lore: |-
+      <arrow> Give item unbreakable
+  plan_c:
+    name: "Plan C"
+    lore: |-
+      <arrow> <red>Kill <white>all mobs within a 5-degree radius include yourself
+      <arrow> <red>Destory <white>itself after use
+  industrial_miner:
+    name: "Industrial Miner"
+    lore: |-
+      <star> Multiblocks
+      <arrow> 2x Diamond Block
+      <arrow> 2x Facing UP piston
+      <arrow> 1x Chest
+      <arrow> Consume lava to dig ores
+      <arrow> Need to put lava bucket in the chest
+      <arrow> Right Click after put lava bucket in the chest
+    waila: "Industrial Miner | %contents% | %processing%"
+  golden_bone_meal:
+    name: "Golden Bone Meal"
+    lore: |-
+      <arrow> Let's all crop include sugar cane grow fully mature
+  filter:
+    name: "Filter"
+    lore: |-
+      <arrow> Used for filter base
+  filter_base:
+    name: "Filter Base"
+    lore: |- 
+      <arrow> Require a filter
+      <arrow> Require waterlogged
+      <arrow> Output dust per tick
+    waila: "Filter Base | %contents%"
+  multi_fluid_tank:
+    name: "Multifluid Tank"
+    lore: |-
+      <arrow> Support four type of fluid
+      <arrow> Require fluid tank casing
+      <arrow> Max capacity depend on the casing you put
+  timing_charger:
+    name: "Timing Charger"
+    lore: |-
+      <arrow> Active the second block down which block type is Dropper/Dispenser
+      <arrow> Active per specified tick you set
+    waila: "Timing Charger | Now delays: <yellow>%delay% <white>ticks"
+  liselette_enchanter:
+    name: "Liselette Enchanter"
+    lore: |-
+      <arrow> Allow enchant pylon equitment through enchant book
+      <arrow> <attr>Obscyra usage:</attr> %fluid-per-craft% per seconds
+      <arrow> <attr>Buffer:</attr> %buffer%
+    waila:
+      running: "Liselette Enchanter | Time left: <yellow>%time%<white>s | %input-bar%"
+      not_running: "Liselette Enchanter | <red>Not running <white>| %input-bar%"
+  liselette_disenchanter:
+    name: "Liselette Disenchanter"
+    lore: |-
+      <arrow> Allow extract enchantment to enchant book / book
+      <arrow> <attr>Obscyra usage:</attr> %fluid-per-craft% per seconds
+      <arrow> <attr>Buffer:</attr> %buffer%
+    waila:
+      running: "Liselette Disenchanter | Time left: <yellow>%time%<white>s | %input-bar%"
+      not_running: "Liselette Disenchanter | <red>Not running <white>| %input-bar%"
 
-  example_block:
-    name: "Example Block"
+message:
+  unbreakable_result:
+    tooltip: "<arrow> <#ff5e00>Can't bitten to pieces nya"
+    success: "<red>Your item is unbreakable now nya"
+  explosion:
+    success: "<yellow>Exchange area to：<red>%radius%x%radius%x%radius%"
+  industrial_miner:
+    finish: "<green>Industrial Miner finish work, Collected <yellow>%amount%<green> ores"
+    lava: "<red>Industrial Miner require a lava bucket"
+    full: "<red>Chest is full"
+    uncomplete: "<red>Multiblock doesn't finish"
+    blocked: "<red>Piston has been blocked"
+    running: "<red>Industrial Miner is running"
+
+guide:
+  page:
+    doramachines: "<yellow>Dora Machines"
+    filter_things: "Filtered things"
+    doramachines_tool: "Tool"
+    doramachines_block: "Block"
+  filter_things: |-
+    <arrow> <attr>Weight:</attr> %weight%
+
+gui:
+  filter: "Filter"
+  multi_fluid_tank:
+    name: "Multifluid Tank"
+    fluid_tank_casing: "Any fluid tank casing"
+    fluid_type: "Choose fluid type"
+    status:
+      name: "Output switch"
+      running: "Output"
+      not_running: "Not output"
+    capacity:
+      name: "Currently storing status"
+      max_capacity: "Capacity: %max%"
+      empty: "Empty"
+      not_empty: "Storing: %capacity%"
+  timing_charger:
+    name: "Timing: %amount%"
     lore: |-
-      <arrow> A block that spawns campfire smoke particles
-      <arrow> <insn>Left or right click</insn> to spawn campfire smoke
+      <arrow> <insn>Left click</insn> to increase %per%
+      <arrow> <insn>Right click</insn> to decrease %per%
+      <arrow> <insn>Min:</insn> %min%
+  liselette_enchanter:
+    equitment_name: "<yellow>Put any equitment"
+    enchant_name: "<yellow>Put any enchant book"
+    progress: "Progress"
+  liselette_disenchanter:
+    equitment_name: "<yellow>Put any equitment"
+    book_name: "<yellow>Put any enchant book / book"
+    progress: "Progress"
+
+waila:
+  industrial_miner:
+    none: "<red>Not working"
+    minewhat: "<yellow>Collected：<green>%ore%"
+    time: "Time left：%time%s %bars%"
+  filter_base:
+    none: "<red>Not working"
+    filterwhat: "<yellow>Collected：<green>%filter%"

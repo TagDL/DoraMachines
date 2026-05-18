@@ -1,0 +1,86 @@
+package io.github.tagdl.DoraMachines;
+
+import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
+import io.github.pylonmc.rebar.content.guide.RebarGuide;
+import io.github.pylonmc.rebar.item.RebarItem;
+import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
+import io.github.tagdl.DoraMachines.blocks.LiseletteDisenchanter;
+import io.github.tagdl.DoraMachines.blocks.LiseletteEnchanter;
+import io.github.tagdl.DoraMachines.guide.FilterPage;
+import io.github.tagdl.DoraMachines.items.ExplosionPickaxe;
+import io.github.tagdl.DoraMachines.items.ExplosionShovel;
+import io.github.tagdl.DoraMachines.items.Filter;
+import io.github.tagdl.DoraMachines.items.GoldenBoneMeal;
+import io.github.tagdl.DoraMachines.items.PlanC;
+import io.github.tagdl.DoraMachines.items.UnbreakableRune;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.github.pylonmc.rebar.config.Settings;
+
+
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
+
+public final class DoraMachinesItems {
+
+    public static final ItemStack EXPLOSION_PICKAXE = ItemStackBuilder.rebar(Material.NETHERITE_PICKAXE, DoraMachinesKeys.EXPLOSION_PICKAXE)
+                .set(DataComponentTypes.MAX_DAMAGE, Settings.get(DoraMachinesKeys.EXPLOSION_PICKAXE).getOrThrow("durability", ConfigAdapter.INTEGER))
+            .build();
+    public static final ItemStack EXPLOSION_SHOVEL = ItemStackBuilder.rebar(Material.NETHERITE_SHOVEL, DoraMachinesKeys.EXPLOSION_SHOVEL)
+                .set(DataComponentTypes.MAX_DAMAGE, Settings.get(DoraMachinesKeys.EXPLOSION_SHOVEL).getOrThrow("durability", ConfigAdapter.INTEGER))
+            .build();
+    public static final ItemStack UNBREAKABLE_RUNE = ItemStackBuilder.rebar(Material.FIREWORK_STAR, DoraMachinesKeys.UNBREAKABLE_RUNE)
+                .set(DataComponentTypes.UNBREAKABLE)
+            .build();
+    public static final ItemStack GOLDEN_BONE_MEAL = ItemStackBuilder.rebar(Material.SUGAR, DoraMachinesKeys.GOLDEN_BONE_MEAL)
+            .build();
+    public static final ItemStack INDUSTRIAL_MINER = ItemStackBuilder.rebar(Material.BLAST_FURNACE, DoraMachinesKeys.INDUSTRIAL_MINER)
+            .build();
+    public static final ItemStack FILTER_BASE = ItemStackBuilder.rebar(Material.PRISMARINE_WALL, DoraMachinesKeys.FILTER_BASE)
+            .build();
+    public static final ItemStack FILTER = ItemStackBuilder.rebar(Material.FISHING_ROD, DoraMachinesKeys.FILTER)
+            .build();
+    public static final ItemStack PLAN_C = ItemStackBuilder.rebar(Material.CRIMSON_BUTTON, DoraMachinesKeys.PLAN_C)
+            .build();
+    public static final ItemStack MULTI_FLUID_TANK = ItemStackBuilder.rebar(Material.LIGHT_BLUE_STAINED_GLASS, DoraMachinesKeys.MULTI_FLUID_TANK)
+            .build();
+    public static final ItemStack TIMING_CHARGER = ItemStackBuilder.rebar(Material.RED_GLAZED_TERRACOTTA, DoraMachinesKeys.TIMING_CHARGER)
+            .build();
+    public static final ItemStack LISELETTE_ENCHANTER = ItemStackBuilder.rebar(Material.POLISHED_DIORITE_SLAB, DoraMachinesKeys.LISELETTE_ENCHANTER)
+            .build();
+    public static final ItemStack LISELETTE_DISENCHANTER = ItemStackBuilder.rebar(Material.POLISHED_ANDESITE_SLAB, DoraMachinesKeys.LISELETTE_DISENCHANTER)
+            .build();
+
+    public static void initialize() {
+        // Register an item using the ExampleItem class
+        RebarItem.register(ExplosionPickaxe.class, EXPLOSION_PICKAXE);
+        DoraMachinesPages.TOOL.addItem(EXPLOSION_PICKAXE);
+        RebarItem.register(ExplosionShovel.class, EXPLOSION_SHOVEL);
+        DoraMachinesPages.TOOL.addItem(EXPLOSION_SHOVEL);
+        RebarItem.register(UnbreakableRune.class, UNBREAKABLE_RUNE);
+        DoraMachinesPages.TOOL.addItem(UNBREAKABLE_RUNE);
+        RebarItem.register(GoldenBoneMeal.class, GOLDEN_BONE_MEAL);
+        DoraMachinesPages.TOOL.addItem(GOLDEN_BONE_MEAL);
+        RebarItem.register(Filter.class, FILTER);
+        DoraMachinesPages.TOOL.addItem(FILTER);
+        RebarItem.register(PlanC.class, PLAN_C);
+        DoraMachinesPages.TOOL.addItem(PLAN_C);
+        // Register a 'normal' item which represents Example Block
+        // Blocks and their corresponding item will almost always share the same key
+        // Note the 3rd parameter - this is the key of the corresponding block registered in [ExampleAddonBlocks]
+        RebarItem.register(RebarItem.class, INDUSTRIAL_MINER, DoraMachinesKeys.INDUSTRIAL_MINER);
+        DoraMachinesPages.BLOCK.addItem(INDUSTRIAL_MINER);
+        RebarItem.register(RebarItem.class, FILTER_BASE, DoraMachinesKeys.FILTER_BASE);
+        DoraMachinesPages.BLOCK.addItem(FILTER_BASE);
+        RebarGuide.getOrCreateInfoPage(DoraMachinesKeys.FILTER_BASE)
+                .addButton(FilterPage.getButton());
+        RebarItem.register(RebarItem.class, MULTI_FLUID_TANK, DoraMachinesKeys.MULTI_FLUID_TANK);
+        DoraMachinesPages.BLOCK.addItem(MULTI_FLUID_TANK);
+        RebarItem.register(RebarItem.class, TIMING_CHARGER, DoraMachinesKeys.TIMING_CHARGER);
+        DoraMachinesPages.BLOCK.addItem(TIMING_CHARGER);
+        RebarItem.register(LiseletteEnchanter.Item.class, LISELETTE_ENCHANTER, DoraMachinesKeys.LISELETTE_ENCHANTER);
+        DoraMachinesPages.BLOCK.addItem(LISELETTE_ENCHANTER);
+        RebarItem.register(LiseletteDisenchanter.Item.class, LISELETTE_DISENCHANTER, DoraMachinesKeys.LISELETTE_DISENCHANTER);
+        DoraMachinesPages.BLOCK.addItem(LISELETTE_DISENCHANTER);
+    }
+}

@@ -1,0 +1,92 @@
+doramachines:golden_bone_meal:
+  pattern:
+    - " A "
+    - "ABA"
+    - " A "
+  key:
+    A: minecraft:gold_nugget
+    B: minecraft:bone_meal
+  result: doramachines:golden_bone_meal
+  category: misc
+
+doramachines:industrial_miner:
+  pattern:
+    - "FSF"
+    - "FAF"
+    - "FBF"
+  key:
+    F: pylon:iron_sheet
+    B: minecraft:iron_pickaxe
+    S: minecraft:bucket
+    A: minecraft:blast_furnace
+  result: doramachines:industrial_miner
+  category: building
+
+doramachines:filter_base:
+  pattern:
+    - "FSF"
+    - "F F"
+    - "FSF"
+  key:
+    F: "#minecraft:wooden_fences"
+    S: minecraft:stick
+  result: doramachines:filter_base
+  category: building
+
+doramachines:filter:
+  pattern:
+    - "FFF"
+    - "FSF"
+    - "FFF"
+  key:
+    F: pylon:fiber
+    S: pylon:filter_mesh
+  result: doramachines:filter
+  category: tool
+
+doramachines:multi_fluid_tank:
+  pattern:
+    - "GFG"
+    - "F F"
+    - "GBG"
+  key:
+    F: pylon:steel_sheet
+    B: pylon:fluid_tank
+    G: minecraft:glass_pane
+  result: doramachines:multi_fluid_tank
+  category: building
+doramachines:timing_charger:
+  pattern:
+    - "FBF"
+    - "F F"
+    - "FGF"
+  key:
+    F: pylon:copper_sheet
+    B: minecraft:redstone
+    G: minecraft:redstone_torch
+  result: doramachines:timing_charger
+  category: building
+doramachines:liselette_enchanter:
+  pattern:
+    - " B "
+    - "FAF"
+    - "FGF"
+  key:
+    F: pylon:liselette_conductor
+    B: minecraft:blue_carpet
+    G: pylon:fluid_pipe_igneous_composite
+    A: minecraft:enchanting_table
+  result: doramachines:liselette_enchanter
+  category: building
+doramachines:liselette_disenchanter:
+  pattern:
+    - " B "
+    - "FAF"
+    - "FGF"
+  key:
+    F: pylon:liselette_conductor
+    B: minecraft:purple_carpet
+    G: pylon:fluid_pipe_igneous_composite
+    A: minecraft:enchanting_table
+  result: doramachines:liselette_disenchanter
+  category: building

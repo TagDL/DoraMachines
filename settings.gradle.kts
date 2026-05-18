@@ -1,1 +1,1 @@
-rootProject.name = "ExampleAddon"
+rootProject.name = "DoraMachines"

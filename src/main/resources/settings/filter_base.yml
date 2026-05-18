@@ -1,0 +1,21 @@
+filter_things:
+  - value: pylon:rock_dust
+    weight: 1.0
+  - value: minecraft:redstone
+    weight: 0.5
+  - value: pylon:tin_dust
+    weight: 0.5
+  - value: pylon:gold_dust
+    weight: 0.05
+  - value: pylon:coal_dust
+    weight: 0.5
+  - value: pylon:diamond_dust
+    weight: 0.05
+  - value: pylon:emerald_dust
+    weight: 0.05
+  - value: pylon:iron_dust
+    weight: 0.5
+  - value: pylon:copper_dust
+    weight: 0.5
+  - value: pylon:gypsum_dust
+    weight: 0.5

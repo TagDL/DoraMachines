@@ -1,0 +1,141 @@
+addon: "哆啦科技"
+
+item:
+  explosion_pickaxe:
+    name: "爆炸镐"
+    lore: |-
+      <arrow> 破坏5x5x5或3x3x3的方块
+      <arrow> 使用 <yellow>潜行键 <white>+ <green>右键 <white>切换模式
+  explosion_shovel:
+    name: "爆炸铲"
+    lore: |-
+      <arrow> 破坏5x5x5或3x3x3的方块
+      <arrow> 使用 <yellow>潜行键 <white>+ <green>右键 <white>切换模式
+  unbreakable_rune:
+    name: "不可破坏符文"
+    lore: |-
+      <arrow> 给予物品无法破坏效果
+  plan_c:
+    name: "C计划"
+    lore: |-
+      <arrow> <red>杀死<white>以自己为中心半径5的所有生物
+      <arrow> 右键使用后<red>移除
+  industrial_miner:
+    name: "工业矿机"
+    lore: |-
+      <star> 多方块结构
+      <arrow> 2x 钻石块
+      <arrow> 2x 朝上的活塞
+      <arrow> 1x 箱子
+      <arrow> 消耗岩浆挖取矿物
+      <arrow> 需要把岩浆桶放置在箱子里
+      <arrow> 放置岩浆桶后右键高炉
+    waila: "工业矿机 | %contents% | %processing%"
+  golden_bone_meal:
+    name: "黄金骨粉"
+    lore: |-
+      <arrow> 使包括甘蔗在内的作物成长到完全成熟阶段
+      <arrow> os: 金坷垃说是
+  filter:
+    name: "滤网"
+    lore: |-
+      <arrow> 用于滤网底座
+  filter_base:
+    name: "滤网底座"
+    lore: |- 
+      <arrow> 需要放入滤网
+      <arrow> 需要放置在静态水中
+      <arrow> 可产出粉尘
+    waila: "滤网底座 | %contents%"
+  multi_fluid_tank:
+    name: "混合流体储罐"
+    lore: |-
+      <arrow> 支持储存四种液体
+      <arrow> 要求放入流体储罐
+      <arrow> 最大容量取决于放入储罐数量
+  timing_charger:
+    name: "定时充能器"
+    lore: |-
+      <arrow> 如果向下第二格方块类型为发射器/投掷器，则激活一次
+      <arrow> 每指定tick激活一次
+    waila: "定时充能器 | 现在延迟: <yellow>%delay% <white>刻"
+  liselette_enchanter:
+    name: "质源附魔台"
+    lore: |-
+      <arrow> 允许使用附魔书为pylon装备附魔
+      <arrow> <attr>每秒消耗黑曜灵浆:</attr> %fluid-per-craft%
+      <arrow> <attr>缓冲区:</attr> %buffer%
+    waila: 
+      running: "质源附魔台 | 剩余时间: <yellow>%time%<white>秒 | %input-bar%"
+      not_running: "质源附魔台 | <red>暂未运行 <white>| %input-bar%"
+  liselette_disenchanter:
+    name: "质源祛魔台"
+    lore: |-
+      <arrow> 允许将附魔从装备提取到附魔书或书本
+      <arrow> <attr>每秒消耗黑曜灵浆:</attr> %fluid-per-craft%
+      <arrow> <attr>缓冲区:</attr> %buffer%
+    waila: 
+      running: "质源祛魔台 | 剩余时间: <yellow>%time%<white>秒 | %input-bar%"
+      not_running: "质源祛魔台 | <red>暂未运行 <white>| %input-bar%"
+
+message:
+  unbreakable_result:
+    tooltip: "<arrow> <#ff5e00>没办法被咬烂了nya"
+    success: "<red>你的物品已经是无法破坏了nya"
+  explosion:
+    success: "<yellow>修改破坏范围为：<red>%radius%x%radius%x%radius%"
+  industrial_miner:
+    finish: "<green>工业矿机采矿完成，共采集<yellow>%amount%<green>个矿石"
+    lava: "<red>工业矿机缺少岩浆桶"
+    full: "<red>存储箱子已满"
+    uncomplete: "<red>工业矿机多方块结构未被正确完成"
+    blocked: "<red>活塞上方被方块阻挡了"
+    running: "<red>工业矿机已经在运行了"
+
+guide:
+  page:
+    doramachines: "<yellow>哆啦科技"
+    filter_things: "滤出的物品"
+    doramachines_tool: "工具"
+    doramachines_block: "方块"
+  filter_things: |-
+    <arrow> <attr>概率:</attr> %weight%
+
+gui:
+  filter: "滤网"
+  multi_fluid_tank:
+    name: "混合流体储罐"
+    fluid_tank_casing: "任意流体储罐"
+    fluid_type: "选择一种流体类型"
+    status:
+      name: "流出开关"
+      running: "允许输出"
+      not_running: "禁止输出"
+    capacity:
+      name: "储存状态"
+      max_capacity: "最大容量: %max%"
+      empty: "空"
+      not_empty: "正在储存: %capacity%"
+  timing_charger:
+    name: "当前延迟: %amount%"
+    lore: |-
+      <arrow> <insn>左键</insn> 以增加%per%刻延迟
+      <arrow> <insn>右键</insn> 以减少%per%刻延迟
+      <arrow> <insn>最小延迟为:</insn> %min%
+  liselette_enchanter:
+    equitment_name: "<yellow>放入任意装备"
+    enchant_name: "<yellow>放入任意附魔书"
+    progress: "进程"
+  liselette_disenchanter:
+    equitment_name: "<yellow>放入任意装备"
+    book_name: "<yellow>放入任意附魔书或书"
+    progress: "进程"
+
+waila:
+  industrial_miner:
+    none: "<red>暂未开采"
+    minewhat: "<yellow>采出：<green>%ore%"
+    time: "剩余时间：%time%s %bars%"
+  filter_base:
+    none: "<red>暂未滤出"
+    filterwhat: "<yellow>滤出：<green>%filter%"
