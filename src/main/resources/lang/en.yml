@@ -1,0 +1,13 @@
+addon: "Example Addon"
+
+item:
+  example_item:
+    name: "Example Item"
+    lore: |-
+      <arrow> <insn>Right click a block</insn> to summon lightning
+
+  example_block:
+    name: "Example Block"
+    lore: |-
+      <arrow> A block that spawns campfire smoke particles
+      <arrow> <insn>Left or right click</insn> to spawn campfire smoke

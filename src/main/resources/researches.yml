@@ -1,0 +1,6 @@
+example_research:
+  item: exampleaddon:example_item
+  cost: 2
+  unlocks:
+  - pylon:example_item
+  - pylon:example_block
