@@ -12,7 +12,7 @@ plugins {
     // used to run a test server locally
     id("xyz.jpenilla.run-paper") version "2.3.0"
     // lombok (provides useful annotations)
-    id("io.freefair.lombok") version "8.13.1"
+    id("io.freefair.lombok") version "9.5.0"
 }
 
 // Specify the 'group' (eg: io.github.pylonmc.exampleaddon)
@@ -27,7 +27,9 @@ repositories {
     maven("https://jitpack.io") {
         name = "JitPack"
     }
-    maven("https://repo.xenondevs.xyz/releases")
+    maven("https://repo.xenondevs.xyz/releases") {
+        name = "InvUI"
+    }
 }
 
 // Get dependency versions from gradle.properties
@@ -36,10 +38,13 @@ val pylonVersion = project.properties["pylon.version"] as String
 
 // Download dependencies
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
-    compileOnly("io.github.pylonmc:rebar:$rebarVersion")
+    compileOnly("io.papermc.paper:paper-api:26.1.2.build.+")
+    //compileOnly("io.github.pylonmc:rebar:$rebarVersion")
     //compileOnly("io.github.pylonmc:pylon:$pylonVersion")
-    compileOnly(files("D:/project/pylon_plugins/pylon-0.35.0.jar"))
+    compileOnly(files("D:/project/pylon_plugins/rebar-0.39.0.jar"))
+    compileOnly(files("D:/project/pylon_plugins/pylon-0.37.0.jar"))
+    compileOnly("xyz.xenondevs.invui:invui:2.1.0")
+    compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.1.0")
 }
 
 // Settings for IntelliJ
@@ -52,7 +57,7 @@ idea {
 
 java {
     // Use Java 21
-    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
 }
 
 // Configuration for the output JAR
@@ -65,7 +70,7 @@ bukkit {
     name = project.name
     main = project.properties["main-class"] as String
     version = project.version.toString()
-    apiVersion = "1.21"
+    apiVersion = "26.1"
     depend = listOf("Rebar", "Pylon")
     load = BukkitPluginDescription.PluginLoadOrder.STARTUP
 }
@@ -90,5 +95,5 @@ tasks.runServer {
     }
 
     maxHeapSize = "2G"
-    minecraftVersion("1.21.11")
+    minecraftVersion("26.1.2")
 }
