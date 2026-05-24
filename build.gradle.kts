@@ -10,7 +10,7 @@ plugins {
     // used to generate plugin.yml
     id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
     // used to run a test server locally
-    id("xyz.jpenilla.run-paper") version "2.3.0"
+    id("xyz.jpenilla.run-paper") version "3.0.2"
     // lombok (provides useful annotations)
     id("io.freefair.lombok") version "9.5.0"
 }
@@ -41,8 +41,8 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:26.1.2.build.+")
     //compileOnly("io.github.pylonmc:rebar:$rebarVersion")
     //compileOnly("io.github.pylonmc:pylon:$pylonVersion")
-    compileOnly(files("D:/project/pylon_plugins/rebar-0.39.0.jar"))
-    compileOnly(files("D:/project/pylon_plugins/pylon-0.37.0.jar"))
+    compileOnly(files("D:/project/pylon_plugins/rebar-0.39.1-26.1.jar"))
+    compileOnly(files("D:/project/pylon_plugins/pylon-0.37.1-26.1.jar"))
     compileOnly("xyz.xenondevs.invui:invui:2.1.0")
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.1.0")
 }

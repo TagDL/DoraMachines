@@ -15,7 +15,7 @@ import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.base.RebarInteractor;
 
 public class PlanC extends RebarItem implements RebarInteractor {
-        public PlanC(@NotNull ItemStack stack) {
+    public PlanC(@NotNull ItemStack stack) {
         super(stack);
     }
     @Override

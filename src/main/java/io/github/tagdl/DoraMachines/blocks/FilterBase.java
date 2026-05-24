@@ -59,7 +59,6 @@ public class FilterBase extends RebarBlock implements
     private final VirtualInventory outputInventory = new VirtualInventory(16);
     private static Config settings = Settings.get(DoraMachinesKeys.FILTER_BASE);
     private static WeightedSet<ItemStack> canOutput = settings.getOrThrow("filter_things", ConfigAdapter.WEIGHTED_SET.from(ConfigAdapter.ITEM_STACK));
-    private final Double totalLength = 3.7;
     private final int doTick = 20;
     private ItemStack filterThing = new ItemStack(Material.AIR);
     @SuppressWarnings("unused")
@@ -126,6 +125,10 @@ public class FilterBase extends RebarBlock implements
     
     private ItemStack RandomAdd() {
         Double weightNow = 0.0;
+        Double totalLength = 0.0;
+        for (WeightedSet.Element<ItemStack> element : canOutput) {
+            totalLength += element.weight();
+        }
         Double randomDouble = random() * totalLength;
         for (WeightedSet.Element<ItemStack> element : canOutput) {
             weightNow += element.weight();

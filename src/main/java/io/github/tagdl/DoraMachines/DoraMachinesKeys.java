@@ -16,4 +16,5 @@ public class DoraMachinesKeys {
     public static final NamespacedKey TIMING_CHARGER = new NamespacedKey(DoraMachines.getInstance(), "timing_charger");
     public static final NamespacedKey LISELETTE_ENCHANTER = new NamespacedKey(DoraMachines.getInstance(), "liselette_enchanter");
     public static final NamespacedKey LISELETTE_DISENCHANTER = new NamespacedKey(DoraMachines.getInstance(), "liselette_disenchanter");
+    public static final NamespacedKey ROAD_TOOL = new NamespacedKey(DoraMachines.getInstance(), "road_tool");
 }

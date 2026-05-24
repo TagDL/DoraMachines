@@ -5,6 +5,7 @@ import io.github.pylonmc.rebar.addon.RebarAddon;
 import io.github.tagdl.DoraMachines.blocks.LiseletteDisenchanter;
 import io.github.tagdl.DoraMachines.blocks.LiseletteEnchanter;
 import io.github.tagdl.DoraMachines.items.GoldenBoneMeal;
+import io.github.tagdl.DoraMachines.items.RoadTool;
 import lombok.Getter;
 
 import org.bukkit.Bukkit;
@@ -37,6 +38,7 @@ public class DoraMachines extends JavaPlugin implements RebarAddon {
         pm.registerEvents(new GoldenBoneMeal.GoldenBoneMealListener(), this);
         pm.registerEvents(new LiseletteEnchanter.PlaceListener(), this);
         pm.registerEvents(new LiseletteDisenchanter.PlaceListener(), this);
+        pm.registerEvents(new RoadTool.PlayMoving(), this);
     }
 
     @Override

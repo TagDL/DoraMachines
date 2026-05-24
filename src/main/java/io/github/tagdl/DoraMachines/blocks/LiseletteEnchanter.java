@@ -19,7 +19,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3d;
 
-import io.github.pylonmc.pylon.Pylon;
 import io.github.pylonmc.pylon.PylonFluids;
 import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.block.RebarBlock;
@@ -33,7 +32,6 @@ import io.github.pylonmc.rebar.block.base.RebarVirtualInventoryBlock;
 import io.github.pylonmc.rebar.block.context.BlockBreakContext;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
-import io.github.pylonmc.rebar.content.fluid.FluidEndpointDisplay;
 import io.github.pylonmc.rebar.entity.display.ItemDisplayBuilder;
 import io.github.pylonmc.rebar.entity.display.transform.TransformBuilder;
 import io.github.pylonmc.rebar.event.PreRebarBlockPlaceEvent;
@@ -75,7 +73,7 @@ public class LiseletteEnchanter extends RebarBlock implements
     private final Component ENCHANT_DISPLAY = Component.translatable("doramachines.gui.liselette_enchanter.enchant_name");
     public final double buffer = getSettings().getOrThrow("buffer", ConfigAdapter.INTEGER);
     public final double fluidPerCraft = getSettings().getOrThrow("fluid-per-craft", ConfigAdapter.INTEGER);
-    private int timing = getSettings().getOrThrow("spend_seconds", ConfigAdapter.INTEGER) * 20;
+    private final int timing = getSettings().getOrThrow("spend_seconds", ConfigAdapter.INTEGER) * 20;
     public static class Item extends RebarItem {
 
         public final double fluidPerCraft = getSettings().getOrThrow("fluid-per-craft", ConfigAdapter.INTEGER);

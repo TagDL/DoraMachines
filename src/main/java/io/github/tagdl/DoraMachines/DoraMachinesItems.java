@@ -12,6 +12,7 @@ import io.github.tagdl.DoraMachines.items.ExplosionShovel;
 import io.github.tagdl.DoraMachines.items.Filter;
 import io.github.tagdl.DoraMachines.items.GoldenBoneMeal;
 import io.github.tagdl.DoraMachines.items.PlanC;
+import io.github.tagdl.DoraMachines.items.RoadTool;
 import io.github.tagdl.DoraMachines.items.UnbreakableRune;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.github.pylonmc.rebar.config.Settings;
@@ -50,6 +51,9 @@ public final class DoraMachinesItems {
             .build();
     public static final ItemStack LISELETTE_DISENCHANTER = ItemStackBuilder.rebar(Material.POLISHED_ANDESITE_SLAB, DoraMachinesKeys.LISELETTE_DISENCHANTER)
             .build();
+    public static final ItemStack ROAD_TOOL = ItemStackBuilder.rebar(Material.NETHER_STAR, DoraMachinesKeys.ROAD_TOOL)
+                .set(DataComponentTypes.MAX_STACK_SIZE, 1)
+            .build();
 
     public static void initialize() {
         // Register an item using the ExampleItem class
@@ -65,6 +69,8 @@ public final class DoraMachinesItems {
         DoraMachinesPages.TOOL.addItem(FILTER);
         RebarItem.register(PlanC.class, PLAN_C);
         DoraMachinesPages.TOOL.addItem(PLAN_C);
+        RebarItem.register(RoadTool.class, ROAD_TOOL);
+        DoraMachinesPages.TOOL.addItem(ROAD_TOOL);
         // Register a 'normal' item which represents Example Block
         // Blocks and their corresponding item will almost always share the same key
         // Note the 3rd parameter - this is the key of the corresponding block registered in [ExampleAddonBlocks]

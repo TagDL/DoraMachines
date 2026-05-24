@@ -63,7 +63,7 @@ item:
     name: "质源附魔台"
     lore: |-
       <arrow> 允许使用附魔书为pylon装备附魔
-      <arrow> <attr>每秒消耗黑曜灵浆:</attr> %fluid-per-craft%
+      <arrow> <attr>每秒消耗<lang:pylon.fluid.obscyra/>:</attr> %fluid-per-craft%
       <arrow> <attr>缓冲区:</attr> %buffer%
     waila: 
       running: "质源附魔台 | 剩余时间: <yellow>%time%<white>秒 | %input-bar%"
@@ -72,11 +72,21 @@ item:
     name: "质源祛魔台"
     lore: |-
       <arrow> 允许将附魔从装备提取到附魔书或书本
-      <arrow> <attr>每秒消耗黑曜灵浆:</attr> %fluid-per-craft%
+      <arrow> <attr>每秒消耗<lang:pylon.fluid.obscyra/>:</attr> %fluid-per-craft%
       <arrow> <attr>缓冲区:</attr> %buffer%
     waila: 
       running: "质源祛魔台 | 剩余时间: <yellow>%time%<white>秒 | %input-bar%"
       not_running: "质源祛魔台 | <red>暂未运行 <white>| %input-bar%"
+  road_tool:
+    name: "铺路工具"
+    lore: |-
+      <arrow> 潜行时且你脚下是空气，将自动放置方块
+      <arrow> 需要背包里有方块
+      <arrow> 方块将在 <yellow>%delete_delay%<gray> 秒后被移除
+      <arrow> 使用 <green>右键 <gray>开启/关闭此功能
+      <arrow> 使用 <yellow>Shift <gray>+ <green>右键 <gray>切换方块类型
+      <arrow> 当前状态: <yellow>%enabled%
+      <arrow> 方块类型: <yellow>%block%
 
 message:
   unbreakable_result:
@@ -91,6 +101,10 @@ message:
     uncomplete: "<red>工业矿机多方块结构未被正确完成"
     blocked: "<red>活塞上方被方块阻挡了"
     running: "<red>工业矿机已经在运行了"
+  road_tool:
+    enabled: "<green>铺路工具已开启"
+    disabled: "<red>铺路工具已关闭"
+    block_set: "<yellow>铺路方块已更改为 <green>%block%"
 
 guide:
   page:

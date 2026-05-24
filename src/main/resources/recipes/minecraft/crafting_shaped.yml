@@ -55,6 +55,7 @@ doramachines:multi_fluid_tank:
     G: minecraft:glass_pane
   result: doramachines:multi_fluid_tank
   category: building
+
 doramachines:timing_charger:
   pattern:
     - "FBF"
@@ -66,6 +67,7 @@ doramachines:timing_charger:
     G: minecraft:redstone_torch
   result: doramachines:timing_charger
   category: building
+
 doramachines:liselette_enchanter:
   pattern:
     - " B "
@@ -78,6 +80,7 @@ doramachines:liselette_enchanter:
     A: minecraft:enchanting_table
   result: doramachines:liselette_enchanter
   category: building
+
 doramachines:liselette_disenchanter:
   pattern:
     - " B "
@@ -90,3 +93,26 @@ doramachines:liselette_disenchanter:
     A: minecraft:enchanting_table
   result: doramachines:liselette_disenchanter
   category: building
+
+doramachines:road_tool:
+  pattern:
+    - "FAF"
+    - "AGA"
+    - "FAF"
+  key:
+    F: pylon:shimmer_dust_1
+    A: pylon:copper_sheet
+    G: pylon:diamond_dust
+  result: doramachines:road_tool
+  category: tool
+
+doramachines:plan_c:
+  pattern:
+    - " A "
+    - "AGA"
+    - " A "
+  key:
+    A: minecraft:netherite_block
+    G: minecraft:nether_star
+  result: doramachines:plan_c
+  category: tool

@@ -62,7 +62,7 @@ item:
     name: "Liselette Enchanter"
     lore: |-
       <arrow> Allow enchant pylon equitment through enchant book
-      <arrow> <attr>Obscyra usage:</attr> %fluid-per-craft% per seconds
+      <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per seconds
       <arrow> <attr>Buffer:</attr> %buffer%
     waila:
       running: "Liselette Enchanter | Time left: <yellow>%time%<white>s | %input-bar%"
@@ -71,11 +71,21 @@ item:
     name: "Liselette Disenchanter"
     lore: |-
       <arrow> Allow extract enchantment to enchant book / book
-      <arrow> <attr>Obscyra usage:</attr> %fluid-per-craft% per seconds
+      <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per seconds
       <arrow> <attr>Buffer:</attr> %buffer%
     waila:
       running: "Liselette Disenchanter | Time left: <yellow>%time%<white>s | %input-bar%"
       not_running: "Liselette Disenchanter | <red>Not running <white>| %input-bar%"
+  road_tool:
+    name: "Road Tool"
+    lore: |-
+      <arrow> Place blocks when sneaking if the block under you is air
+      <arrow> Require have blocks in backpack
+      <arrow> Remove blocks after <yellow>%delete_delay%<gray>s
+      <arrow> Use <green>Right Click <gray>to switch on/off
+      <arrow> Use <yellow>Shift <gray>+ <green>Right Click <gray>to exchange block type
+      <arrow> Toggle: <yellow>%enabled%
+      <arrow> Block type: <yellow>%block%
 
 message:
   unbreakable_result:
@@ -90,6 +100,10 @@ message:
     uncomplete: "<red>Multiblock doesn't finish"
     blocked: "<red>Piston has been blocked"
     running: "<red>Industrial Miner is running"
+  road_tool:
+    enabled: "<green>Road tool toggled on"
+    disabled: "<red>Road tool toggled off"
+    block_set: "<yellow>Road block changed to <green>%block%"
 
 guide:
   page:
