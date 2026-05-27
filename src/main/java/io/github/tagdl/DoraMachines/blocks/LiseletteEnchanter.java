@@ -24,7 +24,7 @@ import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
 import io.github.pylonmc.rebar.block.base.RebarFluidBufferBlock;
-import io.github.pylonmc.rebar.block.base.RebarGuiBlock;
+import io.github.pylonmc.rebar.block.base.RebarInventoryBlock;
 import io.github.pylonmc.rebar.block.base.RebarLogisticBlock;
 import io.github.pylonmc.rebar.block.base.RebarProcessor;
 import io.github.pylonmc.rebar.block.base.RebarTickingBlock;
@@ -60,7 +60,7 @@ public class LiseletteEnchanter extends RebarBlock implements
         RebarVirtualInventoryBlock,
         RebarFluidBufferBlock,
         RebarLogisticBlock,
-        RebarGuiBlock,
+        RebarInventoryBlock,
         RebarTickingBlock
 {
     private final VirtualInventory inputInventory = new VirtualInventory(1);

@@ -18,7 +18,7 @@ import org.jspecify.annotations.NonNull;
 
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
-import io.github.pylonmc.rebar.block.base.RebarGuiBlock;
+import io.github.pylonmc.rebar.block.base.RebarInventoryBlock;
 import io.github.pylonmc.rebar.block.base.RebarProcessor;
 import io.github.pylonmc.rebar.block.base.RebarTickingBlock;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
@@ -41,7 +41,7 @@ import xyz.xenondevs.invui.item.ItemProvider;
 public class TimingCharger extends RebarBlock implements
         RebarDirectionalBlock,
         RebarProcessor,
-        RebarGuiBlock,
+        RebarInventoryBlock,
         RebarTickingBlock
 {
     private static final NamespacedKey TIMING_KEY = pylonKey("amount");

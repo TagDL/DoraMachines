@@ -19,7 +19,7 @@ import io.github.pylonmc.rebar.config.Settings;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.config.Config;
 import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
-import io.github.pylonmc.rebar.block.base.RebarGuiBlock;
+import io.github.pylonmc.rebar.block.base.RebarInventoryBlock;
 import io.github.pylonmc.rebar.block.base.RebarLogisticBlock;
 import io.github.pylonmc.rebar.block.base.RebarProcessor;
 import io.github.pylonmc.rebar.block.base.RebarTickingBlock;
@@ -47,7 +47,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class FilterBase extends RebarBlock implements
         RebarDirectionalBlock,
-        RebarGuiBlock,
+        RebarInventoryBlock,
         RebarVirtualInventoryBlock,
         RebarProcessor,
         RebarLogisticBlock,

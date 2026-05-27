@@ -24,7 +24,7 @@ import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
 import io.github.pylonmc.rebar.block.base.RebarFluidBufferBlock;
-import io.github.pylonmc.rebar.block.base.RebarGuiBlock;
+import io.github.pylonmc.rebar.block.base.RebarInventoryBlock;
 import io.github.pylonmc.rebar.block.base.RebarLogisticBlock;
 import io.github.pylonmc.rebar.block.base.RebarProcessor;
 import io.github.pylonmc.rebar.block.base.RebarTickingBlock;
@@ -60,7 +60,7 @@ public class LiseletteDisenchanter extends RebarBlock implements
         RebarFluidBufferBlock,
         RebarVirtualInventoryBlock,
         RebarLogisticBlock,
-        RebarGuiBlock,
+        RebarInventoryBlock,
         RebarTickingBlock
 {
     private final VirtualInventory inputInventory = new VirtualInventory(1);
@@ -223,7 +223,8 @@ public class LiseletteDisenchanter extends RebarBlock implements
         outputInventory.addItem(new MachineUpdateReason(), tempBookItemStack);
         Bukkit.getScheduler().runTask(DoraMachines.getInstance(), () -> {
             inputInventory.setItemAmount(new MachineUpdateReason(), 0, 0);
-            bookInventory.setItemAmount(new MachineUpdateReason(), 0, bookInventory.getItemAmount(0) - 1);
+            bookInventory.setItem(new MachineUpdateReason(), 0, 
+                bookInventory.getItem(0).asQuantity(bookInventory.getItemAmount(0) - 1));
         });
     }
     @Override

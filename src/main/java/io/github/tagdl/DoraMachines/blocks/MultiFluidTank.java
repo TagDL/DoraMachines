@@ -28,7 +28,7 @@ import io.github.pylonmc.pylon.PylonFluids;
 import io.github.pylonmc.pylon.content.machines.fluid.FluidTankCasing;
 import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
 import io.github.pylonmc.rebar.block.base.RebarFluidBufferBlock;
-import io.github.pylonmc.rebar.block.base.RebarGuiBlock;
+import io.github.pylonmc.rebar.block.base.RebarInventoryBlock;
 import io.github.pylonmc.rebar.block.base.RebarLogisticBlock;
 import io.github.pylonmc.rebar.block.base.RebarVirtualInventoryBlock;
 import io.github.pylonmc.rebar.block.context.BlockBreakContext;
@@ -57,7 +57,7 @@ import xyz.xenondevs.invui.item.ItemProvider;
 import xyz.xenondevs.invui.window.Window;
 
 public class MultiFluidTank extends RebarBlock implements 
-        RebarGuiBlock,
+        RebarInventoryBlock,
         RebarFluidBufferBlock,
         RebarVirtualInventoryBlock,
         RebarLogisticBlock,

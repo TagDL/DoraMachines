@@ -4,7 +4,7 @@ import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
 import io.github.pylonmc.rebar.block.base.RebarInteractBlock;
-import io.github.pylonmc.rebar.block.base.RebarNoVanillaContainerBlock;
+import io.github.pylonmc.rebar.block.base.RebarNoVanillaInventoryBlock;
 import io.github.pylonmc.rebar.block.base.RebarSimpleMultiblock;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
@@ -46,7 +46,7 @@ public class IndustrialMiner extends RebarBlock implements
         RebarDirectionalBlock,
         RebarSimpleMultiblock,
         RebarInteractBlock,
-        RebarNoVanillaContainerBlock
+        RebarNoVanillaInventoryBlock
 {   
     public static final Component LAVA_LACK = Component.translatable("doramachines.message.industrial_miner.lava");
     public static final Component FULL = Component.translatable("doramachines.message.industrial_miner.full");
