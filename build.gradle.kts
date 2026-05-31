@@ -24,6 +24,12 @@ repositories {
     maven("https://repo.papermc.io/repository/maven-public/") {
         name = "papermc"
     }
+    maven("https://repo.guizhan-craft.com/repository/maven-public/") {
+        name = "GuiZhan"
+    }
+    maven("https://libraries.minecraft.net") {
+        name = "Mojang"
+    }
     maven("https://jitpack.io") {
         name = "JitPack"
     }
@@ -45,6 +51,8 @@ dependencies {
     compileOnly(files("D:/project/pylon_plugins/pylon-0.38.0-26.1.jar"))
     compileOnly("xyz.xenondevs.invui:invui:2.1.0")
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.1.0")
+    compileOnly("com.mojang:brigadier:1.0.18")
+    //compileOnly("net.guizhanss:GuizhanLib:1.8.1")
 }
 
 // Settings for IntelliJ

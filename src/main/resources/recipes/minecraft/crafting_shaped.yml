@@ -116,3 +116,17 @@ doramachines:plan_c:
     G: minecraft:nether_star
   result: doramachines:plan_c
   category: tool
+
+doramachines:portable_backpack:
+  pattern:
+    - "DAD"
+    - "AGA"
+    - "BCB"
+  key:
+    A: pylon:steel_silo
+    G: pylon:portability_catalyst
+    B: pylon:fluid_tank_casing_steel
+    C: minecraft:crafting_table
+    D: pylon:fluid_pipe_steel
+  result: doramachines:portable_backpack
+  category: tool

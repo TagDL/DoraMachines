@@ -6,6 +6,7 @@ import io.github.tagdl.DoraMachines.blocks.IndustrialMiner;
 import io.github.tagdl.DoraMachines.blocks.LiseletteDisenchanter;
 import io.github.tagdl.DoraMachines.blocks.LiseletteEnchanter;
 import io.github.tagdl.DoraMachines.blocks.MultiFluidTank;
+import io.github.tagdl.DoraMachines.blocks.PortableBackPack;
 import io.github.tagdl.DoraMachines.blocks.TimingCharger;
 
 import org.bukkit.Material;
@@ -20,5 +21,6 @@ public final class DoraMachinesBlocks {
         RebarBlock.register(DoraMachinesKeys.TIMING_CHARGER, Material.RED_GLAZED_TERRACOTTA, TimingCharger.class);
         RebarBlock.register(DoraMachinesKeys.LISELETTE_ENCHANTER, Material.POLISHED_DIORITE_SLAB, LiseletteEnchanter.class);
         RebarBlock.register(DoraMachinesKeys.LISELETTE_DISENCHANTER, Material.POLISHED_ANDESITE_SLAB, LiseletteDisenchanter.class);
+        RebarBlock.register(DoraMachinesKeys.PORTABLE_BACKPACK, Material.SEA_LANTERN, PortableBackPack.class);
     }
 }

@@ -360,7 +360,7 @@ public class MultiFluidTank extends RebarBlock implements
         }
     }
     @Override
-    public void onFluidRemoved(@NotNull RebarFluid fluid, double amount) { //有问题
+    public void onFluidRemoved(@NotNull RebarFluid fluid, double amount) {
         RebarFluidBufferBlock.super.onFluidRemoved(fluid, amount);
         double tempamount = amount;
         double tempcapacity = 0.0;

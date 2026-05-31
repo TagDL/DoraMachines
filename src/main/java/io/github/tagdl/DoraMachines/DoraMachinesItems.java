@@ -6,6 +6,7 @@ import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
 import io.github.tagdl.DoraMachines.blocks.LiseletteDisenchanter;
 import io.github.tagdl.DoraMachines.blocks.LiseletteEnchanter;
+import io.github.tagdl.DoraMachines.blocks.PortableBackPack;
 import io.github.tagdl.DoraMachines.guide.FilterPage;
 import io.github.tagdl.DoraMachines.items.ExplosionPickaxe;
 import io.github.tagdl.DoraMachines.items.ExplosionShovel;
@@ -54,6 +55,9 @@ public final class DoraMachinesItems {
     public static final ItemStack ROAD_TOOL = ItemStackBuilder.rebar(Material.NETHER_STAR, DoraMachinesKeys.ROAD_TOOL)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
+    public static final ItemStack PORTABLE_BACKPACK = ItemStackBuilder.rebar(Material.SEA_LANTERN, DoraMachinesKeys.PORTABLE_BACKPACK)
+                .set(DataComponentTypes.MAX_STACK_SIZE, 1)
+            .build();
 
     public static void initialize() {
         // Register an item using the ExampleItem class
@@ -71,6 +75,8 @@ public final class DoraMachinesItems {
         DoraMachinesPages.TOOL.addItem(PLAN_C);
         RebarItem.register(RoadTool.class, ROAD_TOOL);
         DoraMachinesPages.TOOL.addItem(ROAD_TOOL);
+        RebarItem.register(PortableBackPack.Item.class, PORTABLE_BACKPACK, DoraMachinesKeys.PORTABLE_BACKPACK);
+        DoraMachinesPages.TOOL.addItem(PORTABLE_BACKPACK);
         // Register a 'normal' item which represents Example Block
         // Blocks and their corresponding item will almost always share the same key
         // Note the 3rd parameter - this is the key of the corresponding block registered in [ExampleAddonBlocks]

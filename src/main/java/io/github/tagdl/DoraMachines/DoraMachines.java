@@ -1,11 +1,14 @@
 package io.github.tagdl.DoraMachines;
 
+import io.github.pylonmc.pylon.command.PylonCommand;
 import io.github.pylonmc.pylon.content.tools.SoulboundRune;
 import io.github.pylonmc.rebar.addon.RebarAddon;
 import io.github.tagdl.DoraMachines.blocks.LiseletteDisenchanter;
 import io.github.tagdl.DoraMachines.blocks.LiseletteEnchanter;
+import io.github.tagdl.DoraMachines.command.PortableBackPackCommand;
 import io.github.tagdl.DoraMachines.items.GoldenBoneMeal;
 import io.github.tagdl.DoraMachines.items.RoadTool;
+import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import lombok.Getter;
 
 import org.bukkit.Bukkit;
@@ -28,7 +31,9 @@ public class DoraMachines extends JavaPlugin implements RebarAddon {
     @Override
     public void onEnable() {
         instance = this;
-
+        getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
+            commands.registrar().register(PortableBackPackCommand.ROOT);
+        });
         // Every Rebar addon must call this BEFORE doing anything Rebar-related
         registerWithRebar();
         PluginManager pm = Bukkit.getPluginManager();

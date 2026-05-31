@@ -86,6 +86,16 @@ item:
       <arrow> Use <yellow>Shift <gray>+ <green>Right Click <gray>to exchange block type
       <arrow> Toggle: <yellow>%enabled%
       <arrow> Block type: <yellow>%block%
+  portable_backpack:
+    name: "Portable Backpack"
+    lore: |-
+      <arrow> Store you items or fluids
+      <arrow> <green>Right Click <gray>to open
+      <arrow> Place on the ground to inject fluid
+      <arrow> Use /setbackpackname to change backpack's name
+      <arrow> %type1%: %amount1%/%capacity%
+      <arrow> %type2%: %amount2%/%capacity%
+    waila: "Portable Backpack | %type1%: %input-bar1% | %type2%: %input-bar2%"
 
 message:
   unbreakable_result:
@@ -104,6 +114,9 @@ message:
     enabled: "<green>Road tool toggled on"
     disabled: "<red>Road tool toggled off"
     block_set: "<yellow>Road block changed to <green>%block%"
+  portable_backpack:
+    same_fluid: "<red>you can't set same type fluid"
+    not_handle_backpack: "<red>you must handle a backpack to run this command"
 
 guide:
   page:
@@ -143,6 +156,17 @@ gui:
     equitment_name: "<yellow>Put any equitment"
     book_name: "<yellow>Put any enchant book / book"
     progress: "Progress"
+  portable_backpack:
+    backpage: "BACK"
+    forwardpage: "FORWARD"
+    craft: "Open Crafting Table"
+    casing: "Storing Fluid"
+    select: "Select a type of fluid"
+    capacity: 
+      name: "Currently storing status"
+      empty: "no fluid storing"
+      not_empty: "Amount: %storing%/%capacity%"
+    lore: "Click to switch on/off"
 
 waila:
   industrial_miner:

@@ -87,6 +87,16 @@ item:
       <arrow> 使用 <yellow>Shift <gray>+ <green>右键 <gray>切换方块类型
       <arrow> 当前状态: <yellow>%enabled%
       <arrow> 方块类型: <yellow>%block%
+  portable_backpack:
+    name: "便携式背包"
+    lore: |-
+      <arrow> 可用于储存物品和液体
+      <arrow> <green>右键 <gray>以打开
+      <arrow> 放在地上以输入液体
+      <arrow> 使用 /setbackpackname 来修改背包的名称
+      <arrow> %type1%: %amount1%/%capacity%
+      <arrow> %type2%: %amount2%/%capacity%
+    waila: "便携式背包 | %type1%: %input-bar1% | %type2%: %input-bar2%"
 
 message:
   unbreakable_result:
@@ -105,6 +115,9 @@ message:
     enabled: "<green>铺路工具已开启"
     disabled: "<red>铺路工具已关闭"
     block_set: "<yellow>铺路方块已更改为 <green>%block%"
+  portable_backpack:
+    same_fluid: "<red>不能设置两种一样的液体"
+    not_handle_backpack: "<red>请手持背包以运行命令"
 
 guide:
   page:
@@ -144,6 +157,17 @@ gui:
     equitment_name: "<yellow>放入任意装备"
     book_name: "<yellow>放入任意附魔书或书"
     progress: "进程"
+  portable_backpack:
+    backpage: "前一页"
+    forwardpage: "下一页"
+    craft: "打开工作台界面"
+    casing: "已储存的液体"
+    select: "选择一种液体类型"
+    capacity: 
+      name: "当前存储状态"
+      empty: "没有液体正在储存"
+      not_empty: "存量: %storing%/%capacity%"
+    lore: "点击以开启/关闭流体输出"
 
 waila:
   industrial_miner:
