@@ -193,6 +193,8 @@ public class PortableBackPack extends RebarBlock implements
                     .addIngredient('U', back)
                     .addIngredient('D', forward)
                     .build();
+            inv.addPreUpdateHandler(event -> 
+                event.setCancelled(RebarItem.fromStack(event.getNewItem()) instanceof Item));
             inv.addPostUpdateHandler(event -> {
             getStack().editPersistentDataContainer(pdc ->
                     pdc.set(INVENTORY_KEY, RebarSerializers.VIRTUAL_INVENTORY, inv));
