@@ -40,6 +40,7 @@ import io.github.tagdl.DoraMachines.DoraMachinesKeys;
 import io.github.tagdl.DoraMachines.items.Filter;
 import net.kyori.adventure.text.Component;
 import xyz.xenondevs.invui.gui.Gui;
+import xyz.xenondevs.invui.inventory.OperationCategory;
 import xyz.xenondevs.invui.inventory.VirtualInventory;
 import xyz.xenondevs.invui.inventory.event.ItemPreUpdateEvent;
 
@@ -74,6 +75,7 @@ public class FilterBase extends RebarBlock implements
     @Override
     public void postInitialise() {
         filterInventory.addPreUpdateHandler(event -> onFilterUpdate(event));
+        filterInventory.setGuiPriority(OperationCategory.ADD, 2);
         createLogisticGroup("filter", LogisticGroupType.INPUT, filterInventory);
         createLogisticGroup("output", LogisticGroupType.OUTPUT, outputInventory);
     }
