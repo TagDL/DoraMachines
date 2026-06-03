@@ -144,9 +144,14 @@ public class MultiFluidTank extends RebarBlock implements
         } else {
             fluidcapacity.set(event.getSlot(), 0.0);
         }
-        for (Window window : event.getInventory().getWindows()) {
-            window.getGuis().get(0).setItem(10 + event.getSlot() * 2, item);
-            item.notifyWindows();
+        int targetSlot = 10 + event.getSlot() * 2;
+        if (targetSlot >= 0 && targetSlot < 36) {
+            for (Window window : event.getInventory().getWindows()) {
+                if (window.getGuis().size() > 0) {
+                    window.getGuis().get(0).setItem(targetSlot, item);
+                    item.notifyWindows();
+                }
+            }
         }
         updateCapacity();
     }
@@ -163,23 +168,13 @@ public class MultiFluidTank extends RebarBlock implements
                 .addIngredient('T', casingInventory)
                 .addIngredient('H', typeStack)
                 .build();
-        int c = 10; //capacity of fluid
-        int f = 19; //type of fluid
-        int g = 28; //turn output on / off
-        int slot = c;
-        while (slot <= g + 6) {
-            if (slot <= c + 6) {
-                gui.setItem(slot, new CapacityItem(((slot - 1) % 9) / 2));
-                if (slot == c + 6) slot++; //skip to next row
-            } else {
-                if (slot <= f + 6) {
-                    gui.setItem(slot, new FluidTypeItem(((slot - 1) % 9) / 2));
-                    if (slot == f + 6) slot++; //skip to next row
-                } else {
-                    gui.setItem(slot, new GateItem(((slot - 1) % 9) / 2));
-                }
-            }
-            slot += 2; //skip to next slot
+        int[] capacitySlots = {10, 12, 14, 16};
+        int[] typeSlots = {19, 21, 23, 25};
+        int[] gateSlots = {28, 30, 32, 34};
+        for (int i = 0; i < 4; i++) {
+            gui.setItem(capacitySlots[i], new CapacityItem(i));
+            gui.setItem(typeSlots[i], new FluidTypeItem(i));
+            gui.setItem(gateSlots[i], new GateItem(i));
         }
         return gui;
     }
