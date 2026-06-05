@@ -171,7 +171,7 @@ public class PortableBackPack extends RebarBlock implements
                         Bukkit.getScheduler().runTask(DoraMachines.getInstance(), () -> {
                             Window.builder()
                                 .setUpperGui(casingGui())  
-                                .setTitle(Component.translatable("doramachines.gui.portable_backpack.casing"))  
+                                .setTitle(Component.translatable("doramachines.gui.portable_backpack.casing"))
                                 .open(player);
                         });
                     }))
@@ -334,7 +334,7 @@ public class PortableBackPack extends RebarBlock implements
         }
         @Override
         public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull Click click) {
-            Gui fluidGui = MultiFluidSelector.make(this::setFluidInner);
+            PagedGui<Inventory> fluidGui = MultiFluidSelector.make(this::setFluidInner);
             Bukkit.getScheduler().runTask(DoraMachines.getInstance(), () -> {
                 Window.builder()
                     .setUpperGui(fluidGui)  

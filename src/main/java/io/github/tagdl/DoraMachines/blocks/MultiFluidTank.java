@@ -50,6 +50,8 @@ import lombok.Getter;
 import net.kyori.adventure.text.Component;
 import xyz.xenondevs.invui.Click;
 import xyz.xenondevs.invui.gui.Gui;
+import xyz.xenondevs.invui.gui.PagedGui;
+import xyz.xenondevs.invui.inventory.Inventory;
 import xyz.xenondevs.invui.inventory.VirtualInventory;
 import xyz.xenondevs.invui.inventory.event.ItemPostUpdateEvent;
 import xyz.xenondevs.invui.item.AbstractItem;
@@ -207,7 +209,9 @@ public class MultiFluidTank extends RebarBlock implements
         public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull Click click) {
             setRunning(this.index, -running[index]);
             createFluidB(fluidtype.get(this.index));
-            notifyWindows();
+            Bukkit.getScheduler().runTask(DoraMachines.getInstance(), () -> {
+                notifyWindows();
+            });
         }
     }
     private class FluidTypeItem extends AbstractItem {
@@ -221,10 +225,9 @@ public class MultiFluidTank extends RebarBlock implements
         }
         @Override
         public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull Click click) {
-            Gui fluidGui = MultiFluidSelector.make(this::setFluid);
+            PagedGui<Inventory> fluidGui = MultiFluidSelector.make(this::setFluid);
             Bukkit.getScheduler().runTask(DoraMachines.getInstance(), () -> {
-                ChangePage page = new ChangePage(fluidGui);
-                page.open(player);
+                new ChangePage(fluidGui, player);
                 notifyWindows();
             });
         }
@@ -235,8 +238,8 @@ public class MultiFluidTank extends RebarBlock implements
                 createFluidB(fluid);
             }
             Bukkit.getScheduler().runTask(DoraMachines.getInstance(), () -> {
-                ChangePage page = new ChangePage(getGui());
-                page.open(player);
+                new ChangePage(getGui(), player);
+                notifyWindows();
             });
         }
     }
@@ -282,13 +285,15 @@ public class MultiFluidTank extends RebarBlock implements
         public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull Click click) {}
     }
     public class ChangePage{
-        private Gui gui;
-        public ChangePage(Gui gui){
-            this.gui = gui;
-        }
-        public void open(Player player){
+        public ChangePage(PagedGui<Inventory> gui, Player player){
             Window.builder()
-                .setUpperGui(this.gui)  
+                .setUpperGui(gui)  
+                .setTitle(Component.translatable("doramachines.gui.multi_fluid_tank.name"))  
+                .open(player);
+        }
+        public ChangePage(Gui gui, Player player){
+            Window.builder()
+                .setUpperGui(gui)  
                 .setTitle(Component.translatable("doramachines.gui.multi_fluid_tank.name"))  
                 .open(player);
         }

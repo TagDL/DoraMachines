@@ -190,6 +190,9 @@ gui:
       empty: "no fluid storing"
       not_empty: "Amount: %storing%/%capacity%"
     lore: "Click to switch on/off"
+  fluid_selector:
+    backpage: "BACK"
+    forwardpage: "FORWARD"
 
 waila:
   industrial_miner:

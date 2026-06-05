@@ -191,6 +191,9 @@ gui:
       empty: "没有液体正在储存"
       not_empty: "存量: %storing%/%capacity%"
     lore: "点击以开启/关闭流体输出"
+  fluid_selector:
+    backpage: "前一页"
+    forwardpage: "下一页"
 
 waila:
   industrial_miner:
