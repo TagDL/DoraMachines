@@ -7,11 +7,13 @@ import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
 import io.github.tagdl.DoraMachines.blocks.LiseletteDisenchanter;
 import io.github.tagdl.DoraMachines.blocks.LiseletteEnchanter;
 import io.github.tagdl.DoraMachines.blocks.PortableBackPack;
+import io.github.tagdl.DoraMachines.blocks.RedstoneLink;
 import io.github.tagdl.DoraMachines.guide.FilterPage;
 import io.github.tagdl.DoraMachines.items.ExplosionPickaxe;
 import io.github.tagdl.DoraMachines.items.ExplosionShovel;
 import io.github.tagdl.DoraMachines.items.Filter;
 import io.github.tagdl.DoraMachines.items.GoldenBoneMeal;
+import io.github.tagdl.DoraMachines.items.LinkedConnector;
 import io.github.tagdl.DoraMachines.items.PlanC;
 import io.github.tagdl.DoraMachines.items.RoadTool;
 import io.github.tagdl.DoraMachines.items.UnbreakableRune;
@@ -58,7 +60,15 @@ public final class DoraMachinesItems {
     public static final ItemStack PORTABLE_BACKPACK = ItemStackBuilder.rebar(Material.SEA_LANTERN, DoraMachinesKeys.PORTABLE_BACKPACK)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
+    public static final ItemStack REDSTONE_LINK = ItemStackBuilder.rebar(Material.OAK_BUTTON, DoraMachinesKeys.REDSTONE_LINK)
+            .build();
+    public static final ItemStack LINKED_CONNECTOR = ItemStackBuilder.rebar(Material.CLAY_BALL, DoraMachinesKeys.LINKED_CONNECTOR)
+                .set(DataComponentTypes.ITEM_MODEL, Material.MUSIC_DISC_LAVA_CHICKEN.getKey())
+                .set(DataComponentTypes.MAX_STACK_SIZE, 1)
+            .build();
 
+    public static final ItemStack TEMP_BLOCK = ItemStackBuilder.rebar(Material.BLUE_WOOL, DoraMachinesKeys.TEMP_BLOCK)
+            .build();
     public static void initialize() {
         // Register an item using the ExampleItem class
         RebarItem.register(ExplosionPickaxe.class, EXPLOSION_PICKAXE);
@@ -77,9 +87,10 @@ public final class DoraMachinesItems {
         DoraMachinesPages.TOOL.addItem(ROAD_TOOL);
         RebarItem.register(PortableBackPack.Item.class, PORTABLE_BACKPACK, DoraMachinesKeys.PORTABLE_BACKPACK);
         DoraMachinesPages.TOOL.addItem(PORTABLE_BACKPACK);
-        // Register a 'normal' item which represents Example Block
-        // Blocks and their corresponding item will almost always share the same key
-        // Note the 3rd parameter - this is the key of the corresponding block registered in [ExampleAddonBlocks]
+        RebarItem.register(LinkedConnector.class, LINKED_CONNECTOR, DoraMachinesKeys.LINKED_CONNECTOR);
+        DoraMachinesPages.TOOL.addItem(LINKED_CONNECTOR);
+
+        
         RebarItem.register(RebarItem.class, INDUSTRIAL_MINER, DoraMachinesKeys.INDUSTRIAL_MINER);
         DoraMachinesPages.BLOCK.addItem(INDUSTRIAL_MINER);
         RebarItem.register(RebarItem.class, FILTER_BASE, DoraMachinesKeys.FILTER_BASE);
@@ -94,5 +105,9 @@ public final class DoraMachinesItems {
         DoraMachinesPages.BLOCK.addItem(LISELETTE_ENCHANTER);
         RebarItem.register(LiseletteDisenchanter.Item.class, LISELETTE_DISENCHANTER, DoraMachinesKeys.LISELETTE_DISENCHANTER);
         DoraMachinesPages.BLOCK.addItem(LISELETTE_DISENCHANTER);
+        RebarItem.register(RedstoneLink.Item.class, REDSTONE_LINK, DoraMachinesKeys.REDSTONE_LINK);
+        DoraMachinesPages.BLOCK.addItem(REDSTONE_LINK);
+
+        RebarItem.register(RebarItem.class, TEMP_BLOCK, DoraMachinesKeys.TEMP_BLOCK);
     }
 }

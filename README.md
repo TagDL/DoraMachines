@@ -13,3 +13,9 @@
 - 和粘液科技相似的工业矿机
 - 不可破坏符文
 - 等等。。。
+
+## Require
+
+- [Rebar](https://github.com/pylonmc/rebar)
+- [Pylon](https://github.com/pylonmc/pylon)
+- [RebarWrench](https://github.com/lijinhong11/RebarWrench)

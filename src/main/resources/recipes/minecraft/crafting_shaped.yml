@@ -130,3 +130,27 @@ doramachines:portable_backpack:
     D: pylon:fluid_pipe_steel
   result: doramachines:portable_backpack
   category: tool
+
+doramachines:redstone_link:
+  pattern:
+    - "   "
+    - "  A"
+    - "BCB"
+  key:
+    A: minecraft:redstone_torch
+    B: pylon:copper_sheet
+    C: "#minecraft:planks"
+  result: doramachines:redstone_link
+  category: redstone
+
+doramachines:linked_connector:
+  pattern:
+    - "   "
+    - " A "
+    - "BCB"
+  key:
+    A: minecraft:lever
+    B: pylon:copper_sheet
+    C: "#minecraft:planks"
+  result: doramachines:linked_connector
+  category: redstone
