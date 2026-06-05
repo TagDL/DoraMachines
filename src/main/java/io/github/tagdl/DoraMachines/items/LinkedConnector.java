@@ -1,11 +1,8 @@
 package io.github.tagdl.DoraMachines.items;
 
-import static io.github.pylonmc.pylon.util.PylonUtils.colorToTextColor;
-
 import java.util.List;
 import java.util.UUID;
 
-import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventPriority;
@@ -16,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 import io.github.pylonmc.rebar.block.BlockStorage;
 import io.github.pylonmc.rebar.datatypes.RebarSerializers;
+import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.base.RebarBlockInteractor;
 import io.github.tagdl.DoraMachines.DoraMachines;
@@ -42,9 +40,10 @@ public class LinkedConnector extends RebarItem implements RebarBlockInteractor {
             blocks.forEach(linker -> {
                 event.getPlayer().sendMessage((!redstoneLink.getLinkType()
                             ? Component.translatable("doramachines.message.linked_connector.find_receiver")
-                            : Component.translatable("doramachines.message.linked_connector.find_transmitter"))
-                        .append(Component.text(" " + getLocationString(linker.getBlock().getLocation()))
-                            .color(colorToTextColor(Color.LIME))));
+                                .arguments(RebarArgument.of("location", getLocationString(linker.getBlock().getLocation())))
+                            : Component.translatable("doramachines.message.linked_connector.find_transmitter")
+                                .arguments(RebarArgument.of("location", getLocationString(linker.getBlock().getLocation())))
+                        ));
             });
             return;
         }

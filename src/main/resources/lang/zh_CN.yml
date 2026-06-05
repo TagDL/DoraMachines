@@ -136,8 +136,8 @@ message:
     not_handle_backpack: "<red>请手持背包以运行命令"
   linked_connector:
     not_found: "<red>未找到 <insn><lang:doramachines.item.redstone_link.name></insn>"
-    find_receiver: "<yellow>正在激活位于该位置的接收端:"
-    find_transmitter: "<yellow>正在激活位于该位置的发射端:"
+    find_receiver: "<yellow>激活的接收端: <green>%location%"
+    find_transmitter: "<yellow>激活的发射端: <green>%location%"
     record_success: "<green>信道记录成功"
     set_failure: "<red>你需要先记录一个发射端"
     set_success: "<green>信道设置成功"

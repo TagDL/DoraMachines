@@ -135,8 +135,8 @@ message:
     not_handle_backpack: "<red>you must handle a backpack to run this command"
   linked_connector:
     not_found: "<red>No <insn><lang:doramachines.item.redstone_link.name></insn> found"
-    find_receiver: "<yellow>Activing Receiver at"
-    find_transmitter: "<yellow>Activing Transmitter at"
+    find_receiver: "<yellow>Activing Receiver at <green>%location%"
+    find_transmitter: "<yellow>Activing Transmitter at <green>%location%"
     record_success: "<green>Record success"
     set_failure: "<red>You need to Record an transmitter first"
     set_success: "<green>Set success"
