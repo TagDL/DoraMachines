@@ -30,8 +30,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 
+import io.github.lijinhong11.rebarwrench.api.WrenchAction;
+import io.github.lijinhong11.rebarwrench.api.WrenchResult;
 import io.github.lijinhong11.rebarwrench.api.Wrenchable;
-import io.github.lijinhong11.rebarwrench.api.properties.Property;
 import io.github.pylonmc.rebar.block.BlockStorage;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
@@ -68,15 +69,8 @@ public class RedstoneLink extends RebarBlock implements
     private boolean link_type = false; //false is send redstone signal
     private UUID receive_uuid;
     public static final Wrenchable WRENCHABLE = Wrenchable.builder()
-                .addProperty("mode", Property.builder(String.class)
-                        .defaultIndex(0)
-                        .possibleValues("Transmitter", "Receiver")
-                        .onValueChange((block, oldValue, newValue) -> {
-                            Boolean tempBoolean = newValue == "Transmitter" ? false : true;
-                            ((RedstoneLink) block).link_type = tempBoolean;
-                        })
-                        .build())
-                .build(); //碎碎念：有点为了这醋包一碟饺子了，算了用吧用吧 :P
+            .interactFunction(RedstoneLink::onWrench)
+            .build(); //碎碎念：有点为了这醋包一碟饺子了，算了用吧用吧 :P
     private final ItemStackBuilder mainStack = ItemStackBuilder.of(Material.BARREL)
         .addCustomModelDataString(getKey() + ":main");
     private final ItemStackBuilder receiveStack = ItemStackBuilder.of(Material.LIGHT_GRAY_CARPET)
@@ -93,11 +87,24 @@ public class RedstoneLink extends RebarBlock implements
         public @NotNull List<RebarArgument> getPlaceholders() {
             return List.of(
                     RebarArgument.of("radius", radius),
-                    RebarArgument.of("ticks", ticks)
+                    RebarArgument.of("ticks", ticks),
+                    RebarArgument.of("have-wrench", Bukkit.getPluginManager().getPlugin("RebarWrench") == null 
+                            || !Bukkit.getPluginManager().isPluginEnabled("RebarWrench") 
+                        ? Component.translatable("doramachines.item.redstone_link.have_wrench")
+                        : Component.translatable("doramachines.item.redstone_link.dont_have_wrench"))
             );
         }
     }
-
+    public static WrenchResult onWrench(Player player, RebarBlock block, WrenchAction action) {
+        RedstoneLink redstoneLink = (RedstoneLink) block;
+        if (!action.equals(WrenchAction.CONFIGURE)) return WrenchResult.SUCCESS;
+        redstoneLink.link_type = !redstoneLink.link_type;
+        player.sendActionBar(!redstoneLink.link_type
+            ? Component.translatable("doramachines.message.redstone_link.transmitter")
+            : Component.translatable("doramachines.message.redstone_link.receiver")
+        );
+        return WrenchResult.SUCCESS;
+    }
     @SuppressWarnings("unused")
     public RedstoneLink(@NotNull Block block, @NotNull BlockCreateContext context) {
         super(block, context);
@@ -203,6 +210,14 @@ public class RedstoneLink extends RebarBlock implements
         //     link_type = !link_type;
         //     getHeldEntity(ItemDisplay.class,"receive").setItemStack(link_type ? receiveStack.build() : null);
         // }
+        if (Bukkit.getPluginManager().getPlugin("RebarWrench") == null 
+                || !Bukkit.getPluginManager().isPluginEnabled("RebarWrench")) return;
+        if (event.getItem() == null || !event.getItem().getType().equals(Material.STICK)) return;
+        link_type = !link_type;
+        event.getPlayer().sendActionBar(!link_type
+            ? Component.translatable("doramachines.message.redstone_link.transmitter")
+            : Component.translatable("doramachines.message.redstone_link.receiver")
+        );
     }
     public BlockFace getWhatFace() {
         Switch switch1 = (Switch) getBlock().getBlockData();

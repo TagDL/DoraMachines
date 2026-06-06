@@ -102,8 +102,10 @@ item:
       <arrow> Remote transmit <red>redstone power
       <arrow> <gray>Max transmit radius: <green>%radius% <gray>blocks
       <arrow> Trigger interval: <green>%ticks% <gray>ticks
-      <arrow> Use <insn><lang:rebarwrench.item.wrench.name></insn> to switch mode between transmitter/receiver
+      <arrow> Use %hava-wrench% to switch mode between transmitter/receiver
       <arrow> Use <insn><lang:doramachines.item.linked_connector.name></insn> to Set Channel
+    have_wrench: <insn><lang:rebarwrench.item.wrench.name></insn>
+    dont_have_wrench: <insn>Stick</insn>
     waila: "Redstone Link | Mode: %mode% | Status: %active%"
   linked_connector:
     name: "Linked Connector"
@@ -140,6 +142,9 @@ message:
     record_success: "<green>Record success"
     set_failure: "<red>You need to Record an transmitter first"
     set_success: "<green>Set success"
+  redstone_link:
+    transmitter: "<yellow>Mode switch to <green>Transmitter"
+    receiver: "<yellow>Mode switch to <green>Receiver"
 
 guide:
   page:

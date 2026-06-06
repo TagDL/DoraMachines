@@ -103,8 +103,10 @@ item:
       <arrow> 远程传输 <red>红石能量
       <arrow> <gray>最大传输半径: <green>%radius% <gray>格
       <arrow> 触发间隔: <green>%ticks% <gray>tick
-      <arrow> 使用 <insn><lang:rebarwrench.item.wrench.name></insn> 在发射端/接收端模式间切换
+      <arrow> 使用 %hava-wrench% 在发射端/接收端模式间切换
       <arrow> 使用 <insn><lang:doramachines.item.linked_connector.name></insn> 来设置信道
+    have_wrench: <insn><lang:rebarwrench.item.wrench.name></insn>
+    dont_have_wrench: <insn>木棍</insn>
     waila: "红石连接器 | 模式: %mode% | 状态: %active%"
   linked_connector:
     name: "信道连接器"
@@ -141,6 +143,9 @@ message:
     record_success: "<green>信道记录成功"
     set_failure: "<red>你需要先记录一个发射端"
     set_success: "<green>信道设置成功"
+  redstone_link:
+    transmitter: "<yellow>模式设置为 <green>发射端"
+    receiver: "<yellow>模式设置为 <green>接收端"
 
 guide:
   page:
