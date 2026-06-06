@@ -12,14 +12,14 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import io.github.pylonmc.rebar.item.RebarItem;
-import io.github.pylonmc.rebar.item.base.RebarInteractor;
+import io.github.pylonmc.rebar.item.interfaces.InteractRebarItemHandler;
 
-public class PlanC extends RebarItem implements RebarInteractor {
+public class PlanC extends RebarItem implements InteractRebarItemHandler {
     public PlanC(@NotNull ItemStack stack) {
         super(stack);
     }
     @Override
-    public void onUsedToClick(@NotNull PlayerInteractEvent event, @NotNull EventPriority priority){
+    public void onInteract(@NotNull PlayerInteractEvent event, @NotNull EventPriority priority){
         if (event.getHand() != EquipmentSlot.HAND 
                 || event.useItemInHand() == Event.Result.DENY
                 || event.getAction().isLeftClick()) return;

@@ -15,15 +15,14 @@ import org.bukkit.block.data.Waterlogged;
 import org.bukkit.entity.Player;
 
 import io.github.pylonmc.rebar.block.RebarBlock;
-import io.github.pylonmc.rebar.config.Settings;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
-import io.github.pylonmc.rebar.config.Config;
-import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
-import io.github.pylonmc.rebar.block.base.RebarInventoryBlock;
-import io.github.pylonmc.rebar.block.base.RebarLogisticBlock;
-import io.github.pylonmc.rebar.block.base.RebarProcessor;
-import io.github.pylonmc.rebar.block.base.RebarTickingBlock;
-import io.github.pylonmc.rebar.block.base.RebarVirtualInventoryBlock;
+import io.github.pylonmc.rebar.config.ConfigSection;
+import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.GuiRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.LogisticRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.ProcessorRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.TickingRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.VirtualInventoryRebarBlock;
 import io.github.pylonmc.rebar.block.context.BlockBreakContext;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
@@ -47,18 +46,18 @@ import xyz.xenondevs.invui.inventory.event.ItemPreUpdateEvent;
 import org.jetbrains.annotations.Nullable;
 
 public class FilterBase extends RebarBlock implements
-        RebarDirectionalBlock,
-        RebarInventoryBlock,
-        RebarVirtualInventoryBlock,
-        RebarProcessor,
-        RebarLogisticBlock,
-        RebarTickingBlock
+        DirectionalRebarBlock,
+        GuiRebarBlock,
+        VirtualInventoryRebarBlock,
+        ProcessorRebarBlock,
+        LogisticRebarBlock,
+        TickingRebarBlock
 {
     public final ItemStackBuilder filterStack = ItemStackBuilder.gui(Material.LIME_STAINED_GLASS_PANE, getKey() + ":filter")
             .name(Component.translatable("doramachines.gui.filter"));
     private final VirtualInventory filterInventory = new VirtualInventory(1);
     private final VirtualInventory outputInventory = new VirtualInventory(16);
-    private static Config settings = Settings.get(DoraMachinesKeys.FILTER_BASE);
+    private static ConfigSection settings = ConfigSection.fromSettings(DoraMachinesKeys.FILTER_BASE);
     private static WeightedSet<ItemStack> canOutput = settings.getOrThrow("filter_things", ConfigAdapter.WEIGHTED_SET.from(ConfigAdapter.ITEM_STACK));
     private final int doTick = 20;
     private ItemStack filterThing = new ItemStack(Material.AIR);
@@ -148,9 +147,9 @@ public class FilterBase extends RebarBlock implements
         return waterlogged.isWaterlogged();
     }
     @Override
-    public void onBreak(@NotNull List<@NotNull ItemStack> drops, @NotNull BlockBreakContext context) {
+    public void onBlockBreak(@NotNull List<@NotNull ItemStack> drops, @NotNull BlockBreakContext context) {
         if (inWater(getBlock())) getBlock().setType(Material.WATER);
-        RebarVirtualInventoryBlock.super.onBreak(drops, context);
+        VirtualInventoryRebarBlock.super.onBlockBreak(drops, context);
     }
     @Override
     public @NotNull Map<@NotNull String, @NotNull VirtualInventory> getVirtualInventories() {

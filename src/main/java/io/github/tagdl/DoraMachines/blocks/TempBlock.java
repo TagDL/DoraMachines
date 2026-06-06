@@ -12,12 +12,12 @@ import org.jspecify.annotations.NonNull;
 import io.github.lijinhong11.rebarwrench.api.Wrenchable;
 import io.github.lijinhong11.rebarwrench.api.properties.Property;
 import io.github.pylonmc.rebar.block.RebarBlock;
-import io.github.pylonmc.rebar.block.base.RebarInteractBlock;
+import io.github.pylonmc.rebar.block.interfaces.InteractRebarBlockHandler;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
 import io.github.tagdl.DoraMachines.DoraMachines;
 import net.kyori.adventure.text.format.NamedTextColor;
 
-public class TempBlock extends RebarBlock implements RebarInteractBlock{
+public class TempBlock extends RebarBlock implements InteractRebarBlockHandler{
     private final NamespacedKey INT = new NamespacedKey(DoraMachines.getInstance(), "ivalue");
 
     public static final Wrenchable WRENCHABLE = Wrenchable.builder()
@@ -50,7 +50,7 @@ public class TempBlock extends RebarBlock implements RebarInteractBlock{
     }
 
     @Override
-    public void onInteract(@NonNull PlayerInteractEvent e, @NonNull EventPriority priority) {
+    public void onInteractedWith(@NonNull PlayerInteractEvent e, @NonNull EventPriority priority) {
         if (!e.getAction().isRightClick()) {
             return;
         }

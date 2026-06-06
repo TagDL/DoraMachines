@@ -26,20 +26,20 @@ import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
 import io.github.pylonmc.pylon.util.PylonUtils;
-import io.github.pylonmc.rebar.block.base.RebarProcessor;
+import io.github.pylonmc.rebar.block.interfaces.ProcessorRebarBlock;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.datatypes.RebarSerializers;
 import io.github.pylonmc.rebar.event.api.annotation.MultiHandler;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.RebarItem;
-import io.github.pylonmc.rebar.item.base.RebarInteractor;
+import io.github.pylonmc.rebar.item.interfaces.InteractRebarItemHandler;
 import io.github.tagdl.DoraMachines.DoraMachines;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
 
 public class RoadTool extends RebarItem implements
-    RebarInteractor,
-    RebarProcessor
+    InteractRebarItemHandler,
+    ProcessorRebarBlock
 {
     @Getter
     private final int deleteDelay = getSettings().getOrThrow("delete_delay_seconds", ConfigAdapter.INTEGER) * 20;
@@ -50,7 +50,7 @@ public class RoadTool extends RebarItem implements
     }
     @SuppressWarnings("UnstableApiUsage")
     @Override @MultiHandler(priorities = { EventPriority.NORMAL, EventPriority.MONITOR })
-    public void onUsedToClick(@NotNull PlayerInteractEvent event, @NotNull EventPriority priority) {
+    public void onInteract(@NotNull PlayerInteractEvent event, @NotNull EventPriority priority) {
         if (!event.getAction().isRightClick() || event.useItemInHand() == Event.Result.DENY) {
             return;
         }

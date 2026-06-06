@@ -47,7 +47,7 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:26.1.2.build.+")
     //compileOnly("io.github.pylonmc:rebar:$rebarVersion")
     //compileOnly("io.github.pylonmc:pylon:$pylonVersion")
-    compileOnly(files("D:/project/pylon_plugins/rebar-0.40.0-26.1.jar"))
+    compileOnly(files("D:/project/pylon_plugins/rebar-1.0.0-SNAPSHOT.jar"))
     compileOnly(files("D:/project/pylon_plugins/pylon-0.38.0-26.1.jar"))
     compileOnly("xyz.xenondevs.invui:invui:2.1.0")
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.1.0")

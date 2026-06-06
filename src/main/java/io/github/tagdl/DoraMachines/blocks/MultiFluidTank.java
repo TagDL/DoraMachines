@@ -26,11 +26,11 @@ import org.jspecify.annotations.NonNull;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.pylon.PylonFluids;
 import io.github.pylonmc.pylon.content.machines.fluid.FluidTankCasing;
-import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
-import io.github.pylonmc.rebar.block.base.RebarFluidBufferBlock;
-import io.github.pylonmc.rebar.block.base.RebarInventoryBlock;
-import io.github.pylonmc.rebar.block.base.RebarLogisticBlock;
-import io.github.pylonmc.rebar.block.base.RebarVirtualInventoryBlock;
+import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.FluidBufferRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.GuiRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.LogisticRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.VirtualInventoryRebarBlock;
 import io.github.pylonmc.rebar.block.context.BlockBreakContext;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
@@ -59,11 +59,11 @@ import xyz.xenondevs.invui.item.ItemProvider;
 import xyz.xenondevs.invui.window.Window;
 
 public class MultiFluidTank extends RebarBlock implements 
-        RebarInventoryBlock,
-        RebarFluidBufferBlock,
-        RebarVirtualInventoryBlock,
-        RebarLogisticBlock,
-        RebarDirectionalBlock
+        GuiRebarBlock,
+        FluidBufferRebarBlock,
+        VirtualInventoryRebarBlock,
+        LogisticRebarBlock,
+        DirectionalRebarBlock
 {
     private static final NamespacedKey STATUS_KEY = pylonKey("status_running");
     private static final NamespacedKey FLUIDTYPE_KEY = pylonKey("fluid_type");
@@ -333,7 +333,7 @@ public class MultiFluidTank extends RebarBlock implements
     }
     @Override  
     public void onFluidAdded(@NotNull RebarFluid fluid, double amount) {
-        RebarFluidBufferBlock.super.onFluidAdded(fluid, amount);
+        FluidBufferRebarBlock.super.onFluidAdded(fluid, amount);
         double tempamount = amount;
         double oldcapa;
         if (casingInventory.isEmpty()) return;
@@ -361,7 +361,7 @@ public class MultiFluidTank extends RebarBlock implements
     }
     @Override
     public void onFluidRemoved(@NotNull RebarFluid fluid, double amount) {
-        RebarFluidBufferBlock.super.onFluidRemoved(fluid, amount);
+        FluidBufferRebarBlock.super.onFluidRemoved(fluid, amount);
         double tempamount = amount;
         double tempcapacity = 0.0;
         for(int i = 0; i < 4; i++){
@@ -399,8 +399,8 @@ public class MultiFluidTank extends RebarBlock implements
         return Map.of("casing", casingInventory);
     }
     @Override
-    public void onBreak(@NotNull List<ItemStack> drops, @NotNull BlockBreakContext context) {
-        RebarVirtualInventoryBlock.super.onBreak(drops, context);
-        RebarFluidBufferBlock.super.onBreak(drops, context);
+    public void onBlockBreak(@NotNull List<ItemStack> drops, @NotNull BlockBreakContext context) {
+        VirtualInventoryRebarBlock.super.onBlockBreak(drops, context);
+        FluidBufferRebarBlock.super.onBlockBreak(drops, context);
     }
 }

@@ -1,5 +1,6 @@
 package io.github.tagdl.DoraMachines;
 
+import io.github.pylonmc.rebar.config.ConfigSection;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.content.guide.RebarGuide;
 import io.github.pylonmc.rebar.item.RebarItem;
@@ -18,7 +19,6 @@ import io.github.tagdl.DoraMachines.items.PlanC;
 import io.github.tagdl.DoraMachines.items.RoadTool;
 import io.github.tagdl.DoraMachines.items.UnbreakableRune;
 import io.papermc.paper.datacomponent.DataComponentTypes;
-import io.github.pylonmc.rebar.config.Settings;
 
 
 import org.bukkit.Material;
@@ -28,10 +28,10 @@ import org.bukkit.inventory.ItemStack;
 public final class DoraMachinesItems {
 
     public static final ItemStack EXPLOSION_PICKAXE = ItemStackBuilder.rebar(Material.NETHERITE_PICKAXE, DoraMachinesKeys.EXPLOSION_PICKAXE)
-                .set(DataComponentTypes.MAX_DAMAGE, Settings.get(DoraMachinesKeys.EXPLOSION_PICKAXE).getOrThrow("durability", ConfigAdapter.INTEGER))
+                .set(DataComponentTypes.MAX_DAMAGE, ConfigSection.fromSettings(DoraMachinesKeys.EXPLOSION_PICKAXE).getOrThrow("durability", ConfigAdapter.INTEGER))
             .build();
     public static final ItemStack EXPLOSION_SHOVEL = ItemStackBuilder.rebar(Material.NETHERITE_SHOVEL, DoraMachinesKeys.EXPLOSION_SHOVEL)
-                .set(DataComponentTypes.MAX_DAMAGE, Settings.get(DoraMachinesKeys.EXPLOSION_SHOVEL).getOrThrow("durability", ConfigAdapter.INTEGER))
+                .set(DataComponentTypes.MAX_DAMAGE, ConfigSection.fromSettings(DoraMachinesKeys.EXPLOSION_SHOVEL).getOrThrow("durability", ConfigAdapter.INTEGER))
             .build();
     public static final ItemStack UNBREAKABLE_RUNE = ItemStackBuilder.rebar(Material.FIREWORK_STAR, DoraMachinesKeys.UNBREAKABLE_RUNE)
                 .set(DataComponentTypes.UNBREAKABLE)

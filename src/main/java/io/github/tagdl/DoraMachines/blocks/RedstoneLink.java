@@ -34,13 +34,12 @@ import io.github.lijinhong11.rebarwrench.api.Wrenchable;
 import io.github.lijinhong11.rebarwrench.api.properties.Property;
 import io.github.pylonmc.rebar.block.BlockStorage;
 import io.github.pylonmc.rebar.block.RebarBlock;
-import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
-import io.github.pylonmc.rebar.block.base.RebarEntityHolderBlock;
-import io.github.pylonmc.rebar.block.base.RebarInteractBlock;
-import io.github.pylonmc.rebar.block.base.RebarTickingBlock;
+import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.EntityHolderRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.InteractRebarBlockHandler;
+import io.github.pylonmc.rebar.block.interfaces.TickingRebarBlock;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
-import io.github.pylonmc.rebar.config.Config;
-import io.github.pylonmc.rebar.config.Settings;
+import io.github.pylonmc.rebar.config.ConfigSection;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.datatypes.RebarSerializers;
 import io.github.pylonmc.rebar.entity.display.BlockDisplayBuilder;
@@ -55,12 +54,12 @@ import io.github.tagdl.DoraMachines.DoraMachinesKeys;
 import net.kyori.adventure.text.Component;
 
 public class RedstoneLink extends RebarBlock implements
-    RebarDirectionalBlock,
-    RebarTickingBlock,
-    RebarEntityHolderBlock,
-    RebarInteractBlock
+    DirectionalRebarBlock,
+    TickingRebarBlock,
+    EntityHolderRebarBlock,
+    InteractRebarBlockHandler
 {
-    private static Config settings = Settings.get(DoraMachinesKeys.REDSTONE_LINK);
+    private static ConfigSection settings = ConfigSection.fromSettings(DoraMachinesKeys.REDSTONE_LINK);
     private static int radius = settings.getOrThrow("radius", ConfigAdapter.INTEGER);
     private static int ticks = settings.getOrThrow("detect-ticks", ConfigAdapter.INTEGER);
     private static final NamespacedKey LINK_TYPE = new NamespacedKey(DoraMachines.getInstance(), "link_type");
@@ -84,7 +83,7 @@ public class RedstoneLink extends RebarBlock implements
         .addCustomModelDataString(getKey() + ":receive");
 
     public static class Item extends RebarItem {
-        private static Config settings = Settings.get(DoraMachinesKeys.REDSTONE_LINK);
+        private static ConfigSection settings = ConfigSection.fromSettings(DoraMachinesKeys.REDSTONE_LINK);
         private static int radius = settings.getOrThrow("radius", ConfigAdapter.INTEGER);
         private static int ticks = settings.getOrThrow("detect-ticks", ConfigAdapter.INTEGER);
         public Item(@NotNull ItemStack stack) {
@@ -185,7 +184,7 @@ public class RedstoneLink extends RebarBlock implements
         pdc.set(UUID_TYPE, RebarSerializers.UUID, receive_uuid);
     }
     @Override
-    public void onInteract(PlayerInteractEvent event, @NotNull EventPriority priority) {
+    public void onInteractedWith(PlayerInteractEvent event, @NotNull EventPriority priority) {
         if (event.getHand() != EquipmentSlot.HAND
                 || !event.getAction().isRightClick()
         ) return;

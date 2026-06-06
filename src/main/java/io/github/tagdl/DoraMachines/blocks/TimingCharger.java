@@ -17,13 +17,12 @@ import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 
 import io.github.pylonmc.rebar.block.RebarBlock;
-import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
-import io.github.pylonmc.rebar.block.base.RebarInventoryBlock;
-import io.github.pylonmc.rebar.block.base.RebarProcessor;
-import io.github.pylonmc.rebar.block.base.RebarTickingBlock;
+import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.GuiRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.ProcessorRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.TickingRebarBlock;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
-import io.github.pylonmc.rebar.config.Config;
-import io.github.pylonmc.rebar.config.Settings;
+import io.github.pylonmc.rebar.config.ConfigSection;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.datatypes.RebarSerializers;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
@@ -39,13 +38,13 @@ import xyz.xenondevs.invui.item.AbstractItem;
 import xyz.xenondevs.invui.item.ItemProvider;
 
 public class TimingCharger extends RebarBlock implements
-        RebarDirectionalBlock,
-        RebarProcessor,
-        RebarInventoryBlock,
-        RebarTickingBlock
+        DirectionalRebarBlock,
+        ProcessorRebarBlock,
+        GuiRebarBlock,
+        TickingRebarBlock
 {
     private static final NamespacedKey TIMING_KEY = pylonKey("amount");
-    private static Config settings = Settings.get(DoraMachinesKeys.TIMING_CHARGER);
+    private static ConfigSection settings = ConfigSection.fromSettings(DoraMachinesKeys.TIMING_CHARGER);
     private static int click_per_change = settings.getOrThrow("Click_Per_Change", ConfigAdapter.INTEGER);
     private static int min_tick = max(settings.getOrThrow("Min_Tick", ConfigAdapter.INTEGER), 1);
     @Getter

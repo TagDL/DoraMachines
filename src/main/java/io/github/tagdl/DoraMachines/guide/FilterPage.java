@@ -4,9 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import io.github.pylonmc.rebar.config.Settings;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
-import io.github.pylonmc.rebar.config.Config;
+import io.github.pylonmc.rebar.config.ConfigSection;
 import io.github.pylonmc.rebar.guide.button.ItemButton;
 import io.github.pylonmc.rebar.guide.button.PageButton;
 import io.github.pylonmc.rebar.guide.pages.base.SimpleDynamicGuidePage;
@@ -25,7 +24,7 @@ import java.util.List;
 
 public class FilterPage extends SimpleDynamicGuidePage {
     private static final FilterPage INSTANCE = new FilterPage();
-    private static Config settings = Settings.get(DoraMachinesKeys.FILTER_BASE);
+    private static ConfigSection settings = ConfigSection.fromSettings(DoraMachinesKeys.FILTER_BASE);
     private static WeightedSet<ItemStack> filted = settings.getOrThrow("filter_things", ConfigAdapter.WEIGHTED_SET.from(ConfigAdapter.ITEM_STACK));
     private static float totalWeight = filted.stream().map(WeightedSet.Element::weight).reduce(0f, Float::sum);
     @Getter private static final Item button = new PageButton(

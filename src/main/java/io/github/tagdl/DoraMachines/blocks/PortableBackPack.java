@@ -29,13 +29,12 @@ import io.github.pylonmc.pylon.PylonFluids;
 import io.github.pylonmc.pylon.PylonItems;
 import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.block.RebarBlock;
-import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
-import io.github.pylonmc.rebar.block.base.RebarFluidBufferBlock;
-import io.github.pylonmc.rebar.block.base.RebarInventoryBlock;
+import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.FluidBufferRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.GuiRebarBlock;
 import io.github.pylonmc.rebar.block.context.BlockBreakContext;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
-import io.github.pylonmc.rebar.config.Config;
-import io.github.pylonmc.rebar.config.Settings;
+import io.github.pylonmc.rebar.config.ConfigSection;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.datatypes.RebarSerializers;
 import io.github.pylonmc.rebar.fluid.FluidPointType;
@@ -43,7 +42,7 @@ import io.github.pylonmc.rebar.fluid.RebarFluid;
 import io.github.pylonmc.rebar.fluid.tags.FluidTemperature;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.RebarItem;
-import io.github.pylonmc.rebar.item.base.RebarInteractor;
+import io.github.pylonmc.rebar.item.interfaces.InteractRebarItemHandler;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
 import io.github.pylonmc.rebar.registry.RebarRegistry;
 import io.github.pylonmc.rebar.util.MachineUpdateReason;
@@ -68,14 +67,14 @@ import xyz.xenondevs.invui.item.ItemProvider;
 import xyz.xenondevs.invui.window.Window;
 
 public class PortableBackPack extends RebarBlock implements 
-    RebarDirectionalBlock,
-    RebarFluidBufferBlock,
-    RebarInventoryBlock
+    DirectionalRebarBlock,
+    FluidBufferRebarBlock,
+    GuiRebarBlock
 {
     public static class Item extends RebarItem implements
-        RebarInteractor
+        InteractRebarItemHandler
     {
-        private final Config config = Settings.get(DoraMachinesKeys.PORTABLE_BACKPACK);
+        private final ConfigSection config = ConfigSection.fromSettings(DoraMachinesKeys.PORTABLE_BACKPACK);
         private final double capacity = config.getOrThrow("capacity", ConfigAdapter.DOUBLE);
         private static final NamespacedKey INVENTORY_KEY = new NamespacedKey(DoraMachines.getInstance(), "backpack_inventory");
         private static final NamespacedKey NAME_KEY = new NamespacedKey(DoraMachines.getInstance(), "backpack_name");
@@ -85,7 +84,7 @@ public class PortableBackPack extends RebarBlock implements
             super(stack);
         }
         @Override
-        public void onUsedToClick(@NotNull PlayerInteractEvent event, @NotNull EventPriority priority){
+        public void onInteract(@NotNull PlayerInteractEvent event, @NotNull EventPriority priority){
             if (event.getHand() != EquipmentSlot.HAND 
                     || event.useItemInHand() == Event.Result.DENY
                     || event.getAction().isLeftClick()
@@ -261,7 +260,7 @@ public class PortableBackPack extends RebarBlock implements
     private Component component;
     private VirtualInventory inventory;
     private List<Boolean> running = new ArrayList<>(Arrays.asList(false, false));
-    private final Config config = Settings.get(DoraMachinesKeys.PORTABLE_BACKPACK);
+    private final ConfigSection config = ConfigSection.fromSettings(DoraMachinesKeys.PORTABLE_BACKPACK);
     private final double capacity = config.getOrThrow("capacity", ConfigAdapter.DOUBLE);
     private ItemStack offItemStack = new ItemStackBuilder(ItemStack.of(Material.RED_STAINED_GLASS_PANE))
                 .name(Component.text("OFF").color(colorToTextColor(Color.RED)))
@@ -405,7 +404,7 @@ public class PortableBackPack extends RebarBlock implements
     }
     @Override  
     public void onFluidAdded(@NotNull RebarFluid fluid, double amount) {
-        RebarFluidBufferBlock.super.onFluidAdded(fluid, amount);
+        FluidBufferRebarBlock.super.onFluidAdded(fluid, amount);
         if (stored_type.get(0).equals(fluid)) stored_amount.set(0, stored_amount.get(0) + amount);
         else stored_amount.set(1, stored_amount.get(1) + amount);
         if (statusInventory.getWindows() != null || !statusInventory.getWindows().isEmpty()) {
@@ -420,7 +419,7 @@ public class PortableBackPack extends RebarBlock implements
     }
     @Override
     public void onFluidRemoved(@NotNull RebarFluid fluid, double amount) {
-        RebarFluidBufferBlock.super.onFluidRemoved(fluid, amount);
+        FluidBufferRebarBlock.super.onFluidRemoved(fluid, amount);
         if (stored_type.get(0).equals(fluid)) stored_amount.set(0, stored_amount.get(0) - amount);
         else stored_amount.set(1, stored_amount.get(1) - amount);
         if (statusInventory.getWindows() != null || !statusInventory.getWindows().isEmpty()) {
@@ -435,10 +434,13 @@ public class PortableBackPack extends RebarBlock implements
     }
     @Override
     public @Nullable ItemStack getDropItem(@NotNull BlockBreakContext context) {
-        return getPickItem();
+        return getDrop();
     }
     @Override
-    public @Nullable ItemStack getPickItem() {
+    public @Nullable ItemStack getPickItem(@NotNull Player player) {
+        return getDrop();
+    }
+    public ItemStack getDrop() {
         ItemStack stack = RebarRegistry.ITEMS.getOrThrow(getKey()).getItemStack();
         Item item = new Item(stack);
         item.setAll(stored_type, stored_amount, inventory, component);

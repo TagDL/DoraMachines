@@ -15,19 +15,19 @@ import io.github.pylonmc.rebar.block.BlockStorage;
 import io.github.pylonmc.rebar.datatypes.RebarSerializers;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.RebarItem;
-import io.github.pylonmc.rebar.item.base.RebarBlockInteractor;
+import io.github.pylonmc.rebar.item.interfaces.BlockInteractRebarItemHandler;
 import io.github.tagdl.DoraMachines.DoraMachines;
 import io.github.tagdl.DoraMachines.blocks.RedstoneLink;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import net.kyori.adventure.text.Component;
 
-public class LinkedConnector extends RebarItem implements RebarBlockInteractor {
+public class LinkedConnector extends RebarItem implements BlockInteractRebarItemHandler {
     private static final NamespacedKey STORED_UUID_KEY = new NamespacedKey(DoraMachines.getInstance(), "stored_uuid_key");
     public LinkedConnector(@NotNull ItemStack stack) {
         super(stack);
     }
     @Override
-    public void onUsedToClickBlock(@NotNull PlayerInteractEvent event, @NotNull EventPriority priority) {
+    public void onInteractWithBlock(@NotNull PlayerInteractEvent event, @NotNull EventPriority priority) {
         if (event.getHand() != EquipmentSlot.HAND 
                 || !event.getAction().isRightClick()) return;
         if (!(BlockStorage.get(event.getClickedBlock()) instanceof RedstoneLink redstoneLink)) return;

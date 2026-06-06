@@ -2,10 +2,10 @@ package io.github.tagdl.DoraMachines.blocks;
 
 import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.block.RebarBlock;
-import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
-import io.github.pylonmc.rebar.block.base.RebarInteractBlock;
-import io.github.pylonmc.rebar.block.base.RebarNoVanillaInventoryBlock;
-import io.github.pylonmc.rebar.block.base.RebarSimpleMultiblock;
+import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.InteractRebarBlockHandler;
+import io.github.pylonmc.rebar.block.interfaces.NoVanillaInventoryRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.SimpleRebarMultiblock;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.waila.WailaDisplay;
@@ -43,10 +43,10 @@ import java.util.List;
 import java.util.Map;
 
 public class IndustrialMiner extends RebarBlock implements 
-        RebarDirectionalBlock,
-        RebarSimpleMultiblock,
-        RebarInteractBlock,
-        RebarNoVanillaInventoryBlock
+        DirectionalRebarBlock,
+        SimpleRebarMultiblock,
+        InteractRebarBlockHandler,
+        NoVanillaInventoryRebarBlock
 {   
     public static final Component LAVA_LACK = Component.translatable("doramachines.message.industrial_miner.lava");
     public static final Component FULL = Component.translatable("doramachines.message.industrial_miner.full");
@@ -101,7 +101,7 @@ public class IndustrialMiner extends RebarBlock implements
         return map;
     }
     @Override
-    public void onInteract(PlayerInteractEvent event, @NotNull EventPriority priority) {
+    public void onInteractedWith(PlayerInteractEvent event, @NotNull EventPriority priority) {
         if (event.getHand() != EquipmentSlot.HAND 
                 || event.useItemInHand() == Event.Result.DENY
                 || !event.getAction().isRightClick()) return;

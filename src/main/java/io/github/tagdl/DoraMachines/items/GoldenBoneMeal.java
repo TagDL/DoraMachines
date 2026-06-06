@@ -6,12 +6,12 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import io.github.pylonmc.rebar.item.RebarItem;
-import io.github.pylonmc.rebar.item.base.RebarBlockInteractor;
+import io.github.pylonmc.rebar.item.interfaces.BlockInteractRebarItemHandler;
 import io.github.tagdl.DoraMachines.DoraMachines;
 import io.github.tagdl.DoraMachines.DoraMachinesItems;
 import net.kyori.adventure.text.Component;
 import io.github.pylonmc.rebar.block.BlockStorage;
-import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
+import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
 import io.github.pylonmc.rebar.event.api.annotation.MultiHandler;
 
 import org.bukkit.event.Event;
@@ -31,8 +31,8 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class GoldenBoneMeal extends RebarItem implements
-    RebarBlockInteractor,
-    RebarDirectionalBlock,
+    BlockInteractRebarItemHandler,
+    DirectionalRebarBlock,
     Listener
 {
     public static final Component SUCCESS = Component.translatable("doramachines.message.unbreakable_result.success");
@@ -40,7 +40,7 @@ public class GoldenBoneMeal extends RebarItem implements
         super(stack);
     }
     @Override @MultiHandler(priorities = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onUsedToClickBlock(@NotNull PlayerInteractEvent event, @NotNull EventPriority priority) {
+    public void onInteractWithBlock(@NotNull PlayerInteractEvent event, @NotNull EventPriority priority) {
         if (event.getHand() != EquipmentSlot.HAND 
                 || event.useItemInHand() == Event.Result.DENY
                 || !event.getAction().isRightClick()) return;

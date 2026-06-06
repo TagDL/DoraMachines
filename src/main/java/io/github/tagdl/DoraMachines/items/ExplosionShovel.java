@@ -4,7 +4,7 @@ import io.github.pylonmc.rebar.block.BlockStorage;
 import io.github.pylonmc.rebar.event.api.annotation.MultiHandler;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.RebarItem;
-import io.github.pylonmc.rebar.item.base.RebarTool;
+import io.github.pylonmc.rebar.item.interfaces.BlockBreakRebarItemHandler;
 import io.github.pylonmc.rebar.util.RebarUtils;
 import io.github.tagdl.DoraMachines.DoraMachines;
 import io.papermc.paper.datacomponent.DataComponentTypes;
@@ -23,7 +23,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDropItemEvent;
-import io.github.pylonmc.rebar.item.base.RebarInteractor;
+import io.github.pylonmc.rebar.item.interfaces.InteractRebarItemHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
@@ -35,8 +35,8 @@ import java.util.*;
 
 
 public class ExplosionShovel extends RebarItem implements 
-    RebarInteractor,
-    RebarTool    
+    InteractRebarItemHandler,
+    BlockBreakRebarItemHandler    
 {
     public ExplosionShovel(@NotNull ItemStack stack) {
         super(stack);
@@ -44,7 +44,7 @@ public class ExplosionShovel extends RebarItem implements
     private static final NamespacedKey RADIUS_KEY_SHOVEL = new NamespacedKey(DoraMachines.getInstance(), "explosion_shovel_radius");
     private static final Set<Event> eventsToIgnore = Collections.newSetFromMap(new WeakHashMap<>());
     @Override @MultiHandler(priorities = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onUsedToBreakBlock(@NotNull BlockBreakEvent event, @NotNull EventPriority priority) {
+    public void onBreakBlock(@NotNull BlockBreakEvent event, @NotNull EventPriority priority) {
         if (BlockStorage.isRebarBlock(event.getBlock()) || eventsToIgnore.contains(event) || event.getPlayer().isSneaking()) {
             eventsToIgnore.remove(event);
             return;
@@ -54,7 +54,7 @@ public class ExplosionShovel extends RebarItem implements
         
     }
     @Override
-    public void onUsedToClick(@NotNull PlayerInteractEvent event, @NotNull EventPriority priority){
+    public void onInteract(@NotNull PlayerInteractEvent event, @NotNull EventPriority priority){
         if (event.getHand() != EquipmentSlot.HAND 
                 || event.useItemInHand() == Event.Result.DENY
                 || !event.getAction().isRightClick()
