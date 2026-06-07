@@ -98,16 +98,16 @@ item:
       <arrow> %type2%: %amount2%/%capacity%
     waila: "便携式背包 | %type1%: %input-bar1% | %type2%: %input-bar2%"
   redstone_link:
-    name: "无线红石终端"
+    name: "无线红石信号终端"
     lore: |-
       <arrow> 远程传输 <red>红石能量
       <arrow> <gray>最大传输半径: <green>%radius% <gray>格
       <arrow> 触发间隔: <green>%ticks% <gray>tick
-      <arrow> 使用 %hava-wrench% 在发射端/接收端模式间切换
+      <arrow> 使用 %have-wrench% 在发射端/接收端模式间切换
       <arrow> 使用 <insn><lang:doramachines.item.linked_connector.name></insn> 来设置信道
     have_wrench: <insn><lang:rebarwrench.item.wrench.name></insn>
     dont_have_wrench: <insn>木棍</insn>
-    waila: "红石连接器 | 模式: %mode% | 状态: %active%"
+    waila: "无限红石信号终端 | 模式: %mode% | 状态: %active%"
   linked_connector:
     name: "信道连接器"
     lore: |-
@@ -115,6 +115,8 @@ item:
       <arrow> <green>右键 <yellow>发射端 <gray>以记录信道
       <arrow> 然后 <green>右键 <yellow>接收端 <gray>以设置信道
       <arrow> <yellow>Shift <gray>+ <green>右键 <gray>以查看同一信道上处于激活状态的发射端/接收端位置
+  temp_block:
+    name: "测试方块"
 
 message:
   unbreakable_result:

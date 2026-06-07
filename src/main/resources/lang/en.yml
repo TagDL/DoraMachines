@@ -102,7 +102,7 @@ item:
       <arrow> Remote transmit <red>redstone power
       <arrow> <gray>Max transmit radius: <green>%radius% <gray>blocks
       <arrow> Trigger interval: <green>%ticks% <gray>ticks
-      <arrow> Use %hava-wrench% to switch mode between transmitter/receiver
+      <arrow> Use %have-wrench% to switch mode between transmitter/receiver
       <arrow> Use <insn><lang:doramachines.item.linked_connector.name></insn> to Set Channel
     have_wrench: <insn><lang:rebarwrench.item.wrench.name></insn>
     dont_have_wrench: <insn>Stick</insn>
@@ -114,6 +114,8 @@ item:
       <arrow> <green>Right Click <yellow>transmitter <gray>to record channel
       <arrow> Then <green>Right Click <yellow>receiver <gray>to set channel
       <arrow> <yellow>Shift <gray>+ <green>Right Click <gray>to check active transmitter/receiver's location which at same channel
+  temp_block:
+    name: "test block"
 
 message:
   unbreakable_result:

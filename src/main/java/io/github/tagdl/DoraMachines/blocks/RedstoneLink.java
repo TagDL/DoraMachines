@@ -32,7 +32,6 @@ import org.jetbrains.annotations.NotNull;
 
 import io.github.lijinhong11.rebarwrench.api.WrenchAction;
 import io.github.lijinhong11.rebarwrench.api.WrenchResult;
-import io.github.lijinhong11.rebarwrench.api.Wrenchable;
 import io.github.pylonmc.rebar.block.BlockStorage;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
@@ -68,9 +67,6 @@ public class RedstoneLink extends RebarBlock implements
     private List<RedstoneLink> blocks = new ArrayList<>();
     private boolean link_type = false; //false is send redstone signal
     private UUID receive_uuid;
-    public static final Wrenchable WRENCHABLE = Wrenchable.builder()
-            .interactFunction(RedstoneLink::onWrench)
-            .build(); //碎碎念：有点为了这醋包一碟饺子了，算了用吧用吧 :P
     private final ItemStackBuilder mainStack = ItemStackBuilder.of(Material.BARREL)
         .addCustomModelDataString(getKey() + ":main");
     private final ItemStackBuilder receiveStack = ItemStackBuilder.of(Material.LIGHT_GRAY_CARPET)
@@ -90,8 +86,8 @@ public class RedstoneLink extends RebarBlock implements
                     RebarArgument.of("ticks", ticks),
                     RebarArgument.of("have-wrench", Bukkit.getPluginManager().getPlugin("RebarWrench") == null 
                             || !Bukkit.getPluginManager().isPluginEnabled("RebarWrench") 
-                        ? Component.translatable("doramachines.item.redstone_link.have_wrench")
-                        : Component.translatable("doramachines.item.redstone_link.dont_have_wrench"))
+                        ? Component.translatable("doramachines.item.redstone_link.dont_have_wrench")
+                        : Component.translatable("doramachines.item.redstone_link.have_wrench"))
             );
         }
     }
@@ -210,8 +206,8 @@ public class RedstoneLink extends RebarBlock implements
         //     link_type = !link_type;
         //     getHeldEntity(ItemDisplay.class,"receive").setItemStack(link_type ? receiveStack.build() : null);
         // }
-        if (Bukkit.getPluginManager().getPlugin("RebarWrench") == null 
-                || !Bukkit.getPluginManager().isPluginEnabled("RebarWrench")) return;
+        if (Bukkit.getPluginManager().getPlugin("RebarWrench") != null 
+                || Bukkit.getPluginManager().isPluginEnabled("RebarWrench")) return;
         if (event.getItem() == null || !event.getItem().getType().equals(Material.STICK)) return;
         link_type = !link_type;
         event.getPlayer().sendActionBar(!link_type

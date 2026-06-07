@@ -1,6 +1,7 @@
 package io.github.tagdl.DoraMachines;
 
 import io.github.lijinhong11.rebarwrench.RebarWrench;
+import io.github.lijinhong11.rebarwrench.api.Wrenchable;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.tagdl.DoraMachines.blocks.FilterBase;
 import io.github.tagdl.DoraMachines.blocks.IndustrialMiner;
@@ -12,6 +13,7 @@ import io.github.tagdl.DoraMachines.blocks.RedstoneLink;
 import io.github.tagdl.DoraMachines.blocks.TempBlock;
 import io.github.tagdl.DoraMachines.blocks.TimingCharger;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 
 public final class DoraMachinesBlocks {
@@ -27,7 +29,11 @@ public final class DoraMachinesBlocks {
         RebarBlock.register(DoraMachinesKeys.REDSTONE_LINK, Material.OAK_BUTTON, RedstoneLink.class);
 
         RebarBlock.register(DoraMachinesKeys.TEMP_BLOCK, Material.BLUE_WOOL, TempBlock.class);
-        RebarWrench.registerWrenchable(TempBlock.class, TempBlock.WRENCHABLE);
-        RebarWrench.registerWrenchable(RedstoneLink.class, RedstoneLink.WRENCHABLE);
+        if (Bukkit.getPluginManager().getPlugin("RebarWrench") != null) {
+            RebarWrench.registerWrenchable(TempBlock.class, TempBlock.WRENCHABLE);
+            RebarWrench.registerWrenchable(RedstoneLink.class, 
+                Wrenchable.builder().interactFunction(RedstoneLink::onWrench).build());
+        }
+
     }
 }

@@ -20,7 +20,6 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3d;
 
 import io.github.pylonmc.pylon.PylonFluids;
-import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.FluidBufferRebarBlock;
@@ -41,6 +40,7 @@ import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
 import io.github.pylonmc.rebar.logistics.LogisticGroupType;
 import io.github.pylonmc.rebar.util.MachineUpdateReason;
+import io.github.pylonmc.rebar.util.ProgressBar;
 import io.github.pylonmc.rebar.util.gui.GuiItems;
 import io.github.pylonmc.rebar.util.gui.ProgressItem;
 import io.github.pylonmc.rebar.util.gui.unit.UnitFormat;
@@ -48,7 +48,6 @@ import io.github.pylonmc.rebar.waila.WailaDisplay;
 import io.github.tagdl.DoraMachines.DoraMachines;
 import io.github.tagdl.DoraMachines.DoraMachinesKeys;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
 import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.inventory.VirtualInventory;
 import xyz.xenondevs.invui.inventory.event.ItemPreUpdateEvent;
@@ -244,19 +243,19 @@ public class LiseletteEnchanter extends RebarBlock implements
                 .arguments(
                     RebarArgument.of("time", 
                         Math.round(progressItem.getTotalTime().toSeconds() * (1.0 - progressItem.getProgress()))),
-                    RebarArgument.of("input-bar", PylonUtils.createFluidAmountBar(
-                        fluidAmount(PylonFluids.OBSCYRA),
-                        fluidCapacity(PylonFluids.OBSCYRA),
-                        20,
-                        TextColor.fromHexString("#000000")
-                )))
+                    RebarArgument.of("input-bar", ProgressBar.fluidContents(
+                        PylonFluids.OBSCYRA, 
+                        fluidCapacity(PylonFluids.OBSCYRA), 
+                        fluidAmount(PylonFluids.OBSCYRA)
+                    ))
+                )
             : Component.translatable("doramachines.item.liselette_enchanter.waila.not_running")
-                .arguments(RebarArgument.of("input-bar", PylonUtils.createFluidAmountBar(
-                        fluidAmount(PylonFluids.OBSCYRA),
-                        fluidCapacity(PylonFluids.OBSCYRA),
-                        20,
-                        TextColor.fromHexString("#000000")
-                )))
+                .arguments(RebarArgument.of("input-bar", ProgressBar.fluidContents(
+                                PylonFluids.OBSCYRA, 
+                                fluidCapacity(PylonFluids.OBSCYRA), 
+                                fluidAmount(PylonFluids.OBSCYRA)
+                            ))
+                )
         );
     }
     public static final class PlaceListener implements Listener {

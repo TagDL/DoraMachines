@@ -1,7 +1,5 @@
 package io.github.tagdl.DoraMachines.blocks;
 
-import static io.github.pylonmc.pylon.util.PylonUtils.colorToTextColor;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +25,6 @@ import org.jspecify.annotations.NonNull;
 
 import io.github.pylonmc.pylon.PylonFluids;
 import io.github.pylonmc.pylon.PylonItems;
-import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.FluidBufferRebarBlock;
@@ -46,6 +43,8 @@ import io.github.pylonmc.rebar.item.interfaces.InteractRebarItemHandler;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
 import io.github.pylonmc.rebar.registry.RebarRegistry;
 import io.github.pylonmc.rebar.util.MachineUpdateReason;
+import io.github.pylonmc.rebar.util.ProgressBar;
+import io.github.pylonmc.rebar.util.RebarUtils;
 import io.github.pylonmc.rebar.util.gui.GuiItems;
 import io.github.pylonmc.rebar.util.gui.unit.UnitFormat;
 import io.github.pylonmc.rebar.waila.WailaDisplay;
@@ -263,11 +262,11 @@ public class PortableBackPack extends RebarBlock implements
     private final ConfigSection config = ConfigSection.fromSettings(DoraMachinesKeys.PORTABLE_BACKPACK);
     private final double capacity = config.getOrThrow("capacity", ConfigAdapter.DOUBLE);
     private ItemStack offItemStack = new ItemStackBuilder(ItemStack.of(Material.RED_STAINED_GLASS_PANE))
-                .name(Component.text("OFF").color(colorToTextColor(Color.RED)))
+                .name(Component.text("OFF").color(RebarUtils.colorToTextColor(Color.RED)))
                 .lore(Component.translatable("doramachines.gui.portable_backpack.lore"))
                 .build();
     private ItemStack onItemStack = new ItemStackBuilder(ItemStack.of(Material.LIME_STAINED_GLASS_PANE))
-                .name(Component.text("ON").color(colorToTextColor(Color.LIME)))
+                .name(Component.text("ON").color(RebarUtils.colorToTextColor(Color.LIME)))
                 .lore(Component.translatable("doramachines.gui.portable_backpack.lore"))
                 .build();
     private VirtualInventory statusInventory = new VirtualInventory(new ItemStack[]{offItemStack, offItemStack});
@@ -453,18 +452,12 @@ public class PortableBackPack extends RebarBlock implements
                 .arguments(
                     RebarArgument.of("type1", stored_type.get(0).getName()),
                     RebarArgument.of("type2", stored_type.get(1).getName()),
-                    RebarArgument.of("input-bar1", PylonUtils.createFluidAmountBar(
-                            fluidAmount(stored_type.get(0)),
-                            capacity,
-                            20,
-                            stored_type.get(0).getColor()
-                    )),
-                    RebarArgument.of("input-bar2", PylonUtils.createFluidAmountBar(
-                            fluidAmount(stored_type.get(1)),
-                            capacity,
-                            20,
-                            stored_type.get(1).getColor()
-                    ))
+                    RebarArgument.of("input-bar1", ProgressBar.fluidContentsWithName(
+                        stored_type.get(0),
+                        capacity, fluidAmount(stored_type.get(0)))),
+                    RebarArgument.of("input-bar2", ProgressBar.fluidContentsWithName(
+                        stored_type.get(1),
+                        capacity, fluidAmount(stored_type.get(1))))
                 ));
     }
 }

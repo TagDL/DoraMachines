@@ -1,6 +1,5 @@
 package io.github.tagdl.DoraMachines.blocks;
 
-import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.InteractRebarBlockHandler;
@@ -8,10 +7,10 @@ import io.github.pylonmc.rebar.block.interfaces.NoVanillaInventoryRebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.SimpleRebarMultiblock;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
+import io.github.pylonmc.rebar.util.ProgressBar;
 import io.github.pylonmc.rebar.waila.WailaDisplay;
 import io.github.tagdl.DoraMachines.DoraMachines;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -348,12 +347,14 @@ public class IndustrialMiner extends RebarBlock implements
                         Component.translatable("doramachines.waila.industrial_miner.time")
                             .arguments(
                                 RebarArgument.of("time", task == null ? TIMETOTAL : task.getTime()),
-                                RebarArgument.of("bars", PylonUtils.createProgressBar(
-                                    task == null ? 0 : TIMETOTAL - task.getTime(),
-                                    TIMETOTAL, 
-                                    20, 
-                                    TextColor.color(100, 255, 100)
-                                ))
+                                // RebarArgument.of("bars", PylonUtils.createProgressBar(
+                                //     task == null ? 0 : TIMETOTAL - task.getTime(),
+                                //     TIMETOTAL, 
+                                //     20, 
+                                //     TextColor.color(100, 255, 100)
+                                // ))
+                                RebarArgument.of("bars", ProgressBar
+                                    .timeRemaining(TIMETOTAL, task == null ? 0 : TIMETOTAL - task.getTime()))
                             )
                     )
                 )

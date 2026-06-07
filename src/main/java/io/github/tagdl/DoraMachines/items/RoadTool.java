@@ -1,7 +1,5 @@
 package io.github.tagdl.DoraMachines.items;
 
-import static io.github.pylonmc.pylon.util.PylonUtils.colorToTextColor;
-
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -33,6 +31,7 @@ import io.github.pylonmc.rebar.event.api.annotation.MultiHandler;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.interfaces.InteractRebarItemHandler;
+import io.github.pylonmc.rebar.util.RebarUtils;
 import io.github.tagdl.DoraMachines.DoraMachines;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
@@ -81,8 +80,8 @@ public class RoadTool extends RebarItem implements
     @Override
     public @NotNull List<@NotNull RebarArgument> getPlaceholders() {
         return List.of(RebarArgument.of("enabled", isEnabled()
-                ? Component.text("On").color(colorToTextColor(Color.GREEN))
-                : Component.text("Off").color(colorToTextColor(Color.RED))),
+                ? Component.text("On").color(RebarUtils.colorToTextColor(Color.LIME))
+                : Component.text("Off").color(RebarUtils.colorToTextColor(Color.RED))),
             RebarArgument.of("delete_delay", deleteDelay / 20),
             RebarArgument.of("block", getRoadBlock().effectiveName()));
     }
