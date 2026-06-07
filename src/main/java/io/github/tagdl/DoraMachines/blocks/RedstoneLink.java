@@ -30,8 +30,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 
-import io.github.lijinhong11.rebarwrench.api.WrenchAction;
-import io.github.lijinhong11.rebarwrench.api.WrenchResult;
 import io.github.pylonmc.rebar.block.BlockStorage;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
@@ -90,16 +88,6 @@ public class RedstoneLink extends RebarBlock implements
                         : Component.translatable("doramachines.item.redstone_link.have_wrench"))
             );
         }
-    }
-    public static WrenchResult onWrench(Player player, RebarBlock block, WrenchAction action) {
-        RedstoneLink redstoneLink = (RedstoneLink) block;
-        if (!action.equals(WrenchAction.CONFIGURE)) return WrenchResult.SUCCESS;
-        redstoneLink.link_type = !redstoneLink.link_type;
-        player.sendActionBar(!redstoneLink.link_type
-            ? Component.translatable("doramachines.message.redstone_link.transmitter")
-            : Component.translatable("doramachines.message.redstone_link.receiver")
-        );
-        return WrenchResult.SUCCESS;
     }
     @SuppressWarnings("unused")
     public RedstoneLink(@NotNull Block block, @NotNull BlockCreateContext context) {
@@ -229,6 +217,9 @@ public class RedstoneLink extends RebarBlock implements
     // }
     public boolean getLinkType() {
         return link_type;
+    }
+    public void setLinkType(boolean type) {
+        this.link_type = type;
     }
     public void setUUID(UUID uuid) {
         receive_uuid = uuid;
