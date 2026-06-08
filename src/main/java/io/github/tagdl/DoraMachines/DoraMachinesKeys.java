@@ -20,6 +20,7 @@ public class DoraMachinesKeys {
     public static final NamespacedKey PORTABLE_BACKPACK = new NamespacedKey(DoraMachines.getInstance(), "portable_backpack");
     public static final NamespacedKey REDSTONE_LINK = new NamespacedKey(DoraMachines.getInstance(), "redstone_link");
     public static final NamespacedKey LINKED_CONNECTOR = new NamespacedKey(DoraMachines.getInstance(), "linked_connector");
-    
+    public static final NamespacedKey WOODCUTTER = new NamespacedKey(DoraMachines.getInstance(), "woodcutter");
+
     public static final NamespacedKey TEMP_BLOCK = new NamespacedKey(DoraMachines.getInstance(), "temp_block");
 }
