@@ -238,25 +238,20 @@ public class LiseletteEnchanter extends RebarBlock implements
     }
     @Override
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
-        return new WailaDisplay(isProcessing()
-            ? Component.translatable("doramachines.item.liselette_enchanter.waila.running")
+        WailaDisplay display = WailaDisplay.of(this, player);
+        display.add(isProcessing()
+            ? Component.translatable("doramachines.waila.liselette_enchanter.running")
                 .arguments(
                     RebarArgument.of("time", 
-                        Math.round(progressItem.getTotalTime().toSeconds() * (1.0 - progressItem.getProgress()))),
-                    RebarArgument.of("input-bar", ProgressBar.fluidContents(
+                        Math.round(progressItem.getTotalTime().toSeconds() * (1.0 - progressItem.getProgress())))
+                )
+            : Component.translatable("doramachines.waila.liselette_enchanter.not_running"));
+        display.add(ProgressBar.fluidContents(
                         PylonFluids.OBSCYRA, 
                         fluidCapacity(PylonFluids.OBSCYRA), 
                         fluidAmount(PylonFluids.OBSCYRA)
-                    ))
-                )
-            : Component.translatable("doramachines.item.liselette_enchanter.waila.not_running")
-                .arguments(RebarArgument.of("input-bar", ProgressBar.fluidContents(
-                                PylonFluids.OBSCYRA, 
-                                fluidCapacity(PylonFluids.OBSCYRA), 
-                                fluidAmount(PylonFluids.OBSCYRA)
-                            ))
-                )
-        );
+                    ));
+        return display;
     }
     public static final class PlaceListener implements Listener {
         @EventHandler

@@ -448,16 +448,13 @@ public class PortableBackPack extends RebarBlock implements
     }
     @Override
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
-        return new WailaDisplay(Component.translatable("doramachines.item.portable_backpack.waila")
-                .arguments(
-                    RebarArgument.of("type1", stored_type.get(0).getName()),
-                    RebarArgument.of("type2", stored_type.get(1).getName()),
-                    RebarArgument.of("input-bar1", ProgressBar.fluidContentsWithName(
+        WailaDisplay display = WailaDisplay.of(this, player);
+        display.add(ProgressBar.fluidContentsWithName(
                         stored_type.get(0),
-                        capacity, fluidAmount(stored_type.get(0)))),
-                    RebarArgument.of("input-bar2", ProgressBar.fluidContentsWithName(
+                        capacity, fluidAmount(stored_type.get(0))));
+        display.add(ProgressBar.fluidContentsWithName(
                         stored_type.get(1),
-                        capacity, fluidAmount(stored_type.get(1))))
-                ));
+                        capacity, fluidAmount(stored_type.get(1))));
+        return display;
     }
 }

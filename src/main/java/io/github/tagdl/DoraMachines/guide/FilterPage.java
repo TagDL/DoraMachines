@@ -48,7 +48,7 @@ public class FilterPage extends SimpleDynamicGuidePage {
                                 UnitFormat.PERCENT.format(Math.round(normalizedWeight * 100)).decimalPlaces(2))
                     ))
                     .build();
-            buttons.add(new ItemButton(stack));
+            buttons.add(ItemButton.of(stack));
         }
         return buttons;
     }

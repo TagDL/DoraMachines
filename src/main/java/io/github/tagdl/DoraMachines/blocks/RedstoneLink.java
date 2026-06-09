@@ -279,14 +279,15 @@ public class RedstoneLink extends RebarBlock implements
     }
     @Override
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
-        return new WailaDisplay(Component.translatable("doramachines.item.redstone_link.waila")
-                .arguments(RebarArgument.of("active", !link_type 
-                    ? isPowered() ? Component.translatable("doramachines.waila.redstone_link.powered")
-                        : Component.translatable("doramachines.waila.redstone_link.not_powered")
-                    : !blocks.isEmpty() ? Component.translatable("doramachines.waila.redstone_link.received")
-                        : Component.translatable("doramachines.waila.redstone_link.not_received")),
-                    RebarArgument.of("mode", !link_type 
-                        ? Component.translatable("doramachines.waila.redstone_link.transmitter")
-                        : Component.translatable("doramachines.waila.redstone_link.receiver"))));
+        WailaDisplay display = WailaDisplay.of(this, player);
+        display.add(!link_type 
+            ? Component.translatable("doramachines.waila.redstone_link.transmitter")
+            : Component.translatable("doramachines.waila.redstone_link.receiver"));
+        display.add(!link_type 
+            ? isPowered() ? Component.translatable("doramachines.waila.redstone_link.powered")
+                : Component.translatable("doramachines.waila.redstone_link.not_powered")
+            : !blocks.isEmpty() ? Component.translatable("doramachines.waila.redstone_link.received")
+                : Component.translatable("doramachines.waila.redstone_link.not_received"));
+        return display;
     }
 }

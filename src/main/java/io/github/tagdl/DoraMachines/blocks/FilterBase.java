@@ -167,15 +167,11 @@ public class FilterBase extends RebarBlock implements
     }
     @Override
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
-        return new WailaDisplay(Component.translatable("doramachines.item.filter_base.waila")
-                .arguments(
-                    RebarArgument.of("contents", 
-                        filterThing.equals(new ItemStack(Material.AIR))
+        WailaDisplay display = WailaDisplay.of(this, player);
+        display.add(filterThing.equals(new ItemStack(Material.AIR))
                             ? Component.translatable("doramachines.waila.filter_base.none")
                             : Component.translatable("doramachines.waila.filter_base.filterwhat")
-                                .arguments(RebarArgument.of("filter", filterThing.effectiveName()))
-                    )
-                )
-        );
+                                .arguments(RebarArgument.of("filter", filterThing.effectiveName())));
+        return display;
     }
 }

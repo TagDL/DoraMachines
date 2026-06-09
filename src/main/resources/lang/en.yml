@@ -30,7 +30,6 @@ item:
       <arrow> Consume lava to dig ores
       <arrow> Need to put lava bucket in the chest
       <arrow> Right Click after put lava bucket in the chest
-    waila: "Industrial Miner | %contents% | %processing%"
   golden_bone_meal:
     name: "Golden Bone Meal"
     lore: |-
@@ -45,7 +44,6 @@ item:
       <arrow> Require a filter
       <arrow> Require waterlogged
       <arrow> Output dust per tick
-    waila: "Filter Base | %contents%"
   multi_fluid_tank:
     name: "Multifluid Tank"
     lore: |-
@@ -57,25 +55,18 @@ item:
     lore: |-
       <arrow> Active the second block down which block type is Dropper/Dispenser
       <arrow> Active per specified tick you set
-    waila: "Timing Charger | Now delays: <yellow>%delay% <white>ticks"
   liselette_enchanter:
     name: "Liselette Enchanter"
     lore: |-
       <arrow> Allow enchant pylon equitment through enchant book
       <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per seconds
       <arrow> <attr>Buffer:</attr> %buffer%
-    waila:
-      running: "Liselette Enchanter | Time left: <yellow>%time%<white>s | %input-bar%"
-      not_running: "Liselette Enchanter | <red>Not running <white>| %input-bar%"
   liselette_disenchanter:
     name: "Liselette Disenchanter"
     lore: |-
       <arrow> Allow extract enchantment to enchant book / book
       <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per seconds
       <arrow> <attr>Buffer:</attr> %buffer%
-    waila:
-      running: "Liselette Disenchanter | Time left: <yellow>%time%<white>s | %input-bar%"
-      not_running: "Liselette Disenchanter | <red>Not running <white>| %input-bar%"
   road_tool:
     name: "Road Tool"
     lore: |-
@@ -95,7 +86,6 @@ item:
       <arrow> Use /setbackpackname to change backpack's name
       <arrow> %type1%: %amount1%/%capacity%
       <arrow> %type2%: %amount2%/%capacity%
-    waila: "Portable Backpack | %type1%: %input-bar1% | %type2%: %input-bar2%"
   redstone_link:
     name: "Redstone Link"
     lore: |-
@@ -106,7 +96,6 @@ item:
       <arrow> Use <insn><lang:doramachines.item.linked_connector.name></insn> to Set Channel
     have_wrench: <insn><lang:rebarwrench.item.wrench.name></insn>
     dont_have_wrench: <insn>Stick</insn>
-    waila: "Redstone Link | Mode: %mode% | Status: %active%"
   linked_connector:
     name: "Linked Connector"
     lore: |-
@@ -210,9 +199,17 @@ waila:
     none: "<red>Not working"
     filterwhat: "<yellow>Collected：<green>%filter%"
   redstone_link:
-    powered: <green>Powered
-    not_powered: <red>Not Powered
-    received: <green>Received
-    not_received: <red>Not Received
-    transmitter: <yellow>Transmitter
-    receiver: <yellow>Receiver
+    powered: "Status: <green>Powered"
+    not_powered: "Status: <red>Not Powered"
+    received: "Status: <green>Received"
+    not_received: "Status: <red>Not Received"
+    transmitter: "Mode: <yellow>Transmitter"
+    receiver: "Mode: <yellow>Receiver"
+  liselette_enchanter:
+    running: "Time left: <yellow>%time%<white>s"
+    not_running: "<red>Not running <white>"
+  liselette_disenchanter:
+    running: "Time left: <yellow>%time%<white>s"
+    not_running: "<red>Not running <white>"
+  timing_charger:
+    delay: "Now delays: <yellow>%delay% <white>ticks"

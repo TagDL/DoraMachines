@@ -335,29 +335,17 @@ public class IndustrialMiner extends RebarBlock implements
     }
     @Override
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
-        return new WailaDisplay(Component.translatable(
-            "doramachines.item.industrial_miner.waila")
-                .arguments(
-                    RebarArgument.of("contents", 
-                        task == null
-                            ? Component.translatable("doramachines.waila.industrial_miner.none")
-                            : Component.translatable("doramachines.waila.industrial_miner.minewhat")
-                                .arguments(RebarArgument.of("ore", task.getWhatOre()))),
-                    RebarArgument.of("processing", 
-                        Component.translatable("doramachines.waila.industrial_miner.time")
-                            .arguments(
-                                RebarArgument.of("time", task == null ? TIMETOTAL : task.getTime()),
-                                // RebarArgument.of("bars", PylonUtils.createProgressBar(
-                                //     task == null ? 0 : TIMETOTAL - task.getTime(),
-                                //     TIMETOTAL, 
-                                //     20, 
-                                //     TextColor.color(100, 255, 100)
-                                // ))
-                                RebarArgument.of("bars", ProgressBar
-                                    .timeRemaining(TIMETOTAL, task == null ? 0 : TIMETOTAL - task.getTime()))
-                            )
-                    )
-                )
-        );
+        WailaDisplay display = WailaDisplay.of(this, player);
+        display.add(task == null
+            ? Component.translatable("doramachines.waila.industrial_miner.none")
+            : Component.translatable("doramachines.waila.industrial_miner.minewhat")
+                .arguments(RebarArgument.of("ore", task.getWhatOre())));
+        display.add(Component.translatable("doramachines.waila.industrial_miner.time")
+            .arguments(
+                RebarArgument.of("time", task == null ? TIMETOTAL : task.getTime()),
+                RebarArgument.of("bars", ProgressBar
+                    .timeRemaining(TIMETOTAL, task == null ? 0 : TIMETOTAL - task.getTime()))
+            ));
+        return display;
     }
 }

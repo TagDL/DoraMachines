@@ -117,7 +117,8 @@ public class TimingCharger extends RebarBlock implements
     }
     @Override
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
-        return new WailaDisplay(Component.translatable("doramachines.item.timing_charger.waila")
-                .arguments(RebarArgument.of("delay", timing)));
+        return WailaDisplay.of(this, player).add(
+                Component.translatable("doramachines.waila.timing_charger.delay")
+                    .arguments(RebarArgument.of("delay", timing)));
     }
 }

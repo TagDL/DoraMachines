@@ -30,7 +30,6 @@ item:
       <arrow> 消耗岩浆挖取矿物
       <arrow> 需要把岩浆桶放置在箱子里
       <arrow> 放置岩浆桶后右键高炉
-    waila: "工业矿机 | %contents% | %processing%"
   golden_bone_meal:
     name: "黄金骨粉"
     lore: |-
@@ -46,7 +45,6 @@ item:
       <arrow> 需要放入滤网
       <arrow> 需要放置在静态水中
       <arrow> 可产出粉尘
-    waila: "滤网底座 | %contents%"
   multi_fluid_tank:
     name: "混合流体储罐"
     lore: |-
@@ -63,20 +61,14 @@ item:
     name: "质源附魔台"
     lore: |-
       <arrow> 允许使用附魔书为pylon装备附魔
-      <arrow> <attr>每秒消耗<lang:pylon.fluid.obscyra/>:</attr> %fluid-per-craft%
+      <arrow> <attr>每秒消耗 <lang:pylon.fluid.obscyra/>:</attr> %fluid-per-craft%
       <arrow> <attr>缓冲区:</attr> %buffer%
-    waila: 
-      running: "质源附魔台 | 剩余时间: <yellow>%time%<white>秒 | %input-bar%"
-      not_running: "质源附魔台 | <red>暂未运行 <white>| %input-bar%"
   liselette_disenchanter:
     name: "质源祛魔台"
     lore: |-
       <arrow> 允许将附魔从装备提取到附魔书或书本
-      <arrow> <attr>每秒消耗<lang:pylon.fluid.obscyra/>:</attr> %fluid-per-craft%
+      <arrow> <attr>每秒消耗 <lang:pylon.fluid.obscyra/>:</attr> %fluid-per-craft%
       <arrow> <attr>缓冲区:</attr> %buffer%
-    waila: 
-      running: "质源祛魔台 | 剩余时间: <yellow>%time%<white>秒 | %input-bar%"
-      not_running: "质源祛魔台 | <red>暂未运行 <white>| %input-bar%"
   road_tool:
     name: "铺路工具"
     lore: |-
@@ -96,7 +88,6 @@ item:
       <arrow> 使用 /setbackpackname 来修改背包的名称
       <arrow> %type1%: %amount1%/%capacity%
       <arrow> %type2%: %amount2%/%capacity%
-    waila: "便携式背包 | %type1%: %input-bar1% | %type2%: %input-bar2%"
   redstone_link:
     name: "无线红石信号终端"
     lore: |-
@@ -107,7 +98,6 @@ item:
       <arrow> 使用 <insn><lang:doramachines.item.linked_connector.name></insn> 来设置信道
     have_wrench: <insn><lang:rebarwrench.item.wrench.name></insn>
     dont_have_wrench: <insn>木棍</insn>
-    waila: "无限红石信号终端 | 模式: %mode% | 状态: %active%"
   linked_connector:
     name: "信道连接器"
     lore: |-
@@ -211,9 +201,17 @@ waila:
     none: "<red>暂未滤出"
     filterwhat: "<yellow>滤出：<green>%filter%"
   redstone_link:
-    powered: "<green>已充能"
-    not_powered: "<red>未充能"
-    received: "<green>已接收信号"
-    not_received: "<red>未接收信号"
-    transmitter: "<yellow>发射端"
-    receiver: "<yellow>接收端"
+    powered: "状态: <green>已充能"
+    not_powered: "状态: <red>未充能"
+    received: "状态: <green>已接收信号"
+    not_received: "状态: <red>未接收信号"
+    transmitter: "模式: <yellow>发射端"
+    receiver: "模式: <yellow>接收端"
+  liselette_enchanter:
+    running: "剩余时间: <yellow>%time%<white> 秒"
+    not_running: "<red>暂未运行 <white>|"
+  liselette_disenchanter:
+    running: "剩余时间: <yellow>%time%<white> 秒"
+    not_running: "<red>暂未运行 <white>|"
+  timing_charger:
+    delay: "现在延迟: <yellow>%delay% <white>刻"
