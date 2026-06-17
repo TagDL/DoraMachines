@@ -175,7 +175,7 @@ doramachines:diesel_woodcutter:
     - "BDB"
   key:
     A: pylon:internal_combustion_engine
-    B: pylon:steel_sheet
+    B: pylon:iron_sheet
     C: pylon:bronze_axe
     D: pylon:fluid_pipe_steel
   result: doramachines:diesel_woodcutter
