@@ -10,6 +10,7 @@ import io.github.tagdl.DoraMachines.blocks.LiseletteEnchanter;
 import io.github.tagdl.DoraMachines.blocks.PortableBackPack;
 import io.github.tagdl.DoraMachines.blocks.RedstoneLink;
 import io.github.tagdl.DoraMachines.blocks.DieselWoodcutter;
+import io.github.tagdl.DoraMachines.blocks.HydraulicWoodcutter;
 import io.github.tagdl.DoraMachines.guide.FilterPage;
 import io.github.tagdl.DoraMachines.items.ExplosionPickaxe;
 import io.github.tagdl.DoraMachines.items.ExplosionShovel;
@@ -112,7 +113,7 @@ public final class DoraMachinesItems {
         DoraMachinesPages.BLOCK.addItem(LISELETTE_DISENCHANTER);
         RebarItem.register(RedstoneLink.Item.class, REDSTONE_LINK, DoraMachinesKeys.REDSTONE_LINK);
         DoraMachinesPages.BLOCK.addItem(REDSTONE_LINK);
-        RebarItem.register(DieselWoodcutter.Item.class, HYDRAULIC_WOODCUTTER, DoraMachinesKeys.HYDRAULIC_WOODCUTTER);
+        RebarItem.register(HydraulicWoodcutter.Item.class, HYDRAULIC_WOODCUTTER, DoraMachinesKeys.HYDRAULIC_WOODCUTTER);
         DoraMachinesPages.BLOCK.addItem(HYDRAULIC_WOODCUTTER);
         RebarItem.register(DieselWoodcutter.Item.class, DIESEL_WOODCUTTER, DoraMachinesKeys.DIESEL_WOODCUTTER);
         DoraMachinesPages.BLOCK.addItem(DIESEL_WOODCUTTER);
