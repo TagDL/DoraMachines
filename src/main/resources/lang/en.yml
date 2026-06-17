@@ -105,11 +105,22 @@ item:
       <arrow> <yellow>Shift <gray>+ <green>Right Click <gray>to check active transmitter/receiver's location which at same channel
   temp_block:
     name: "test block"
+  hydraulic_woodcutter:
+    name: "Hydraulic Woodcutter"
+    lore: |-
+      <arrow> Automatic logging and consume one piece of log in output inventory to replanting
+      <arrow> <attr><lang:pylon.fluid.hydraulic_fluid/> usage:</attr> %fluid-per-craft% per seconds
+      <arrow> <attr>Buffer:</attr> %buffer%
+  diesel_woodcutter:
+    name: "Diesel Woodcutter"
+    lore: |-
+      <arrow> Automatic logging and consume one piece of log in output inventory to replanting
+      <arrow> <attr><lang:pylon.fluid.biodiesel/> usage:</attr> %fluid-per-craft% per seconds
+      <arrow> <attr>Buffer:</attr> %buffer%
 
 message:
   unbreakable_result:
-    tooltip: "<arrow> <#ff5e00>Can't bitten to pieces nya"
-    success: "<red>Your item is unbreakable now nya"
+    success: "<blue>Your item is unbreakable now"
   explosion:
     success: "<yellow>Exchange area to：<red>%radius%x%radius%x%radius%"
   industrial_miner:

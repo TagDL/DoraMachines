@@ -60,6 +60,9 @@ public class DoraMachines extends JavaPlugin implements RebarAddon {
 
     @Override
     public @NotNull Material getMaterial() {
-        return Material.DEAD_BUSH;
+        return Material.NETHERITE_PICKAXE;
+    }
+    public static void nya() {
+        Bukkit.getLogger().info("nya");
     }
 }

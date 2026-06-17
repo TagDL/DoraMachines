@@ -154,3 +154,29 @@ doramachines:linked_connector:
     C: "#minecraft:planks"
   result: doramachines:linked_connector
   category: redstone
+
+doramachines:hydraulic_woodcutter:
+  pattern:
+    - "BDB"
+    - "CAB"
+    - "BDB"
+  key:
+    A: pylon:hydraulic_motor
+    B: minecraft:bricks
+    C: minecraft:iron_axe
+    D: pylon:fluid_pipe_bronze
+  result: doramachines:hydraulic_woodcutter
+  category: building
+
+doramachines:diesel_woodcutter:
+  pattern:
+    - "BDB"
+    - "CAB"
+    - "BDB"
+  key:
+    A: pylon:internal_combustion_engine
+    B: pylon:steel_sheet
+    C: pylon:bronze_axe
+    D: pylon:fluid_pipe_steel
+  result: doramachines:diesel_woodcutter
+  category: building

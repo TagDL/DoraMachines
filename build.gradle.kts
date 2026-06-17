@@ -52,7 +52,7 @@ dependencies {
     compileOnly("xyz.xenondevs.invui:invui:2.1.0")
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.1.0")
     compileOnly("com.mojang:brigadier:1.0.18")
-    compileOnly("io.github.lijinhong11:RebarWrench:1.0.2")
+    compileOnly("io.github.lijinhong11:RebarWrench:1.0.3")
     //compileOnly("net.guizhanss:GuizhanLib:1.8.1")
 }
 
@@ -103,9 +103,9 @@ tasks.runServer {
         github("pylonmc", "pylon", pylonVersion, "pylon-$pylonVersion.jar")
     }
 
-    downloadPlugins {
-        github("tagdl", "rebarwrench", "0.0.5", "RebarWrench-1.0.2.jar")
-    }
+    // downloadPlugins {
+    //     github("tagdl", "rebarwrench", "0.0.6", "RebarWrench-1.0.3.jar")
+    // }
     
     maxHeapSize = "2G"
     minecraftVersion("26.1.2")

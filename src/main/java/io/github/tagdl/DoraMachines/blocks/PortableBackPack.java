@@ -3,6 +3,7 @@ package io.github.tagdl.DoraMachines.blocks;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -79,6 +80,7 @@ public class PortableBackPack extends RebarBlock implements
         private static final NamespacedKey NAME_KEY = new NamespacedKey(DoraMachines.getInstance(), "backpack_name");
         private static final NamespacedKey STORED_TYPE_KEY = new NamespacedKey(DoraMachines.getInstance(), "backpack_stored_type");
         private static final NamespacedKey STORED_AMOUNT_KEY = new NamespacedKey(DoraMachines.getInstance(), "backpack_stored_amount");
+        private static final NamespacedKey UUID_KEY = new NamespacedKey(DoraMachines.getInstance(), "backpack_uuid");
         public Item(@NotNull ItemStack stack) {
             super(stack);
         }
@@ -88,7 +90,8 @@ public class PortableBackPack extends RebarBlock implements
                     || event.useItemInHand() == Event.Result.DENY
                     || event.getAction().isLeftClick()
                     || event.getClickedBlock() != null) return;
-            
+            getStack().editPersistentDataContainer(pdc -> 
+                pdc.set(UUID_KEY, RebarSerializers.UUID, UUID.randomUUID()));
             PagedGui<Inventory> gui = make();
             open(gui, event.getPlayer());
         }
@@ -105,7 +108,7 @@ public class PortableBackPack extends RebarBlock implements
         public void open(Gui gui, Player player) {
             Window.builder()
                 .setUpperGui(gui)  
-                .setTitle(getName())  
+                .setTitle(getName())
                 .open(player);
         }
         public void setName(Player player, Component name) {
@@ -120,13 +123,18 @@ public class PortableBackPack extends RebarBlock implements
             return getStack().getPersistentDataContainer()
                 .getOrDefault(NAME_KEY, RebarSerializers.COMPONENT, Component.translatable("doramachines.item.portable_backpack.name"));
         }
-        public void setAll(List<RebarFluid> fluids, List<Double> d, VirtualInventory inventory, Component name) {
+        public void setAll(List<RebarFluid> fluids, List<Double> d, VirtualInventory inventory, Component name, UUID uuid) {
             getStack().editPersistentDataContainer(pdc -> {
                 pdc.set(STORED_TYPE_KEY, RebarSerializers.LIST.listTypeFrom(RebarSerializers.REBAR_FLUID), fluids);
                 pdc.set(STORED_AMOUNT_KEY, RebarSerializers.LIST.listTypeFrom(RebarSerializers.DOUBLE), d);
                 pdc.set(NAME_KEY, RebarSerializers.COMPONENT, name);
                 pdc.set(INVENTORY_KEY, RebarSerializers.VIRTUAL_INVENTORY, inventory);
+                pdc.set(UUID_KEY, RebarSerializers.UUID, uuid);
             });
+        }
+        public UUID getUUID() {
+            return getStack().getPersistentDataContainer()
+                .getOrDefault(UUID_KEY, RebarSerializers.UUID, UUID.randomUUID());
         }
         public List<RebarFluid> getStoredType() {
             return getStack().getPersistentDataContainer()
@@ -191,11 +199,32 @@ public class PortableBackPack extends RebarBlock implements
                     .addIngredient('U', back)
                     .addIngredient('D', forward)
                     .build();
-            inv.addPreUpdateHandler(event -> 
-                event.setCancelled(RebarItem.fromStack(event.getNewItem()) instanceof Item));
+            inv.addPreUpdateHandler(event -> {
+                if (RebarItem.fromStack(event.getNewItem()) instanceof Item) event.setCancelled(true);
+                else {
+                    Boolean hasBackpack = false;
+                    for (Player player : gui.getCurrentViewers()) {
+                        for (ItemStack itemStack : player.getInventory().getContents()) {
+                            if (!(RebarItem.fromStack(itemStack) instanceof Item item)) continue;
+                            if (item.getUUID().equals(getUUID())) {
+                                hasBackpack = true;
+                                break;
+                            }
+                        }
+                    }
+                    event.setCancelled(!hasBackpack);
+                }
+            });
             inv.addPostUpdateHandler(event -> {
-            getStack().editPersistentDataContainer(pdc ->
-                    pdc.set(INVENTORY_KEY, RebarSerializers.VIRTUAL_INVENTORY, inv));
+                ItemStack openingItemStack = getStack();
+                for (Player player : gui.getCurrentViewers()) {
+                    for (ItemStack itemStack : player.getInventory().getContents()) {
+                        if (!(RebarItem.fromStack(itemStack) instanceof Item item)) continue;
+                        if (item.getUUID().equals(getUUID())) openingItemStack = itemStack;
+                    }
+                }
+                openingItemStack.editPersistentDataContainer(pdc ->
+                        pdc.set(INVENTORY_KEY, RebarSerializers.VIRTUAL_INVENTORY, inv));
             });
             return gui;
         }
@@ -240,7 +269,7 @@ public class PortableBackPack extends RebarBlock implements
         @Override
         public @NotNull RebarBlock place(@NotNull BlockCreateContext context) {
             PortableBackPack tank = (PortableBackPack) getSchema().place(context);
-            tank.setAll(getStoredType(), getStoredAmount(), getInventory(), getName());
+            tank.setAll(getStoredType(), getStoredAmount(), getInventory(), getName(), getUUID());
             for (int i = 0; i < getStoredType().size(); i++) {
                 tank.createFluidBuffer(getStoredType().get(i), capacity, true, true);
                 tank.setFluidCapacity(getStoredType().get(i), capacity);
@@ -254,11 +283,13 @@ public class PortableBackPack extends RebarBlock implements
     private static final NamespacedKey CAPACITY_KEY = new NamespacedKey(DoraMachines.getInstance(), "block_capacity");
     private static final NamespacedKey COMPONENT_KEY = new NamespacedKey(DoraMachines.getInstance(), "block_component");
     private static final NamespacedKey INVENTORY_KEY = new NamespacedKey(DoraMachines.getInstance(), "block_inventory");
+    private static final NamespacedKey UUID_KEY = new NamespacedKey(DoraMachines.getInstance(), "block_uuid");
     private List<RebarFluid> stored_type = new ArrayList<>(Arrays.asList(PylonFluids.WATER, PylonFluids.LAVA));
     private List<Double> stored_amount = new ArrayList<>(Arrays.asList(0.0, 0.0));
     private Component component;
     private VirtualInventory inventory;
     private List<Boolean> running = new ArrayList<>(Arrays.asList(false, false));
+    private UUID uuid;
     private final ConfigSection config = ConfigSection.fromSettings(DoraMachinesKeys.PORTABLE_BACKPACK);
     private final double capacity = config.getOrThrow("capacity", ConfigAdapter.DOUBLE);
     private ItemStack offItemStack = new ItemStackBuilder(ItemStack.of(Material.RED_STAINED_GLASS_PANE))
@@ -285,6 +316,7 @@ public class PortableBackPack extends RebarBlock implements
         running = new ArrayList<>(pdc.get(STATUS_KEY, RebarSerializers.LIST.listTypeFrom(RebarSerializers.BOOLEAN)));
         inventory = pdc.get(INVENTORY_KEY, RebarSerializers.VIRTUAL_INVENTORY);
         component = pdc.get(COMPONENT_KEY, RebarSerializers.COMPONENT);
+        uuid = pdc.get(UUID_KEY, RebarSerializers.UUID);
     }
     @Override
     public void write(@NotNull PersistentDataContainer pdc) {
@@ -293,6 +325,7 @@ public class PortableBackPack extends RebarBlock implements
         pdc.set(STATUS_KEY, RebarSerializers.LIST.listTypeFrom(RebarSerializers.BOOLEAN), running);
         pdc.set(INVENTORY_KEY, RebarSerializers.VIRTUAL_INVENTORY, inventory);
         pdc.set(COMPONENT_KEY, RebarSerializers.COMPONENT, component);
+        pdc.set(UUID_KEY, RebarSerializers.UUID, uuid);
     }
     @Override
     public void postInitialise() {
@@ -303,11 +336,12 @@ public class PortableBackPack extends RebarBlock implements
             running.set(event.getSlot(), !running.get(event.getSlot()));
         });
     }
-    public void setAll(List<RebarFluid> fluids, List<Double> d, VirtualInventory inventory, Component component) {
+    public void setAll(List<RebarFluid> fluids, List<Double> d, VirtualInventory inventory, Component component, UUID uuid) {
         this.stored_type = new ArrayList<>(fluids);
         this.stored_amount = new ArrayList<>(d);
         this.inventory = inventory;
         this.component = component;
+        this.uuid = uuid;
     }
     public Gui getGui(){
         Gui gui = Gui.builder()
@@ -433,16 +467,16 @@ public class PortableBackPack extends RebarBlock implements
     }
     @Override
     public @Nullable ItemStack getDropItem(@NotNull BlockBreakContext context) {
-        return getDrop();
+        return getDrop(false);
     }
     @Override
     public @Nullable ItemStack getPickItem(@NotNull Player player) {
-        return getDrop();
+        return getDrop(true);
     }
-    public ItemStack getDrop() {
+    public ItemStack getDrop(Boolean rollUUID) {
         ItemStack stack = RebarRegistry.ITEMS.getOrThrow(getKey()).getItemStack();
         Item item = new Item(stack);
-        item.setAll(stored_type, stored_amount, inventory, component);
+        item.setAll(stored_type, stored_amount, inventory, component, rollUUID ? UUID.randomUUID() : uuid);
         item.setName(component);
         return stack;
     }

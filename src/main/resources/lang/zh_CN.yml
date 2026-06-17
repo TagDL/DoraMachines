@@ -107,11 +107,22 @@ item:
       <arrow> <yellow>Shift <gray>+ <green>右键 <gray>以查看同一信道上处于激活状态的发射端/接收端位置
   temp_block:
     name: "测试方块"
+  hydraulic_woodcutter:
+    name: "液压伐木机"
+    lore: |-
+      <arrow> 自动砍树并消耗一个储存在输出槽的木头以补种
+      <arrow> <attr>每秒消耗 <lang:pylon.fluid.hydraulic_fluid/>:</attr> %fluid-per-craft%
+      <arrow> <attr>缓冲区:</attr> %buffer%
+  diesel_woodcutter:
+    name: "柴油伐木机"
+    lore: |-
+      <arrow> 自动砍树并消耗一个储存在输出槽的木头以补种
+      <arrow> <attr>每秒消耗 <lang:pylon.fluid.biodiesel/>:</attr> %fluid-per-craft%
+      <arrow> <attr>缓冲区:</attr> %buffer%
 
 message:
   unbreakable_result:
-    tooltip: "<arrow> <#ff5e00>没办法被咬烂了nya"
-    success: "<red>你的物品已经是无法破坏了nya"
+    success: "<blue>你的物品已经是无法破坏了"
   explosion:
     success: "<yellow>修改破坏范围为：<red>%radius%x%radius%x%radius%"
   industrial_miner:

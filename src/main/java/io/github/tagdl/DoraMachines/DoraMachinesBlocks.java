@@ -4,6 +4,7 @@ import io.github.lijinhong11.rebarwrench.RebarWrench;
 import io.github.lijinhong11.rebarwrench.api.Wrenchable;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.tagdl.DoraMachines.blocks.FilterBase;
+import io.github.tagdl.DoraMachines.blocks.HydraulicWoodcutter;
 import io.github.tagdl.DoraMachines.blocks.IndustrialMiner;
 import io.github.tagdl.DoraMachines.blocks.LiseletteDisenchanter;
 import io.github.tagdl.DoraMachines.blocks.LiseletteEnchanter;
@@ -12,6 +13,8 @@ import io.github.tagdl.DoraMachines.blocks.PortableBackPack;
 import io.github.tagdl.DoraMachines.blocks.RedstoneLink;
 import io.github.tagdl.DoraMachines.blocks.TempBlock;
 import io.github.tagdl.DoraMachines.blocks.TimingCharger;
+import io.github.tagdl.DoraMachines.blocks.DieselWoodcutter;
+import io.github.tagdl.DoraMachines.blocks.wrench.NormalWrench;
 import io.github.tagdl.DoraMachines.blocks.wrench.RedstoneLinkWrench;
 
 import org.bukkit.Bukkit;
@@ -28,12 +31,33 @@ public final class DoraMachinesBlocks {
         RebarBlock.register(DoraMachinesKeys.LISELETTE_DISENCHANTER, Material.POLISHED_ANDESITE_SLAB, LiseletteDisenchanter.class);
         RebarBlock.register(DoraMachinesKeys.PORTABLE_BACKPACK, Material.SEA_LANTERN, PortableBackPack.class);
         RebarBlock.register(DoraMachinesKeys.REDSTONE_LINK, Material.OAK_BUTTON, RedstoneLink.class);
+        RebarBlock.register(DoraMachinesKeys.HYDRAULIC_WOODCUTTER, Material.BRICKS, HydraulicWoodcutter.class);
+        RebarBlock.register(DoraMachinesKeys.DIESEL_WOODCUTTER, Material.RESIN_BRICKS, DieselWoodcutter.class);
 
         if (Bukkit.getPluginManager().getPlugin("RebarWrench") != null) {
-            RebarBlock.register(DoraMachinesKeys.TEMP_BLOCK, Material.BLUE_WOOL, TempBlock.class);
-            RebarWrench.registerWrenchable(TempBlock.class, TempBlock.WRENCHABLE);
+            RebarWrench.registerWrenchable(IndustrialMiner.class, Wrenchable.builder()
+                .interactFunction(NormalWrench::onWrench).build());
+            RebarWrench.registerWrenchable(FilterBase.class, Wrenchable.builder()
+                .interactFunction(NormalWrench::onWrench).build());
+            RebarWrench.registerWrenchable(MultiFluidTank.class, Wrenchable.builder()
+                .interactFunction(NormalWrench::onWrench).build());
+            RebarWrench.registerWrenchable(TimingCharger.class, Wrenchable.builder()
+                .interactFunction(NormalWrench::onWrench).build());
+            RebarWrench.registerWrenchable(LiseletteEnchanter.class, Wrenchable.builder()
+                .interactFunction(NormalWrench::onWrench).build());
+            RebarWrench.registerWrenchable(LiseletteDisenchanter.class, Wrenchable.builder()
+                .interactFunction(NormalWrench::onWrench).build());
+            RebarWrench.registerWrenchable(PortableBackPack.class, Wrenchable.builder()
+                .interactFunction(NormalWrench::onWrench).build());
             RebarWrench.registerWrenchable(RedstoneLink.class, 
                 Wrenchable.builder().interactFunction(RedstoneLinkWrench::onWrench).build());
+            RebarWrench.registerWrenchable(HydraulicWoodcutter.class, Wrenchable.builder()
+                .interactFunction(NormalWrench::onWrench).build());
+            RebarWrench.registerWrenchable(DieselWoodcutter.class, Wrenchable.builder()
+                .interactFunction(NormalWrench::onWrench).build());
+
+            RebarBlock.register(DoraMachinesKeys.TEMP_BLOCK, Material.BLUE_WOOL, TempBlock.class);
+            RebarWrench.registerWrenchable(TempBlock.class, TempBlock.WRENCHABLE);
         }
 
     }

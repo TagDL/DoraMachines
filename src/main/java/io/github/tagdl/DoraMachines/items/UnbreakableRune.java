@@ -5,7 +5,6 @@ import io.github.pylonmc.pylon.content.tools.base.Rune;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.translation.GlobalTranslator;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
@@ -20,7 +19,6 @@ import org.jetbrains.annotations.NotNull;
 @SuppressWarnings("UnstableApiUsage")
 public class UnbreakableRune extends Rune {
     public static final Component SUCCESS = Component.translatable("doramachines.message.unbreakable_result.success");
-    public static final Component TOOLTIP = Component.translatable("doramachines.message.unbreakable_result.tooltip");
 
     public UnbreakableRune(@NotNull ItemStack stack) {
         super(stack);
@@ -54,7 +52,6 @@ public class UnbreakableRune extends Rune {
         Player player = event.getPlayer();
         ItemStack handle = ItemStackBuilder.of(target.asQuantity(consume)) // Already cloned in `asQuantity`
                 .set(DataComponentTypes.UNBREAKABLE)
-                .lore(GlobalTranslator.render(TOOLTIP, player.locale()))
                 .build();
 
         // (N)Either left runes or targets

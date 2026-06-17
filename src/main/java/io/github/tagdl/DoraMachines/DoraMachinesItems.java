@@ -9,6 +9,7 @@ import io.github.tagdl.DoraMachines.blocks.LiseletteDisenchanter;
 import io.github.tagdl.DoraMachines.blocks.LiseletteEnchanter;
 import io.github.tagdl.DoraMachines.blocks.PortableBackPack;
 import io.github.tagdl.DoraMachines.blocks.RedstoneLink;
+import io.github.tagdl.DoraMachines.blocks.DieselWoodcutter;
 import io.github.tagdl.DoraMachines.guide.FilterPage;
 import io.github.tagdl.DoraMachines.items.ExplosionPickaxe;
 import io.github.tagdl.DoraMachines.items.ExplosionShovel;
@@ -66,6 +67,10 @@ public final class DoraMachinesItems {
                 .set(DataComponentTypes.ITEM_MODEL, Material.MUSIC_DISC_LAVA_CHICKEN.getKey())
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
+    public static final ItemStack HYDRAULIC_WOODCUTTER = ItemStackBuilder.rebar(Material.BRICKS, DoraMachinesKeys.HYDRAULIC_WOODCUTTER)
+            .build();
+    public static final ItemStack DIESEL_WOODCUTTER = ItemStackBuilder.rebar(Material.RESIN_BRICKS, DoraMachinesKeys.DIESEL_WOODCUTTER)
+            .build();
 
     public static final ItemStack TEMP_BLOCK = ItemStackBuilder.rebar(Material.BLUE_WOOL, DoraMachinesKeys.TEMP_BLOCK)
             .build();
@@ -107,6 +112,10 @@ public final class DoraMachinesItems {
         DoraMachinesPages.BLOCK.addItem(LISELETTE_DISENCHANTER);
         RebarItem.register(RedstoneLink.Item.class, REDSTONE_LINK, DoraMachinesKeys.REDSTONE_LINK);
         DoraMachinesPages.BLOCK.addItem(REDSTONE_LINK);
+        RebarItem.register(DieselWoodcutter.Item.class, HYDRAULIC_WOODCUTTER, DoraMachinesKeys.HYDRAULIC_WOODCUTTER);
+        DoraMachinesPages.BLOCK.addItem(HYDRAULIC_WOODCUTTER);
+        RebarItem.register(DieselWoodcutter.Item.class, DIESEL_WOODCUTTER, DoraMachinesKeys.DIESEL_WOODCUTTER);
+        DoraMachinesPages.BLOCK.addItem(DIESEL_WOODCUTTER);
 
         RebarItem.register(RebarItem.class, TEMP_BLOCK, DoraMachinesKeys.TEMP_BLOCK);
     }

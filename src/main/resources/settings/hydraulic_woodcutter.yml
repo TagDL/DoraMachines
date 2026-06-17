@@ -1,0 +1,4 @@
+break-per-log-consume-seconds: 1.0
+max-break-amount: 100
+buffer: 100
+fluid-per-craft: 10
