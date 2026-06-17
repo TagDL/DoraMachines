@@ -17,6 +17,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Container;
+import org.bukkit.block.ShulkerBox;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -106,7 +107,7 @@ public class ExplosionShovel extends RebarItem implements
         Collection<ItemStack> drops = block.getDrops(tool);
 
         if (blockState instanceof Container container
-                && !(blockState instanceof org.bukkit.block.ShulkerBox)) {
+                && !(blockState instanceof ShulkerBox)) {
             Inventory inv = container.getInventory();
             for (ItemStack item : inv.getContents()) {
                 if (item != null && !item.getType().isAir()) {
