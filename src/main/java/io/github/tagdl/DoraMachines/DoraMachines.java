@@ -6,6 +6,7 @@ import io.github.pylonmc.pylon.content.tools.SoulboundRune;
 import io.github.pylonmc.rebar.addon.RebarAddon;
 import io.github.tagdl.DoraMachines.blocks.LiseletteDisenchanter;
 import io.github.tagdl.DoraMachines.blocks.LiseletteEnchanter;
+import io.github.tagdl.DoraMachines.blocks.RedstoneClock;
 import io.github.tagdl.DoraMachines.blocks.RedstoneLink;
 import io.github.tagdl.DoraMachines.command.PortableBackPackCommand;
 import io.github.tagdl.DoraMachines.items.GoldenBoneMeal;

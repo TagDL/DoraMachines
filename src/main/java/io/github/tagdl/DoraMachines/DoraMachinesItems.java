@@ -72,6 +72,8 @@ public final class DoraMachinesItems {
             .build();
     public static final ItemStack DIESEL_WOODCUTTER = ItemStackBuilder.rebar(Material.RESIN_BRICKS, DoraMachinesKeys.DIESEL_WOODCUTTER)
             .build();
+    public static final ItemStack REDSTONE_CLOCK = ItemStackBuilder.rebar(Material.RED_CONCRETE, DoraMachinesKeys.REDSTONE_CLOCK)
+            .build();
 
     public static final ItemStack TEMP_BLOCK = ItemStackBuilder.rebar(Material.BLUE_WOOL, DoraMachinesKeys.TEMP_BLOCK)
             .build();
@@ -117,6 +119,8 @@ public final class DoraMachinesItems {
         DoraMachinesPages.BLOCK.addItem(HYDRAULIC_WOODCUTTER);
         RebarItem.register(DieselWoodcutter.Item.class, DIESEL_WOODCUTTER, DoraMachinesKeys.DIESEL_WOODCUTTER);
         DoraMachinesPages.BLOCK.addItem(DIESEL_WOODCUTTER);
+        RebarItem.register(RebarItem.class, REDSTONE_CLOCK, DoraMachinesKeys.REDSTONE_CLOCK);
+        DoraMachinesPages.BLOCK.addItem(REDSTONE_CLOCK);
 
         RebarItem.register(RebarItem.class, TEMP_BLOCK, DoraMachinesKeys.TEMP_BLOCK);
     }

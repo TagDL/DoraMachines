@@ -155,6 +155,18 @@ doramachines:linked_connector:
   result: doramachines:linked_connector
   category: redstone
 
+doramachines:redstone_clock:
+  pattern:
+    - "BAB"
+    - "B B"
+    - "BCB"
+  key:
+    A: minecraft:clock
+    B: pylon:copper_sheet
+    C: minecraft:redstone_torch
+  result: doramachines:redstone_clock
+  category: redstone
+
 doramachines:hydraulic_woodcutter:
   pattern:
     - "BDB"

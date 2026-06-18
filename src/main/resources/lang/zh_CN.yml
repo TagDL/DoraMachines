@@ -119,6 +119,10 @@ item:
       <arrow> 自动砍树并消耗一个储存在输出槽的木头以补种
       <arrow> <attr>每秒消耗 <lang:pylon.fluid.biodiesel/>:</attr> %fluid-per-craft%
       <arrow> <attr>缓冲区:</attr> %buffer%
+  redstone_clock:
+    name: "红石钟"
+    lore: |-
+      <arrow> 每隔指定时间发出红石信号
 
 message:
   unbreakable_result:
@@ -177,8 +181,8 @@ gui:
   timing_charger:
     name: "当前延迟: %amount%"
     lore: |-
-      <arrow> <insn>左键</insn> 以增加%per%刻延迟
-      <arrow> <insn>右键</insn> 以减少%per%刻延迟
+      <arrow> <insn>左键</insn> 以增加 %per% 刻延迟
+      <arrow> <insn>右键</insn> 以减少 %per% 刻延迟
       <arrow> <insn>最小延迟为:</insn> %min%
   liselette_enchanter:
     equitment_name: "<yellow>放入任意装备"
@@ -202,6 +206,12 @@ gui:
   fluid_selector:
     backpage: "前一页"
     forwardpage: "下一页"
+  redstone_clock:
+    name: "当前延迟: %amount%"
+    lore: |-
+      <arrow> <insn>左键</insn> 以增加 %per% 刻延迟
+      <arrow> <insn>右键</insn> 以减少 %per% 刻延迟
+      <arrow> <insn>最小延迟为:</insn> %min%
 
 waila:
   industrial_miner:
@@ -225,4 +235,6 @@ waila:
     running: "剩余时间: <yellow>%time%<white> 秒"
     not_running: "<red>暂未运行 <white>|"
   timing_charger:
+    delay: "现在延迟: <yellow>%delay% <white>刻"
+  redstone_clock:
     delay: "现在延迟: <yellow>%delay% <white>刻"

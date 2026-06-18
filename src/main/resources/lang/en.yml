@@ -117,6 +117,10 @@ item:
       <arrow> Automatic logging and consume one piece of log in output inventory to replanting
       <arrow> <attr><lang:pylon.fluid.biodiesel/> usage:</attr> %fluid-per-craft% per seconds
       <arrow> <attr>Buffer:</attr> %buffer%
+  redstone_clock:
+    name: "Redstone Clock"
+    lore: |-
+      <arrow> Output redstone power per specified tick you set
 
 message:
   unbreakable_result:
@@ -173,7 +177,7 @@ gui:
       empty: "Empty"
       not_empty: "Storing: %capacity%"
   timing_charger:
-    name: "Timing: %amount%"
+    name: "Delay: %amount%"
     lore: |-
       <arrow> <insn>Left click</insn> to increase %per%
       <arrow> <insn>Right click</insn> to decrease %per%
@@ -200,6 +204,12 @@ gui:
   fluid_selector:
     backpage: "BACK"
     forwardpage: "FORWARD"
+  redstone_clock:
+    name: "Delay: %amount%"
+    lore: |-
+      <arrow> <insn>Left click</insn> to increase %per%
+      <arrow> <insn>Right click</insn> to decrease %per%
+      <arrow> <insn>Min:</insn> %min%
 
 waila:
   industrial_miner:
@@ -223,4 +233,6 @@ waila:
     running: "Time left: <yellow>%time%<white>s"
     not_running: "<red>Not running <white>"
   timing_charger:
+    delay: "Now delays: <yellow>%delay% <white>ticks"
+  redstone_clock:
     delay: "Now delays: <yellow>%delay% <white>ticks"

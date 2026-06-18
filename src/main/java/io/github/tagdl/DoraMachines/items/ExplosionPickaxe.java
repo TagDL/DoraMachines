@@ -67,11 +67,9 @@ public class ExplosionPickaxe extends RebarItem implements
                 case 0 -> 1;
                 default -> 2;
             };
-        event.getItem().editPersistentDataContainer(pdc->{
-            pdc.set(RADIUS_KEY_PICKAXE, PersistentDataType.INTEGER, next_radius);
-        });
-        event.getPlayer().sendActionBar(Component
-                .translatable("doramachines.message.explosion.success")
+        event.getItem().editPersistentDataContainer(pdc ->
+            pdc.set(RADIUS_KEY_PICKAXE, PersistentDataType.INTEGER, next_radius));
+        event.getPlayer().sendActionBar(Component.translatable("doramachines.message.explosion.success")
                 .arguments(RebarArgument.of("radius", (next_radius * 2) + 1)));
     }
         
@@ -81,28 +79,20 @@ public class ExplosionPickaxe extends RebarItem implements
         for (int x = -radius; x <= radius; x++) {
             for (int y = -radius; y <= radius; y++) {
                 for (int z = -radius; z <= radius; z++) {
-
                     if (x == 0 && y == 0 && z == 0) continue;
-
                     Block target = centerBlock.getRelative(x, y, z);
-
-                    if (target.getType().isAir() || target.getType().getHardness() < 0 || BlockStorage.isRebarBlock(target)) {
-                        continue;
-                    }
-
+                    if (target.getType().isAir() || target.getType().getHardness() < 0
+                            || BlockStorage.isRebarBlock(target)) continue;
                     BlockBreakEvent breakEvent = new BlockBreakEvent(target, player);
                     eventsToIgnore.add(breakEvent);
-                    if (!breakEvent.callEvent()) {
-                        continue;
-                    }
-
-                    executeDestruction(target, player, tool, breakEvent);
+                    if (!breakEvent.callEvent()) continue;
+                    startDestory(target, player, tool, breakEvent);
                 }
             }
         }
     }
 
-    private void executeDestruction(Block block, Player player, ItemStack tool, BlockBreakEvent event) {
+    private void startDestory(Block block, Player player, ItemStack tool, BlockBreakEvent event) {
         BlockState blockState = block.getState();
         Collection<ItemStack> drops = block.getDrops(tool);
 
@@ -110,31 +100,21 @@ public class ExplosionPickaxe extends RebarItem implements
                 && !(blockState instanceof ShulkerBox)) {
             Inventory inv = container.getInventory();
             for (ItemStack item : inv.getContents()) {
-                if (item != null && !item.getType().isAir()) {
-                    drops.add(item);
-                }
+                if (item != null && !item.getType().isAir()) drops.add(item);
             }
         }
-
         block.getWorld().playEffect(block.getLocation(), Effect.STEP_SOUND, block.getBlockData());
-
         block.setType(Material.AIR);
-
         if (event.isDropItems()) {
             List<Item> itemsDropped = new ArrayList<>();
             for (ItemStack itemStack : drops) {
                 Item item = block.getWorld().dropItem(block.getLocation(), itemStack);
                 itemsDropped.add(item);
             }
-
-            if (!new BlockDropItemEvent(block, blockState, player, itemsDropped).callEvent()) {
-                itemsDropped.forEach(Item::remove);
-            }
+            if (!new BlockDropItemEvent(block, blockState, player, itemsDropped).callEvent()) itemsDropped.forEach(Item::remove);
         }
-
         Tool toolComponent = tool.getData(DataComponentTypes.TOOL);
-        if (toolComponent != null) {
-            RebarUtils.damageItem(tool, toolComponent.damagePerBlock(), player, EquipmentSlot.HAND);
-        }
+        if (toolComponent != null) RebarUtils.damageItem(tool, toolComponent.damagePerBlock(), player, EquipmentSlot.HAND);
+
     }
 }

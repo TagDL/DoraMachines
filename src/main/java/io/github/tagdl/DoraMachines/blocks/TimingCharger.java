@@ -1,6 +1,5 @@
 package io.github.tagdl.DoraMachines.blocks;
 
-import static io.github.pylonmc.pylon.util.PylonUtils.pylonKey;
 import static java.lang.Math.max;
 
 import org.bukkit.Material;
@@ -29,6 +28,7 @@ import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
 import io.github.pylonmc.rebar.util.gui.GuiItems;
 import io.github.pylonmc.rebar.waila.WailaDisplay;
+import io.github.tagdl.DoraMachines.DoraMachines;
 import io.github.tagdl.DoraMachines.DoraMachinesKeys;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
@@ -43,10 +43,10 @@ public class TimingCharger extends RebarBlock implements
         GuiRebarBlock,
         TickingRebarBlock
 {
-    private static final NamespacedKey TIMING_KEY = pylonKey("amount");
-    private static ConfigSection settings = ConfigSection.fromSettings(DoraMachinesKeys.TIMING_CHARGER);
-    private static int click_per_change = settings.getOrThrow("Click_Per_Change", ConfigAdapter.INTEGER);
-    private static int min_tick = max(settings.getOrThrow("Min_Tick", ConfigAdapter.INTEGER), 1);
+    private static final NamespacedKey TIMING_KEY = new NamespacedKey(DoraMachines.getInstance(), "delay");
+    private final ConfigSection settings = ConfigSection.fromSettings(DoraMachinesKeys.TIMING_CHARGER);
+    private int click_per_change = settings.getOrThrow("Click_Per_Change", ConfigAdapter.INTEGER);
+    private int min_tick = max(settings.getOrThrow("Min_Tick", ConfigAdapter.INTEGER), 1);
     @Getter
     private int timing = 5;
 
@@ -78,7 +78,7 @@ public class TimingCharger extends RebarBlock implements
     public class TimingItem extends AbstractItem {
         @Override
         public @NonNull ItemProvider getItemProvider(@NotNull Player player) {
-            return ItemStackBuilder.of(Material.RED_CONCRETE)
+            return ItemStackBuilder.of(Material.CLOCK)
                     .name(Component.translatable("doramachines.gui.timing_charger.name")
                         .arguments(RebarArgument.of("amount", timing)))
                     .lore(Component.translatable("doramachines.gui.timing_charger.lore")
@@ -87,11 +87,8 @@ public class TimingCharger extends RebarBlock implements
         }
         @Override
         public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull Click click) {
-            if (clickType.isLeftClick()) {
-                timing += click_per_change;
-            } else if (clickType.isRightClick()) {
-                timing -= click_per_change;
-            }
+            if (clickType.isLeftClick()) timing += click_per_change;
+            else if (clickType.isRightClick()) timing -= click_per_change;
             timing = max(timing, min_tick);
             notifyWindows();
         }
@@ -107,6 +104,7 @@ public class TimingCharger extends RebarBlock implements
     }
     @Override
     public void onProcessFinished() {
+        if (getBlock() == null || !getBlock().getChunk().isLoaded()) return;
         if (getBlock().getRelative(BlockFace.DOWN, 2).getType() == Material.AIR) return;
         if (getBlock().getRelative(BlockFace.DOWN, 2).getState() instanceof Dispenser dispenser) {
             dispenser.dispense();
