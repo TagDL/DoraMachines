@@ -110,7 +110,7 @@ item:
   hydraulic_woodcutter:
     name: "液压伐木机"
     lore: |-
-      <arrow> 自动砍树并消耗一个储存在输出槽的木头以补种
+      <arrow> 自动砍树并消耗一个木头以补种
       <arrow> <attr>每秒消耗 <lang:pylon.fluid.hydraulic_fluid/>:</attr> %fluid-per-craft%
       <arrow> <attr>缓冲区:</attr> %buffer%
   diesel_woodcutter:

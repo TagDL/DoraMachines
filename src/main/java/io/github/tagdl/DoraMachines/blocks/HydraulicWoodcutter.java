@@ -2,11 +2,9 @@ package io.github.tagdl.DoraMachines.blocks;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -26,11 +24,9 @@ import io.github.pylonmc.rebar.block.context.BlockBreakContext;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
 import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.FluidBufferRebarBlock;
-import io.github.pylonmc.rebar.block.interfaces.GuiRebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.LogisticRebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.ProcessorRebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.TickingRebarBlock;
-import io.github.pylonmc.rebar.block.interfaces.VirtualInventoryRebarBlock;
 import io.github.pylonmc.rebar.config.ConfigSection;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.datatypes.RebarSerializers;
@@ -40,28 +36,21 @@ import io.github.pylonmc.rebar.fluid.FluidPointType;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
-import io.github.pylonmc.rebar.logistics.LogisticGroupType;
-import io.github.pylonmc.rebar.util.MachineUpdateReason;
 import io.github.pylonmc.rebar.util.ProgressBar;
 import io.github.pylonmc.rebar.util.RebarUtils;
-import io.github.pylonmc.rebar.util.gui.GuiItems;
 import io.github.pylonmc.rebar.util.gui.unit.UnitFormat;
 import io.github.pylonmc.rebar.util.position.BlockPosition;
 import io.github.pylonmc.rebar.waila.WailaDisplay;
 import io.github.tagdl.DoraMachines.DoraMachines;
 import io.github.tagdl.DoraMachines.DoraMachinesKeys;
 import io.papermc.paper.event.block.BlockBreakBlockEvent;
-import xyz.xenondevs.invui.gui.Gui;
-import xyz.xenondevs.invui.inventory.VirtualInventory;
 
 public class HydraulicWoodcutter extends RebarBlock implements
     DirectionalRebarBlock,
     TickingRebarBlock,
-    GuiRebarBlock,
     LogisticRebarBlock,
     ProcessorRebarBlock,
-    FluidBufferRebarBlock,
-    VirtualInventoryRebarBlock
+    FluidBufferRebarBlock
 {   
     public static class Item extends RebarItem {
 
@@ -86,7 +75,6 @@ public class HydraulicWoodcutter extends RebarBlock implements
     private int max_break = settings.getOrThrow("max-break-amount", ConfigAdapter.INTEGER); 
     public final double buffer = settings.getOrThrow("buffer", ConfigAdapter.INTEGER);
     public final double fluidPerCraft = settings.getOrThrow("fluid-per-craft", ConfigAdapter.INTEGER);
-    private VirtualInventory outputInventory = new VirtualInventory(1);
     private List<BlockPosition> breaking_block = new ArrayList<>();
     public ItemStackBuilder faceStack = ItemStackBuilder.of(Material.IRON_BLOCK)
             .addCustomModelDataString(getKey() + ":face");
@@ -115,24 +103,8 @@ public class HydraulicWoodcutter extends RebarBlock implements
         breaking_block = new ArrayList<>(pdc.get(BREAKING_LOG, RebarSerializers.LIST.listTypeFrom(RebarSerializers.BLOCK_POSITION)));
     }
     @Override
-    public void postInitialise() {
-        outputInventory.addPreUpdateHandler(event -> {
-            if (event.isAdd() || event.isSwap()) event.setCancelled(!(event.getUpdateReason() instanceof MachineUpdateReason));
-        });
-        createLogisticGroup("output", LogisticGroupType.OUTPUT, outputInventory);
-    }
-    @Override
     public void write(@NotNull PersistentDataContainer pdc) {
         pdc.set(BREAKING_LOG, RebarSerializers.LIST.listTypeFrom(RebarSerializers.BLOCK_POSITION), breaking_block);
-    }
-    @Override
-    public @NotNull Gui createGui() {
-        return Gui.builder()
-                .setStructure("# # # o m o # # #")
-                .addIngredient('#', GuiItems.background())
-                .addIngredient('m', outputInventory)
-                .addIngredient('o', GuiItems.output())
-                .build();
     }
     @Override
     public void tick() {
@@ -170,36 +142,26 @@ public class HydraulicWoodcutter extends RebarBlock implements
     @Override
     public void onProcessFinished() {
         if (breaking_block.isEmpty()) return;
-        for (BlockPosition blockPosition : new ArrayList<>(breaking_block)) {
-            Block block = blockPosition.getBlock();
+        ItemStack consumeItemStack = ItemStack.empty();
+        for (int i = 0; i < breaking_block.size(); i++) {
+            Block block = new ArrayList<>(breaking_block).get(i).getBlock();
             if (block == null || block.isEmpty() || !Tag.LOGS.isTagged(block.getType())) {
                 continue;
             }
-            List<ItemStack> drops = block.getDrops().stream().toList();
             block.getWorld().playEffect(block.getLocation(), Effect.STEP_SOUND, block.getBlockData());
-            if (!outputInventory.canHold(drops)) block.breakNaturally();
-            else {
+            if (i == breaking_block.size() - 1) {
+                consumeItemStack = ItemStack.of(block.getType());
                 block.setType(Material.AIR);
-                drops.forEach(drop -> outputInventory.addItem(new MachineUpdateReason(), drop));
-            }
+            } else block.breakNaturally();
         }
         breaking_block.clear();
-        Bukkit.getScheduler().runTask(DoraMachines.getInstance(), () -> {
-            ItemStack holdingItemStack = outputInventory.getItem(0);
-            if (holdingItemStack == null || holdingItemStack.isEmpty()) return;
-            ItemStack removedItemStack = holdingItemStack.subtract();
-            Matcher matcher = Pattern.compile("^(.+_)(LOG)$").matcher(removedItemStack.getType().name());
-            if (matcher.matches()) getBlock().getRelative(getFacing())
-                    .setType(Material.matchMaterial(matcher.group(1) + "SAPLING"));
-        });
-    }
-    @Override
-    public @NotNull Map<@NotNull String, @NotNull VirtualInventory> getVirtualInventories() {
-        return Map.of("output", outputInventory);
+        if (consumeItemStack == null || consumeItemStack.isEmpty()) return;
+        Matcher matcher = Pattern.compile("^(.+_)(LOG)$").matcher(consumeItemStack.getType().name());
+        if (matcher.matches()) getBlock().getRelative(getFacing())
+            .setType(Material.matchMaterial(matcher.group(1) + "SAPLING"));
     }
     @Override
     public void onBlockBreak(@NotNull List<ItemStack> drops, @NotNull BlockBreakContext context) {
-        VirtualInventoryRebarBlock.super.onBlockBreak(drops, context);
         FluidBufferRebarBlock.super.onBlockBreak(drops, context);
     }
     @Override

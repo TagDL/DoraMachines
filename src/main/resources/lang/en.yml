@@ -108,7 +108,7 @@ item:
   hydraulic_woodcutter:
     name: "Hydraulic Woodcutter"
     lore: |-
-      <arrow> Automatic logging and consume one piece of log in output inventory to replanting
+      <arrow> Automatic logging and consume one piece of log to replanting
       <arrow> <attr><lang:pylon.fluid.hydraulic_fluid/> usage:</attr> %fluid-per-craft% per seconds
       <arrow> <attr>Buffer:</attr> %buffer%
   diesel_woodcutter:
