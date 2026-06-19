@@ -12,22 +12,17 @@ import io.papermc.paper.datacomponent.item.Tool;
 import net.kyori.adventure.text.Component;
 
 import org.bukkit.Effect;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Container;
 import org.bukkit.block.ShulkerBox;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockDropItemEvent;
 import io.github.pylonmc.rebar.item.interfaces.InteractRebarItemHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
@@ -44,6 +39,7 @@ public class ExplosionShovel extends RebarItem implements
     }
     private static final NamespacedKey RADIUS_KEY_SHOVEL = new NamespacedKey(DoraMachines.getInstance(), "explosion_shovel_radius");
     private static final Set<Event> eventsToIgnore = Collections.newSetFromMap(new WeakHashMap<>());
+    
     @Override @MultiHandler(priorities = EventPriority.MONITOR, ignoreCancelled = true)
     public void onBreakBlock(@NotNull BlockBreakEvent event, @NotNull EventPriority priority) {
         if (BlockStorage.isRebarBlock(event.getBlock()) || eventsToIgnore.contains(event) || event.getPlayer().isSneaking()) {
@@ -60,11 +56,7 @@ public class ExplosionShovel extends RebarItem implements
                 || !event.getPlayer().isSneaking()) return;
         int radius = event.getItem().getPersistentDataContainer()
             .getOrDefault(RADIUS_KEY_SHOVEL, PersistentDataType.INTEGER, 2);
-        int next_radius = switch (radius) {
-                case 2 -> 0;
-                case 0 -> 1;
-                default -> 2;
-            };
+        int next_radius = radius == 2 ? 0 : radius == 0 ? 1 : 2;
         event.getItem().editPersistentDataContainer(pdc ->
             pdc.set(RADIUS_KEY_SHOVEL, PersistentDataType.INTEGER, next_radius));
         event.getPlayer().sendActionBar(Component
@@ -92,24 +84,14 @@ public class ExplosionShovel extends RebarItem implements
     }
 
     private void startDestory(Block block, Player player, ItemStack tool, BlockBreakEvent event) {
-        BlockState blockState = block.getState();
         Collection<ItemStack> drops = block.getDrops(tool);
-        if (blockState instanceof Container container && !(blockState instanceof ShulkerBox)) {
-            Inventory inv = container.getInventory();
-            for (ItemStack item : inv.getContents()) {
-                if (item != null && !item.getType().isAir()) drops.add(item);
+        if (block instanceof Container container && !(block instanceof ShulkerBox)) {
+            for (ItemStack itemStack : container.getInventory().getContents()) {
+                if (itemStack != null && !itemStack.getType().isAir()) drops.add(itemStack);
             }
         }
         block.getWorld().playEffect(block.getLocation(), Effect.STEP_SOUND, block.getBlockData());
-        block.setType(Material.AIR);
-        if (event.isDropItems()) {
-            List<Item> itemsDropped = new ArrayList<>();
-            for (ItemStack itemStack : drops) {
-                Item item = block.getWorld().dropItem(block.getLocation(), itemStack);
-                itemsDropped.add(item);
-            }
-            if (!new BlockDropItemEvent(block, blockState, player, itemsDropped).callEvent()) itemsDropped.forEach(Item::remove);
-        }
+        block.breakNaturally();
         Tool toolComponent = tool.getData(DataComponentTypes.TOOL);
         if (toolComponent != null) RebarUtils.damageItem(tool, toolComponent.damagePerBlock(), player, EquipmentSlot.HAND);
     }
