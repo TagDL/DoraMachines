@@ -38,3 +38,15 @@ doramachines:unbreakable_rune:
     M: minecraft:netherite_ingot
   result: doramachines:unbreakable_rune
   time-seconds: 70
+
+doramachines:void_picker:
+  shape:
+    - "SL "
+    - " M "
+    - " LS"
+  key:
+    L: pylon:shimmer_dust_1
+    S: pylon:abyssal_catalyst
+    M: minecraft:cactus
+  result: doramachines:void_picker
+  time-seconds: 10

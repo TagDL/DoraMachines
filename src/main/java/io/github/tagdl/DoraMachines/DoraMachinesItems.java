@@ -20,6 +20,7 @@ import io.github.tagdl.DoraMachines.items.LinkedConnector;
 import io.github.tagdl.DoraMachines.items.PlanC;
 import io.github.tagdl.DoraMachines.items.RoadTool;
 import io.github.tagdl.DoraMachines.items.UnbreakableRune;
+import io.github.tagdl.DoraMachines.items.VoidPicker;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 
 
@@ -74,6 +75,10 @@ public final class DoraMachinesItems {
             .build();
     public static final ItemStack REDSTONE_CLOCK = ItemStackBuilder.rebar(Material.RED_CONCRETE, DoraMachinesKeys.REDSTONE_CLOCK)
             .build();
+    public static final ItemStack VOID_PICKER = ItemStackBuilder.rebar(Material.CLAY_BALL, DoraMachinesKeys.VOID_PICKER)
+                .set(DataComponentTypes.ITEM_MODEL, Material.BLACK_BUNDLE.getKey())
+                .set(DataComponentTypes.MAX_STACK_SIZE, 1)
+            .build();
 
     public static final ItemStack TEMP_BLOCK = ItemStackBuilder.rebar(Material.BLUE_WOOL, DoraMachinesKeys.TEMP_BLOCK)
             .build();
@@ -97,6 +102,8 @@ public final class DoraMachinesItems {
         DoraMachinesPages.TOOL.addItem(PORTABLE_BACKPACK);
         RebarItem.register(LinkedConnector.class, LINKED_CONNECTOR, DoraMachinesKeys.LINKED_CONNECTOR);
         DoraMachinesPages.TOOL.addItem(LINKED_CONNECTOR);
+        RebarItem.register(VoidPicker.class, VOID_PICKER, DoraMachinesKeys.VOID_PICKER);
+        DoraMachinesPages.TOOL.addItem(VOID_PICKER);
 
         
         RebarItem.register(RebarItem.class, INDUSTRIAL_MINER, DoraMachinesKeys.INDUSTRIAL_MINER);

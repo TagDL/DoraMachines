@@ -123,6 +123,14 @@ item:
     name: "红石钟"
     lore: |-
       <arrow> 每隔指定时间发出红石信号
+  void_picker:
+    name: "虚空拾取者"
+    lore: |-
+      <arrow> 删除在白名单里或不在黑名单里的新拾取的掉落物
+      <arrow> <green>右键 <gray>以打开界面
+      <arrow> %mode%
+      <arrow> 掉落物列表: %item%
+    prefix: "<arrow> "
 
 message:
   unbreakable_result:
@@ -212,6 +220,12 @@ gui:
       <arrow> <insn>左键</insn> 以增加 %per% 刻延迟
       <arrow> <insn>右键</insn> 以减少 %per% 刻延迟
       <arrow> <insn>最小延迟为:</insn> %min%
+  void_picker:
+    name: "虚空拾取者"
+    whitelist: "模式: 白名单"
+    blacklist: "模式: 黑名单"
+    lore: "点击以切换模式"
+
 
 waila:
   industrial_miner:

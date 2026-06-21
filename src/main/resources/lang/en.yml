@@ -121,6 +121,14 @@ item:
     name: "Redstone Clock"
     lore: |-
       <arrow> Output redstone power per specified tick you set
+  void_picker:
+    name: "Void Picker"
+    lore: |-
+      <arrow> Delete itemStack you pickup which in whitelist or not in blacklist
+      <arrow> <green>Right Click <gray>to open gui
+      <arrow> %mode%
+      <arrow> Item list: %item%
+    prefix: "<arrow> "
 
 message:
   unbreakable_result:
@@ -210,6 +218,11 @@ gui:
       <arrow> <insn>Left click</insn> to increase %per%
       <arrow> <insn>Right click</insn> to decrease %per%
       <arrow> <insn>Min:</insn> %min%
+  void_picker:
+    name: "Void Picker"
+    whitelist: "Mode: Whitelist"
+    blacklist: "Mode: Blacklist"
+    lore: "Click to switch mode"
 
 waila:
   industrial_miner:
