@@ -5,12 +5,12 @@ item:
     name: "Explosion Pickaxe"
     lore: |-
       <arrow> Destory 5x5x5 or 3x3x3 area's block
-      <arrow> Use <yellow>Shift <white>+ <green>Right Click <white>to exchange model
+      <arrow> Use <yellow>Shift <gray>+ <green>Right Click <gray>to exchange model
   explosion_shovel:
     name: "Explosion Shovel"
     lore: |-
       <arrow> Destory 5x5x5 or 3x3x3 area's block
-      <arrow> Use <yellow>Shift <white>+ <green>Right Click <white>to exchange model
+      <arrow> Use <yellow>Shift <gray>+ <green>Right Click <gray>to exchange model
   unbreakable_rune:
     name: "Unbreakable Rune"
     lore: |-
@@ -18,8 +18,8 @@ item:
   plan_c:
     name: "Plan C"
     lore: |-
-      <arrow> <red>Kill <white>all mobs within a 5-degree radius include yourself
-      <arrow> <red>Destory <white>itself after use
+      <arrow> <red>Kill <gray>all mobs within a 5-degree radius include yourself
+      <arrow> <red>Destory <gray>itself after use
   industrial_miner:
     name: "Industrial Miner"
     lore: |-

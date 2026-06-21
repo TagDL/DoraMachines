@@ -5,12 +5,12 @@ item:
     name: "爆炸镐"
     lore: |-
       <arrow> 破坏5x5x5或3x3x3的方块
-      <arrow> 使用 <yellow>潜行键 <white>+ <green>右键 <white>切换模式
+      <arrow> 使用 <yellow>潜行键 <gray>+ <green>右键 <gray>切换模式
   explosion_shovel:
     name: "爆炸铲"
     lore: |-
       <arrow> 破坏5x5x5或3x3x3的方块
-      <arrow> 使用 <yellow>潜行键 <white>+ <green>右键 <white>切换模式
+      <arrow> 使用 <yellow>潜行键 <gray>+ <green>右键 <gray>切换模式
   unbreakable_rune:
     name: "不可破坏符文"
     lore: |-
@@ -18,7 +18,7 @@ item:
   plan_c:
     name: "C计划"
     lore: |-
-      <arrow> <red>杀死<white>以自己为中心半径5的所有生物
+      <arrow> <red>杀死<gray>以自己为中心半径5的所有生物
       <arrow> 右键使用后<red>移除
   industrial_miner:
     name: "工业矿机"

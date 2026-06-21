@@ -125,7 +125,7 @@ doramachines:portable_backpack:
   key:
     A: pylon:steel_silo
     G: pylon:portability_catalyst
-    B: pylon:fluid_tank_casing_steel
+    B: pylon:portable_fluid_tank_steel
     C: minecraft:crafting_table
     D: pylon:fluid_pipe_steel
   result: doramachines:portable_backpack
