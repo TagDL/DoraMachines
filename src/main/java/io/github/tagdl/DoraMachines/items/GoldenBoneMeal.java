@@ -5,11 +5,11 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import com.destroystokyo.paper.ParticleBuilder;
+
 import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.interfaces.BlockInteractRebarItemHandler;
 import io.github.tagdl.DoraMachines.DoraMachines;
-import io.github.tagdl.DoraMachines.DoraMachinesItems;
-import net.kyori.adventure.text.Component;
 import io.github.pylonmc.rebar.block.BlockStorage;
 import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
 import io.github.pylonmc.rebar.event.api.annotation.MultiHandler;
@@ -19,8 +19,11 @@ import org.bukkit.event.EventHandler;
 
 import org.bukkit.event.Listener;
 import org.bukkit.block.data.Directional;
+import org.bukkit.block.data.type.Sapling;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Dispenser;
@@ -35,7 +38,6 @@ public class GoldenBoneMeal extends RebarItem implements
     DirectionalRebarBlock,
     Listener
 {
-    public static final Component SUCCESS = Component.translatable("doramachines.message.unbreakable_result.success");
     public GoldenBoneMeal(@NotNull ItemStack stack) {
         super(stack);
     }
@@ -44,18 +46,23 @@ public class GoldenBoneMeal extends RebarItem implements
         if (event.getHand() != EquipmentSlot.HAND 
                 || event.useItemInHand() == Event.Result.DENY
                 || !event.getAction().isRightClick()) return;
-        ItemStack item = event.getItem();
-        Block block = event.getClickedBlock();
-        this.getKey();
-        if (!grow(event, item, block)) return;
-
-        item.subtract(); 
-        event.setCancelled(true);
+        if (!grow(event.getClickedBlock())) return;
+        if (event.getPlayer().getGameMode() != GameMode.CREATIVE) event.getItem().subtract(); 
     }
-    //for player
-    public static boolean grow(@NotNull PlayerInteractEvent event, ItemStack item, Block block) {
+    public static boolean grow(Block block) {
         BlockData data = block.getBlockData();
-        if (!(data instanceof Ageable ageable)) return false;
+        if (BlockStorage.isRebarBlock(block)) return false;
+        if (data instanceof Sapling) {
+            growTree(block);
+            return true;
+        }
+        if (!(data instanceof Ageable ageable)) {
+            if (block.getType() == Material.GRASS_BLOCK) {
+                block.applyBoneMeal(BlockFace.UP);
+                return true;
+            }
+            return false;
+        }
         if (block.getType() == Material.SUGAR_CANE) {
 
             Block downCane = block;
@@ -70,7 +77,6 @@ public class GoldenBoneMeal extends RebarItem implements
             }
             
             if (height >= 3) {
-                event.setCancelled(true);
                 return false;
             }
             while (height < 3) {
@@ -79,94 +85,55 @@ public class GoldenBoneMeal extends RebarItem implements
                     topCane = topCane.getRelative(BlockFace.UP);
                     height++;
             }
+            new ParticleBuilder(Particle.HAPPY_VILLAGER).location(block.getLocation()).spawn();
             return true;
         }
         int currentAge = ageable.getAge();
         int maxAge = ageable.getMaximumAge();
 
-        if (currentAge >= maxAge) {
-            event.setCancelled(true);
-            return false;
-        } 
+        if (currentAge >= maxAge) return false;
 
         ageable.setAge(maxAge);
         block.setBlockData(ageable);
-
+        new ParticleBuilder(Particle.HAPPY_VILLAGER).location(block.getLocation()).spawn();
         return true;
     }
-    //for dispenser
-    public static boolean grow(BlockDispenseEvent event, ItemStack item, Block block) {
-        BlockData data = block.getBlockData();
-        if (!(data instanceof Ageable ageable)) return false;
-        if (block.getType() == Material.SUGAR_CANE) {
-
-            Block downCane = block;
-            while (downCane.getRelative(BlockFace.DOWN).getType() == Material.SUGAR_CANE) {
-                downCane = downCane.getRelative(BlockFace.DOWN);
-            }
-            Block topCane = downCane;
-            int height = 1;
-            while (topCane.getRelative(BlockFace.UP).getType() == Material.SUGAR_CANE) {
-                topCane = topCane.getRelative(BlockFace.UP);
-                height++;
-            }
-
-            if (height >= 3) {
-                event.setCancelled(true);
-                return false;
-            }
-            while (height < 3) {
-                if (topCane.getRelative(BlockFace.UP).getType() != Material.AIR) break;
-                    topCane.getRelative(BlockFace.UP).setType(Material.SUGAR_CANE);
-                    topCane = topCane.getRelative(BlockFace.UP);
-                    height++;
-            }
-            return true;
+    private static void growTree(Block block) {
+        if (block.getBlockData() instanceof Sapling) {
+            Block freshBlock = block.getWorld().getBlockAt(block.getLocation());
+            freshBlock.applyBoneMeal(BlockFace.UP);
+            Bukkit.getScheduler().runTask(DoraMachines.getInstance(),() -> growTree(freshBlock));
         }
-        int currentAge = ageable.getAge();
-        int maxAge = ageable.getMaximumAge();
-
-        if (currentAge >= maxAge) {
-            event.setCancelled(true);
-            return false;
-        } 
-
-        ageable.setAge(maxAge);
-        block.setBlockData(ageable);
-
-        return true;
     }
-
     public static class GoldenBoneMealListener implements Listener {
         @EventHandler(priority = EventPriority.LOWEST)
         public void onDispense(BlockDispenseEvent event) {
-            if (event.getItem().getType() != DoraMachinesItems.GOLDEN_BONE_MEAL.getType()) return;
-            if (BlockStorage.get(event.getBlock()) == null
-                    && event.getBlock().getType() == Material.DISPENSER) {
-                    if (!(event.getBlock().getBlockData() instanceof Directional directional)) return;
+            ItemStack item = event.getItem();
+            Block block = event.getBlock();
+            if (!(RebarItem.fromStack(item) instanceof GoldenBoneMeal)) return;
+            if (!BlockStorage.isRebarBlock(block)
+                    && block.getState(false) instanceof Dispenser dispenser) {
+                if (!(event.getBlock().getBlockData() instanceof Directional directional)) return;
 
-                    Block crop = event.getBlock().getRelative(directional.getFacing());
-                    ItemStack item = event.getItem();
-                    if (!grow(event, item, crop)) return;
-                    event.setCancelled(true);
-                    // event.setItem(new ItemStack(Material.STONE));
-                    Bukkit.getScheduler().runTask(DoraMachines.getInstance(), () -> {
-                        Dispenser dispenser = (Dispenser) event.getBlock().getState(false);
-                        Inventory inv = dispenser.getInventory();
-                        ItemStack[] contents = inv.getContents();
-                        for (int i = 0; i < contents.length; i++) {
-                            ItemStack is = contents[i];
-                            if (is != null && is.isSimilar(item)) {
-                                int amount = is.getAmount();
-                                if (amount >= 1) {
-                                    is.setAmount(amount - 1);
-                                    inv.setItem(i, is);
-                                }
-                                break;
+                Block crop = event.getBlock().getRelative(directional.getFacing());
+                if (!grow(crop)) return;
+                event.setCancelled(true);
+                Bukkit.getScheduler().runTask(DoraMachines.getInstance(), () -> {
+                    Inventory inv = dispenser.getInventory();
+                    ItemStack[] contents = inv.getContents();
+                    for (int i = 0; i < contents.length; i++) {
+                        ItemStack is = contents[i];
+                        if (is != null && is.isSimilar(item)) {
+                            int amount = is.getAmount();
+                            if (amount >= 1) {
+                                is.setAmount(amount - 1);
+                                inv.setItem(i, is);
                             }
+                            break;
                         }
-                        dispenser.update();
-                    });
+                    }
+                    dispenser.update();
+                });
 
             }
         }
