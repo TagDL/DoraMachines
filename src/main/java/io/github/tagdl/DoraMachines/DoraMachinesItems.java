@@ -95,7 +95,6 @@ public final class DoraMachinesItems {
         RebarItem.register(Filter.class, FILTER);
         DoraMachinesPages.TOOL.addItem(FILTER);
         RebarItem.register(PlanC.class, PLAN_C);
-        DoraMachinesPages.TOOL.addItem(PLAN_C);
         RebarItem.register(RoadTool.class, ROAD_TOOL);
         DoraMachinesPages.TOOL.addItem(ROAD_TOOL);
         RebarItem.register(PortableBackPack.Item.class, PORTABLE_BACKPACK, DoraMachinesKeys.PORTABLE_BACKPACK);

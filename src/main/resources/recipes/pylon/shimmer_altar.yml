@@ -47,6 +47,6 @@ doramachines:void_picker:
   key:
     L: pylon:shimmer_dust_1
     S: pylon:abyssal_catalyst
-    M: minecraft:cactus
+    M: minecraft:black_bundle
   result: doramachines:void_picker
   time-seconds: 10

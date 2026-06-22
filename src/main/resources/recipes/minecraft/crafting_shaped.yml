@@ -106,17 +106,6 @@ doramachines:road_tool:
   result: doramachines:road_tool
   category: tool
 
-doramachines:plan_c:
-  pattern:
-    - " A "
-    - "AGA"
-    - " A "
-  key:
-    A: minecraft:netherite_block
-    G: minecraft:nether_star
-  result: doramachines:plan_c
-  category: tool
-
 doramachines:portable_backpack:
   pattern:
     - "DAD"
