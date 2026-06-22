@@ -26,6 +26,7 @@ import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.datatypes.RebarSerializers;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
+import io.github.pylonmc.rebar.util.ProgressBar;
 import io.github.pylonmc.rebar.util.gui.GuiItems;
 import io.github.pylonmc.rebar.waila.WailaDisplay;
 import io.github.tagdl.DoraMachines.DoraMachines;
@@ -115,8 +116,10 @@ public class TimingCharger extends RebarBlock implements
     }
     @Override
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
-        return WailaDisplay.of(this, player).add(
-                Component.translatable("doramachines.waila.timing_charger.delay")
-                    .arguments(RebarArgument.of("delay", timing)));
+        WailaDisplay display = WailaDisplay.of(this, player);
+        if (isProcessing()) display.add(ProgressBar.timeRemaining(getProcessTimeTicks() <= 20
+                ? 1 : getProcessTimeSeconds(), getProcessSecondsRemaining()));
+        display.add(Component.translatable("doramachines.waila.timing_charger.delay").arguments(RebarArgument.of("delay", timing)));
+        return display;
     }
 }

@@ -28,6 +28,7 @@ import io.github.pylonmc.rebar.entity.display.BlockDisplayBuilder;
 import io.github.pylonmc.rebar.entity.display.transform.TransformBuilder;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
+import io.github.pylonmc.rebar.util.ProgressBar;
 import io.github.pylonmc.rebar.util.gui.GuiItems;
 import io.github.pylonmc.rebar.waila.WailaDisplay;
 import io.github.tagdl.DoraMachines.DoraMachines;
@@ -120,8 +121,9 @@ public class RedstoneClock extends RebarBlock implements
     @Override
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
         WailaDisplay display =  WailaDisplay.of(this, player);
-        display.add(Component.translatable("doramachines.waila.redstone_clock.delay")
-            .arguments(RebarArgument.of("delay", timing)));
+        if (isProcessing()) display.add(ProgressBar.timeRemaining(getProcessTimeTicks() <= 20
+                ? 1 : getProcessTimeSeconds(), getProcessSecondsRemaining()));
+        display.add(Component.translatable("doramachines.waila.redstone_clock.delay").arguments(RebarArgument.of("delay", timing)));
         return display;
     }
 }
