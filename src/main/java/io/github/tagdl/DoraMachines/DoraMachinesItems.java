@@ -39,7 +39,7 @@ public final class DoraMachinesItems {
     public static final ItemStack UNBREAKABLE_RUNE = ItemStackBuilder.rebar(Material.FIREWORK_STAR, DoraMachinesKeys.UNBREAKABLE_RUNE)
                 .set(DataComponentTypes.UNBREAKABLE)
             .build();
-    public static final ItemStack GOLDEN_BONE_MEAL = ItemStackBuilder.rebar(Material.SUGAR, DoraMachinesKeys.GOLDEN_BONE_MEAL)
+    public static final ItemStack GOLDEN_BONE_MEAL = ItemStackBuilder.rebar(Material.BONE_MEAL, DoraMachinesKeys.GOLDEN_BONE_MEAL)
             .build();
     public static final ItemStack INDUSTRIAL_MINER = ItemStackBuilder.rebar(Material.BLAST_FURNACE, DoraMachinesKeys.INDUSTRIAL_MINER)
             .build();

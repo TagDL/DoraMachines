@@ -35,8 +35,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 public class GoldenBoneMeal extends RebarItem implements
     BlockInteractRebarItemHandler,
-    DirectionalRebarBlock,
-    Listener
+    DirectionalRebarBlock
 {
     public GoldenBoneMeal(@NotNull ItemStack stack) {
         super(stack);
@@ -47,6 +46,7 @@ public class GoldenBoneMeal extends RebarItem implements
                 || event.useItemInHand() == Event.Result.DENY
                 || !event.getAction().isRightClick()) return;
         if (!grow(event.getClickedBlock())) return;
+        event.setCancelled(true);
         if (event.getPlayer().getGameMode() != GameMode.CREATIVE) event.getItem().subtract(); 
     }
     public static boolean grow(Block block) {
@@ -56,13 +56,7 @@ public class GoldenBoneMeal extends RebarItem implements
             growTree(block);
             return true;
         }
-        if (!(data instanceof Ageable ageable)) {
-            if (block.getType() == Material.GRASS_BLOCK) {
-                block.applyBoneMeal(BlockFace.UP);
-                return true;
-            }
-            return false;
-        }
+        if (!(data instanceof Ageable ageable)) return false;
         if (block.getType() == Material.SUGAR_CANE) {
 
             Block downCane = block;
