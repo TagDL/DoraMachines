@@ -26,6 +26,7 @@ import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
@@ -171,7 +172,8 @@ public class Slingshot extends RebarItem implements InteractRebarItemHandler, En
                                 ? arrow.getLocation().getBlock() 
                                 : arrow.getLocation().add(arrow.getLocation().getDirection().normalize().multiply(0.6)).getBlock()
                             : arrow.getLocation().add(arrow.getLocation().getDirection().normalize().multiply(0.6)).getBlock();
-                        if (block.isReplaceable() && block.getType() != Material.STRUCTURE_VOID && canPlace(itemStack, block, player)) block.setType(itemStack.getType());
+                        if (block.isReplaceable() && block.getType() != Material.STRUCTURE_VOID && canPlace(itemStack, block, player)) 
+                            ((BlockStateMeta) itemStack.getItemMeta()).getBlockState().copy(block.getLocation()).update(true, true);
                         else arrow.getLocation().getWorld().dropItem(arrow.getLocation().toCenterLocation(), itemStack);
                     } else if (arrow.getLocation().getBlock().getType() == Material.FARMLAND && canPlant(itemStack.getType()) != null) {
                         Block block = arrow.getLocation().add(arrow.getLocation().getDirection().normalize().multiply(0.6)).getBlock();
