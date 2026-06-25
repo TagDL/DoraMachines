@@ -131,6 +131,10 @@ item:
       <arrow> %mode%
       <arrow> 掉落物列表: %item%
     prefix: "<arrow> "
+  slingshot:
+    name: "弹弓"
+    lore: |-
+      <arrow> 副手放置想要发射的物品并长按 <green>右键 <gray>以使用
 
 message:
   unbreakable_result:

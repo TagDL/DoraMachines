@@ -13,6 +13,7 @@ plugins {
     id("xyz.jpenilla.run-paper") version "3.0.2"
     // lombok (provides useful annotations)
     id("io.freefair.lombok") version "9.5.0"
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.21"
 }
 
 // Specify the 'group' (eg: io.github.pylonmc.exampleaddon)
@@ -44,7 +45,7 @@ val pylonVersion = project.properties["pylon.version"] as String
 
 // Download dependencies
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:26.1.2.build.+")
+    paperweight.paperDevBundle("26.1.2.build.+")
     //compileOnly("io.github.pylonmc:rebar:$rebarVersion")
     //compileOnly("io.github.pylonmc:pylon:$pylonVersion")
     compileOnly(files("D:/project/pylon_plugins/rebar-0.42.0-26.1.jar"))
@@ -54,6 +55,7 @@ dependencies {
     compileOnly("com.mojang:brigadier:1.0.18")
     compileOnly("io.github.lijinhong11:RebarWrench:1.0.3")
     //compileOnly("net.guizhanss:GuizhanLib:1.8.1")
+    
 }
 
 // Settings for IntelliJ

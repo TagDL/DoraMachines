@@ -11,6 +11,7 @@ import io.github.tagdl.DoraMachines.blocks.RedstoneLink;
 import io.github.tagdl.DoraMachines.command.PortableBackPackCommand;
 import io.github.tagdl.DoraMachines.items.GoldenBoneMeal;
 import io.github.tagdl.DoraMachines.items.RoadTool;
+import io.github.tagdl.DoraMachines.items.Slingshot;
 import io.github.tagdl.DoraMachines.items.VoidPicker;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import lombok.Getter;
@@ -46,6 +47,7 @@ public class DoraMachines extends JavaPlugin implements RebarAddon {
         pm.registerEvents(new LiseletteDisenchanter.PlaceListener(), this);
         pm.registerEvents(new RoadTool.PlayMoving(), this);
         pm.registerEvents(new VoidPicker.PickupListener(), this);
+        pm.registerEvents(new Slingshot.CrossbowLoad(), this);
     }
 
     @Override

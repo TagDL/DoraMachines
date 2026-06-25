@@ -129,6 +129,10 @@ item:
       <arrow> %mode%
       <arrow> Item list: %item%
     prefix: "<arrow> "
+  slingshot:
+    name: "Slingshot"
+    lore: |-
+      <arrow> Hold the item stack you want to shoot and press <green>Right Click <gray>to start to use
 
 message:
   unbreakable_result:

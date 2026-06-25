@@ -19,6 +19,7 @@ import io.github.tagdl.DoraMachines.items.GoldenBoneMeal;
 import io.github.tagdl.DoraMachines.items.LinkedConnector;
 import io.github.tagdl.DoraMachines.items.PlanC;
 import io.github.tagdl.DoraMachines.items.RoadTool;
+import io.github.tagdl.DoraMachines.items.Slingshot;
 import io.github.tagdl.DoraMachines.items.UnbreakableRune;
 import io.github.tagdl.DoraMachines.items.VoidPicker;
 import io.papermc.paper.datacomponent.DataComponentTypes;
@@ -79,6 +80,11 @@ public final class DoraMachinesItems {
                 .set(DataComponentTypes.ITEM_MODEL, Material.BLACK_BUNDLE.getKey())
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
+    public static final ItemStack SLINGSHOT = ItemStackBuilder.rebar(Material.CROSSBOW, DoraMachinesKeys.SLINGSHOT)
+                .set(DataComponentTypes.ITEM_MODEL, Material.STICK.getKey())
+                .unset(DataComponentTypes.ENCHANTABLE)
+                .unset(DataComponentTypes.MAX_DAMAGE)
+            .build();
 
     public static final ItemStack TEMP_BLOCK = ItemStackBuilder.rebar(Material.BLUE_WOOL, DoraMachinesKeys.TEMP_BLOCK)
             .build();
@@ -103,6 +109,8 @@ public final class DoraMachinesItems {
         DoraMachinesPages.TOOL.addItem(LINKED_CONNECTOR);
         RebarItem.register(VoidPicker.class, VOID_PICKER, DoraMachinesKeys.VOID_PICKER);
         DoraMachinesPages.TOOL.addItem(VOID_PICKER);
+        RebarItem.register(Slingshot.class, SLINGSHOT, DoraMachinesKeys.SLINGSHOT);
+        DoraMachinesPages.TOOL.addItem(SLINGSHOT);
 
         
         RebarItem.register(RebarItem.class, INDUSTRIAL_MINER, DoraMachinesKeys.INDUSTRIAL_MINER);
