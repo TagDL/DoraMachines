@@ -32,10 +32,10 @@ import org.jetbrains.annotations.NotNull;
 
 import com.destroystokyo.paper.ParticleBuilder;
 
-import io.github.pylonmc.rebar.block.BlockStorage;
 import io.github.pylonmc.rebar.block.RebarBlockSchema;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
+import io.github.pylonmc.rebar.content.fluid.FluidPipe;
 import io.github.pylonmc.rebar.datatypes.RebarSerializers;
 import io.github.pylonmc.rebar.entity.display.ItemDisplayBuilder;
 import io.github.pylonmc.rebar.event.PreRebarBlockPlaceEvent;
@@ -151,7 +151,7 @@ public class Slingshot extends RebarItem implements InteractRebarItemHandler, En
                 arrow.remove();
                 display.remove();
                 if (RebarItem.isRebarItem(itemStack)) {
-                    if (RebarItem.fromStack(itemStack).getRebarBlock() == null) {
+                    if (RebarItem.fromStack(itemStack).getRebarBlock() == null || RebarItem.fromStack(itemStack).getClass().equals(FluidPipe.class)) {
                         arrow.getLocation().getWorld().dropItem(arrow.getLocation().toCenterLocation(), itemStack);
                     } else {
                         Block block = !arrow.getLocation().getBlock().getType().isSolid()
@@ -161,7 +161,7 @@ public class Slingshot extends RebarItem implements InteractRebarItemHandler, En
                             : arrow.getLocation().add(arrow.getLocation().getDirection().normalize().multiply(0.6)).getBlock();
                         if (block.isReplaceable() && block.getType() != Material.STRUCTURE_VOID) 
                             if (!canRebarPlace(itemStack, block, player)) arrow.getLocation().getWorld().dropItem(arrow.getLocation().toCenterLocation(), itemStack);
-                            else BlockStorage.placeBlock(block, RebarItem.fromStack(itemStack).getRebarBlock(), new BlockCreateContext.Default(player, block));
+                            else RebarItem.fromStack(itemStack).place(new BlockCreateContext.Default(player, block));
                         else arrow.getLocation().getWorld().dropItem(arrow.getLocation().toCenterLocation(), itemStack);
                     } 
                 } else {
