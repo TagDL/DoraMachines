@@ -181,3 +181,14 @@ doramachines:diesel_woodcutter:
     D: pylon:fluid_pipe_steel
   result: doramachines:diesel_woodcutter
   category: building
+
+doramachines:slingshot:
+  pattern:
+    - "D D"
+    - "ADA"
+    - " D "
+  key:
+    A: pylon:fiber
+    D: minecraft:stick
+  result: doramachines:slingshot
+  category: tool
