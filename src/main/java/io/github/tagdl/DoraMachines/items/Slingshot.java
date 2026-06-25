@@ -172,9 +172,10 @@ public class Slingshot extends RebarItem implements InteractRebarItemHandler, En
                                 ? arrow.getLocation().getBlock() 
                                 : arrow.getLocation().add(arrow.getLocation().getDirection().normalize().multiply(0.6)).getBlock()
                             : arrow.getLocation().add(arrow.getLocation().getDirection().normalize().multiply(0.6)).getBlock();
-                        if (block.isReplaceable() && block.getType() != Material.STRUCTURE_VOID && canPlace(itemStack, block, player)) 
-                            ((BlockStateMeta) itemStack.getItemMeta()).getBlockState().copy(block.getLocation()).update(true, true);
-                        else arrow.getLocation().getWorld().dropItem(arrow.getLocation().toCenterLocation(), itemStack);
+                        if (block.isReplaceable() && block.getType() != Material.STRUCTURE_VOID && canPlace(itemStack, block, player)) {
+                            if (!(itemStack.getItemMeta() instanceof BlockStateMeta meta)) block.setType(itemStack.getType());
+                            else meta.getBlockState().copy(block.getLocation()).update(true, true);
+                        } else arrow.getLocation().getWorld().dropItem(arrow.getLocation().toCenterLocation(), itemStack);
                     } else if (arrow.getLocation().getBlock().getType() == Material.FARMLAND && canPlant(itemStack.getType()) != null) {
                         Block block = arrow.getLocation().add(arrow.getLocation().getDirection().normalize().multiply(0.6)).getBlock();
                         if (block.isReplaceable() && block.getType() != Material.STRUCTURE_VOID) block.setType(canPlant(itemStack.getType()));
