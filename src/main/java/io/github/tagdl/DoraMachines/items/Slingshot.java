@@ -8,6 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
+import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
@@ -94,9 +95,17 @@ public class Slingshot extends RebarItem implements InteractRebarItemHandler, En
     }
     public static final class CrossbowLoad implements Listener {
         @EventHandler
-        public void onCrossbowLoad(EntityLoadCrossbowEvent event){
+        public void onCrossbowLoad(EntityLoadCrossbowEvent event) {
             if (!(event.getEntity() instanceof Player player)) return;
             if (!(RebarItem.fromStack(player.getInventory().getItemInMainHand()) instanceof Slingshot slingshot)) return;
+            for (ItemStack itemStack : player.getInventory().getContents()) {
+                if (itemStack == null || itemStack.isEmpty()) continue;
+                Material material = itemStack.getType();
+                if (Tag.ITEMS_ARROWS.isTagged(material) || material == Material.FIREWORK_ROCKET) {
+                    event.setConsumeItem(false);
+                    break;
+                }
+            }
             if (event.getHand() != EquipmentSlot.HAND) {
                 event.setCancelled(true);
                 return;
@@ -108,9 +117,9 @@ public class Slingshot extends RebarItem implements InteractRebarItemHandler, En
             }
             itemStack = itemStack.asOne();
             if (!(slingshot.getStack().getItemMeta() instanceof CrossbowMeta meta)) return;
-            player.getInventory().getItemInOffHand().subtract();
+            if (player.getGameMode() != GameMode.CREATIVE) player.getInventory().getItemInOffHand().subtract();
             meta.setChargedProjectiles(List.of(itemStack));
-            slingshot.getStack().setItemMeta(meta);
+            Bukkit.getScheduler().runTask(DoraMachines.getInstance(), () -> slingshot.getStack().setItemMeta(meta));
         }
         @EventHandler
         public void onShoot(EntityShootBowEvent event) {
