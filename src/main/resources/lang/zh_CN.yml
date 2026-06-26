@@ -135,6 +135,11 @@ item:
     name: "弹弓"
     lore: |-
       <arrow> 副手放置想要发射的物品并长按 <green>右键 <gray>以使用
+  ruckus_maker:
+    name: "B动静制造器"
+    lore: |-
+      <arrow> <green>右键 <gray>以使用
+      <arrow> 随机播放粒子和声音
 
 message:
   unbreakable_result:

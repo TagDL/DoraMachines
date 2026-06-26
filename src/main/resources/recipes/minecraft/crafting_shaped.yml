@@ -192,3 +192,15 @@ doramachines:slingshot:
     D: minecraft:stick
   result: doramachines:slingshot
   category: tool
+
+doramachines:ruckus_maker:
+  pattern:
+    - " B "
+    - "DAD"
+    - " D "
+  key:
+    A: minecraft:note_block
+    D: pylon:gold_sheet
+    B: "#minecraft:buttons"
+  result: doramachines:ruckus_maker
+  category: tool

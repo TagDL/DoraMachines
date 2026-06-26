@@ -133,6 +133,11 @@ item:
     name: "Slingshot"
     lore: |-
       <arrow> Hold the item stack you want to shoot and press <green>Right Click <gray>to start to use
+  ruckus_maker:
+    name: "Ruckus Maker"
+    lore: |-
+      <arrow> <green>Right Click <gray>to use
+      <arrow> Play random particle and sound
 
 message:
   unbreakable_result:

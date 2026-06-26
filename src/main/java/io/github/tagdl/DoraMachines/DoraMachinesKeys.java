@@ -25,6 +25,7 @@ public class DoraMachinesKeys {
     public static final NamespacedKey REDSTONE_CLOCK = new NamespacedKey(DoraMachines.getInstance(), "redstone_clock");
     public static final NamespacedKey VOID_PICKER = new NamespacedKey(DoraMachines.getInstance(), "void_picker");
     public static final NamespacedKey SLINGSHOT = new NamespacedKey(DoraMachines.getInstance(), "slingshot");
+    public static final NamespacedKey RUCKUS_MAKER = new NamespacedKey(DoraMachines.getInstance(), "ruckus_maker");
 
     public static final NamespacedKey TEMP_BLOCK = new NamespacedKey(DoraMachines.getInstance(), "temp_block");
 }
