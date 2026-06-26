@@ -175,6 +175,7 @@ guide:
     filter_things: "Filtered things"
     doramachines_tool: "Tool"
     doramachines_block: "Block"
+    doramachines_toy: "Toy"
   filter_things: |-
     <arrow> <attr>Weight:</attr> %weight%
 
