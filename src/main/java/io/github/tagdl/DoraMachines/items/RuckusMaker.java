@@ -10,6 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.Registry;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
@@ -41,14 +42,13 @@ public class RuckusMaker extends RebarItem implements InteractRebarItemHandler {
             return;
         }
         Player player = event.getPlayer();
-        int indexSound = (int) (random() * SOUND_LIST.size());
+        startSound(player);
         for (int i = 0; i < PARTICLE_AMOUNT; i++) 
             playParticle(player.getLocation().add(
                 ThreadLocalRandom.current().nextDouble(-2, 2),
                 ThreadLocalRandom.current().nextDouble(0.5),
                 ThreadLocalRandom.current().nextDouble(-2, 2)));
-        player.getWorld().playSound(player.getLocation(), 
-            Registry.SOUNDS.get(SOUND_LIST.get(indexSound)), VOLUME, PITCH);
+        
     }
     private static void playParticle(Location location) {
         int indexParticle = (int) (random() * Particle.values().length);
@@ -61,6 +61,12 @@ public class RuckusMaker extends RebarItem implements InteractRebarItemHandler {
             location.getWorld().spawnParticle(particle, location, 1, 
                 new Particle.DustTransition(getRandomColor(), getRandomColor(), 2));
         } else playParticle(location);
+    }
+    private static void startSound(Player player) {
+        int indexSound = (int) (random() * SOUND_LIST.size());
+        Sound sound = Registry.SOUNDS.get(SOUND_LIST.get(indexSound));
+        if (Registry.SOUNDS.getKey(sound).getKey().startsWith("music_disc.")) startSound(player);
+        else player.getWorld().playSound(player.getLocation(), sound, VOLUME, PITCH);
     }
     private static Color getRandomColor() {
         return Color.fromRGB(
