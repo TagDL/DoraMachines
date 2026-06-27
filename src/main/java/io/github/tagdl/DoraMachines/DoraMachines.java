@@ -9,6 +9,7 @@ import io.github.tagdl.DoraMachines.blocks.LiseletteEnchanter;
 import io.github.tagdl.DoraMachines.blocks.RedstoneClock;
 import io.github.tagdl.DoraMachines.blocks.RedstoneLink;
 import io.github.tagdl.DoraMachines.command.PortableBackPackCommand;
+import io.github.tagdl.DoraMachines.items.Dagger;
 import io.github.tagdl.DoraMachines.items.GoldenBoneMeal;
 import io.github.tagdl.DoraMachines.items.RoadTool;
 import io.github.tagdl.DoraMachines.items.Slingshot;
@@ -48,6 +49,7 @@ public class DoraMachines extends JavaPlugin implements RebarAddon {
         pm.registerEvents(new RoadTool.PlayMoving(), this);
         pm.registerEvents(new VoidPicker.PickupListener(), this);
         pm.registerEvents(new Slingshot.CrossbowLoad(), this);
+        //pm.registerEvents(new Dagger.PlayerAttack(), this);
     }
 
     @Override

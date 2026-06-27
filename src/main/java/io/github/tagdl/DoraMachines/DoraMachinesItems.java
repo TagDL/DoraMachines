@@ -12,6 +12,7 @@ import io.github.tagdl.DoraMachines.blocks.RedstoneLink;
 import io.github.tagdl.DoraMachines.blocks.DieselWoodcutter;
 import io.github.tagdl.DoraMachines.blocks.HydraulicWoodcutter;
 import io.github.tagdl.DoraMachines.guide.FilterPage;
+import io.github.tagdl.DoraMachines.items.Dagger;
 import io.github.tagdl.DoraMachines.items.ExplosionPickaxe;
 import io.github.tagdl.DoraMachines.items.ExplosionShovel;
 import io.github.tagdl.DoraMachines.items.Filter;
@@ -90,11 +91,12 @@ public final class DoraMachinesItems {
                 .set(DataComponentTypes.ITEM_MODEL, Material.MUSIC_DISC_11.getKey())
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
+    public static final ItemStack DAGGER = ItemStackBuilder.rebar(Material.WOODEN_SWORD, DoraMachinesKeys.DAGGER)
+            .build();
 
     public static final ItemStack TEMP_BLOCK = ItemStackBuilder.rebar(Material.BLUE_WOOL, DoraMachinesKeys.TEMP_BLOCK)
             .build();
     public static void initialize() {
-        // Register an item using the ExampleItem class
         RebarItem.register(ExplosionPickaxe.class, EXPLOSION_PICKAXE);
         DoraMachinesPages.TOOL.addItem(EXPLOSION_PICKAXE);
         RebarItem.register(ExplosionShovel.class, EXPLOSION_SHOVEL);
@@ -118,6 +120,8 @@ public final class DoraMachinesItems {
         DoraMachinesPages.TOY.addItem(SLINGSHOT);
         RebarItem.register(RuckusMaker.class, RUCKUS_MAKER, DoraMachinesKeys.RUCKUS_MAKER);
         DoraMachinesPages.TOY.addItem(RUCKUS_MAKER);
+        RebarItem.register(Dagger.class, DAGGER, DoraMachinesKeys.DAGGER);
+        //DoraMachinesPages.TOY.addItem(DAGGER);
         
         RebarItem.register(RebarItem.class, INDUSTRIAL_MINER, DoraMachinesKeys.INDUSTRIAL_MINER);
         DoraMachinesPages.BLOCK.addItem(INDUSTRIAL_MINER);
