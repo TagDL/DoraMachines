@@ -138,6 +138,13 @@ item:
     lore: |-
       <arrow> <green>Right Click <gray>to use
       <arrow> Play random particle and sound
+  dagger:
+    name: "Dagger"
+    lore: |-
+      <arrow> <green>Right Click <gray>to dash forward
+      <arrow> If attack entity during dash will leap backward
+      <arrow> <yellow>Shift <gray>+ <green>Right Click <gray>to turn on or turn off
+      <arrow> Toggle: <yellow>%enabled%
 
 message:
   unbreakable_result:
@@ -168,6 +175,9 @@ message:
   redstone_link:
     transmitter: "<yellow>Mode switch to <green>Transmitter"
     receiver: "<yellow>Mode switch to <green>Receiver"
+  dagger:
+    enabled: "<green>Dagger toggled on"
+    disabled: "<red>Dagger toggled off"
 
 guide:
   page:

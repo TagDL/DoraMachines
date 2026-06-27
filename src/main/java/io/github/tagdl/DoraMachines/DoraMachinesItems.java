@@ -121,7 +121,7 @@ public final class DoraMachinesItems {
         RebarItem.register(RuckusMaker.class, RUCKUS_MAKER, DoraMachinesKeys.RUCKUS_MAKER);
         DoraMachinesPages.TOY.addItem(RUCKUS_MAKER);
         RebarItem.register(Dagger.class, DAGGER, DoraMachinesKeys.DAGGER);
-        //DoraMachinesPages.TOY.addItem(DAGGER);
+        DoraMachinesPages.TOY.addItem(DAGGER);
         
         RebarItem.register(RebarItem.class, INDUSTRIAL_MINER, DoraMachinesKeys.INDUSTRIAL_MINER);
         DoraMachinesPages.BLOCK.addItem(INDUSTRIAL_MINER);

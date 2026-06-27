@@ -1,12 +1,16 @@
 package io.github.tagdl.DoraMachines.items;
 
+import java.util.List;
+
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.NamespacedKey;
-import org.bukkit.craftbukkit.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -14,13 +18,14 @@ import org.jetbrains.annotations.NotNull;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.datatypes.RebarSerializers;
 import io.github.pylonmc.rebar.event.api.annotation.MultiHandler;
+import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.interfaces.InteractRebarItemHandler;
-import io.github.pylonmc.rebar.item.interfaces.InventoryTickerRebarItem;
+import io.github.pylonmc.rebar.util.RebarUtils;
 import io.github.tagdl.DoraMachines.DoraMachines;
-import net.minecraft.world.entity.LivingEntity;
+import net.kyori.adventure.text.Component;
 
-public class Dagger extends RebarItem implements InteractRebarItemHandler, InventoryTickerRebarItem{
+public class Dagger extends RebarItem implements InteractRebarItemHandler{
     private static final NamespacedKey STATUS_KEY = new NamespacedKey(DoraMachines.getInstance(), "status");
     private static final NamespacedKey ATTACK_KEY = new NamespacedKey(DoraMachines.getInstance(), "attack");
     private final int COOLDOWN = getSettingOrThrow("cooldown-ticks", ConfigAdapter.INTEGER);
@@ -35,8 +40,10 @@ public class Dagger extends RebarItem implements InteractRebarItemHandler, Inven
             return;
         }
         Player player = event.getPlayer();
-        if (player.isSneaking()) setStatus(!getStatus());
-        else if (getStatus() && (event.getClickedBlock() == null || event.getClickedBlock().isEmpty())) {
+        if (player.isSneaking()) {
+            player.sendMessage(Component.translatable("doramachines.message.dagger." + (!getStatus() ? "enabled" : "disabled")));
+            setStatus(!getStatus());
+        } else if (getStatus() && (event.getClickedBlock() == null || event.getClickedBlock().isEmpty())) {
             player.setVelocity(player.getLocation().getDirection().multiply(1.5).setY(0.4));
             player.setCooldown(getStack(), COOLDOWN);
             setAttack(player, true);
@@ -57,43 +64,22 @@ public class Dagger extends RebarItem implements InteractRebarItemHandler, Inven
     public static void setAttack(Player player, boolean status){
         player.getPersistentDataContainer().set(ATTACK_KEY, RebarSerializers.BOOLEAN, status);
     }
-    public static void run(Player player) {
-        if (!getAttack(player)) return;
-        if (!(RebarItem.fromStack(player.getInventory().getItemInMainHand()) instanceof Dagger dagger)) return;
-        if (!dagger.getStatus()) return;
-        if (!(player.getTargetEntity(3) instanceof org.bukkit.entity.LivingEntity entity)) return;
-        LivingEntity nmsEntity = ((CraftLivingEntity) entity).getHandle();
-        if (nmsEntity == null) return;
-        net.minecraft.world.entity.player.Player nmsPlayer = ((CraftPlayer) player).getHandle();
-        if (!nmsPlayer.canAttack(nmsEntity)) return;
-        player.swingMainHand();
-        nmsPlayer.attack(nmsEntity);
-        player.getPersistentDataContainer().remove(ATTACK_KEY);
-        player.setVelocity(player.getLocation().getDirection().multiply(-1.5).setY(0.5));
-    }
     @Override
-    public void onTick(Player player) {
-        run(player);
+    public @NotNull List<@NotNull RebarArgument> getPlaceholders() {
+        return List.of(RebarArgument.of("enabled", getStatus()
+                ? Component.text("On").color(RebarUtils.colorToTextColor(Color.LIME))
+                : Component.text("Off").color(RebarUtils.colorToTextColor(Color.RED))));
     }
-    @Override
-    public long getBaseTickInterval() {
-        return 1;
+    public static final class PlayerAttack implements Listener {
+        @EventHandler
+        public void onPlayerLand(EntityDamageByEntityEvent event) {
+            if (!(event.getDamager() instanceof Player player)) return;
+            if (!getAttack(player)) return;
+            if (!(RebarItem.fromStack(player.getInventory().getItemInMainHand()) instanceof Dagger dagger)) return;
+            if (!dagger.getStatus()) return;
+            if (!(event.getEntity() instanceof org.bukkit.entity.LivingEntity)) return;
+            player.getPersistentDataContainer().remove(ATTACK_KEY);
+            player.setVelocity(player.getLocation().getDirection().multiply(-1.5).setY(0.4));
+        }
     }
-    // public static final class PlayerAttack implements Listener {
-    //     @EventHandler
-    //     public void onPlayerLand(PlayerMoveEvent event) {
-    //         Player player = event.getPlayer();
-    //         if (!getAttack(player)) return;
-    //         if (!(RebarItem.fromStack(player.getInventory().getItemInMainHand()) instanceof Dagger dagger)) return;
-    //         if (!dagger.getStatus()) return;
-    //         if (!(player.getTargetEntity(3) instanceof org.bukkit.entity.LivingEntity entity)) return;
-    //         LivingEntity nmsEntity = ((CraftLivingEntity) entity).getHandle();
-    //         if (nmsEntity == null) return;
-    //         net.minecraft.world.entity.player.Player nmsPlayer = ((CraftPlayer) player).getHandle();
-    //         if (!nmsPlayer.canAttack(nmsEntity)) return;
-    //         player.swingMainHand();
-    //         nmsPlayer.attack(nmsEntity);
-    //         player.getPersistentDataContainer().remove(ATTACK_KEY);
-    //     }
-    // }
 }

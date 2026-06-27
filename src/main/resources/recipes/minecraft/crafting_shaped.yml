@@ -204,3 +204,15 @@ doramachines:ruckus_maker:
     B: "#minecraft:buttons"
   result: doramachines:ruckus_maker
   category: tool
+
+doramachines:dagger:
+  pattern:
+    - "D  "
+    - " B "
+    - "  A"
+  key:
+    A: "#minecraft:planks"
+    B: minecraft:stick
+    D: minecraft:slime_ball
+  result: doramachines:dagger
+  category: weapon

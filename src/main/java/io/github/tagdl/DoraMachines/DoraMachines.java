@@ -49,7 +49,7 @@ public class DoraMachines extends JavaPlugin implements RebarAddon {
         pm.registerEvents(new RoadTool.PlayMoving(), this);
         pm.registerEvents(new VoidPicker.PickupListener(), this);
         pm.registerEvents(new Slingshot.CrossbowLoad(), this);
-        //pm.registerEvents(new Dagger.PlayerAttack(), this);
+        pm.registerEvents(new Dagger.PlayerAttack(), this);
     }
 
     @Override

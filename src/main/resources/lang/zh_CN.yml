@@ -140,6 +140,13 @@ item:
     lore: |-
       <arrow> <green>右键 <gray>以使用
       <arrow> 随机播放粒子和声音
+  dagger:
+    name: "匕首"
+    lore: |-
+      <arrow> <green>右键 <gray>以向前冲刺
+      <arrow> 冲刺过程中攻击实体将后跃
+      <arrow> <yellow>Shift <gray>+ <green>右键 <gray>以开关
+      <arrow> 当前状态: <yellow>%enabled%
 
 message:
   unbreakable_result:
@@ -170,6 +177,9 @@ message:
   redstone_link:
     transmitter: "<yellow>模式设置为 <green>发射端"
     receiver: "<yellow>模式设置为 <green>接收端"
+  dagger:
+    enabled: "<green>匕首开启"
+    disabled: "<red>匕首关闭"
 
 guide:
   page:
