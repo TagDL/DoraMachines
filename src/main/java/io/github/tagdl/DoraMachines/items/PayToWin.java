@@ -52,6 +52,7 @@ public class PayToWin extends Talisman {
             event.setDamage(event.getDamage() + cost);
             for (ItemStack itemStack : player.getInventory().getContents()) {
                 if (cost <= 0) break;
+                if (itemStack == null || itemStack.isEmpty()) continue;
                 if (!itemStack.isSimilar(ItemStack.of(Material.GOLD_INGOT))) continue;
                 int consume = Math.min(cost, itemStack.getAmount());
                 itemStack.subtract(consume);
