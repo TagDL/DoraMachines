@@ -167,8 +167,23 @@ item:
       lore: |-
         <green>右键 <gray>以格挡
         <arrow> 击退前方的实体
-  pay_to_win:
-    name: "<yellow>充钱制胜"
+  pay_to_win_lv1:
+    name: "<yellow>充钱制胜 Lv1"
+    lore: |-
+      <arrow> 消耗 <yellow>金锭 <gray>以增加造成的伤害
+      <arrow> 每次消耗的数量: <green>%amount%
+  pay_to_win_lv2:
+    name: "<yellow>充钱制胜 Lv2"
+    lore: |-
+      <arrow> 消耗 <yellow>金锭 <gray>以增加造成的伤害
+      <arrow> 每次消耗的数量: <green>%amount%
+  pay_to_win_lv3:
+    name: "<yellow>充钱制胜 Lv3"
+    lore: |-
+      <arrow> 消耗 <yellow>金锭 <gray>以增加造成的伤害
+      <arrow> 每次消耗的数量: <green>%amount%
+  pay_to_win_lv4:
+    name: "<yellow>充钱制胜 Lv4"
     lore: |-
       <arrow> 消耗 <yellow>金锭 <gray>以增加造成的伤害
       <arrow> 每次消耗的数量: <green>%amount%

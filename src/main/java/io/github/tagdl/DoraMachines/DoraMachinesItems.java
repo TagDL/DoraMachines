@@ -98,7 +98,19 @@ public final class DoraMachinesItems {
             .build();
     public static final ItemStack ASSAULT_SHIELD = ItemStackBuilder.rebar(Material.SHIELD, DoraMachinesKeys.ASSAULT_SHIELD)
             .build();
-    public static final ItemStack PAY_TO_WIN = ItemStackBuilder.rebar(Material.CLAY_BALL, DoraMachinesKeys.PAY_TO_WIN)
+    public static final ItemStack PAY_TO_WIN_LV1 = ItemStackBuilder.rebar(Material.CLAY_BALL, DoraMachinesKeys.PAY_TO_WIN_LV1)
+                .set(DataComponentTypes.MAX_STACK_SIZE, 1)
+                .set(DataComponentTypes.ITEM_MODEL, Material.MUSIC_DISC_PIGSTEP.getKey())
+            .build();
+    public static final ItemStack PAY_TO_WIN_LV2 = ItemStackBuilder.rebar(Material.CLAY_BALL, DoraMachinesKeys.PAY_TO_WIN_LV2)
+                .set(DataComponentTypes.MAX_STACK_SIZE, 1)
+                .set(DataComponentTypes.ITEM_MODEL, Material.MUSIC_DISC_PIGSTEP.getKey())
+            .build();
+    public static final ItemStack PAY_TO_WIN_LV3 = ItemStackBuilder.rebar(Material.CLAY_BALL, DoraMachinesKeys.PAY_TO_WIN_LV3)
+                .set(DataComponentTypes.MAX_STACK_SIZE, 1)
+                .set(DataComponentTypes.ITEM_MODEL, Material.MUSIC_DISC_PIGSTEP.getKey())
+            .build();
+    public static final ItemStack PAY_TO_WIN_LV4 = ItemStackBuilder.rebar(Material.CLAY_BALL, DoraMachinesKeys.PAY_TO_WIN_LV4)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
                 .set(DataComponentTypes.ITEM_MODEL, Material.MUSIC_DISC_PIGSTEP.getKey())
             .build();
@@ -133,9 +145,15 @@ public final class DoraMachinesItems {
         DoraMachinesPages.TOY.addItem(DAGGER);
         RebarItem.register(AssaultShield.class, ASSAULT_SHIELD, DoraMachinesKeys.ASSAULT_SHIELD);
         DoraMachinesPages.TOY.addItem(ASSAULT_SHIELD);
-        RebarItem.register(PayToWin.class, PAY_TO_WIN, DoraMachinesKeys.PAY_TO_WIN);
-        DoraMachinesPages.TOOL.addItem(PAY_TO_WIN);
-        
+        RebarItem.register(PayToWin.class, PAY_TO_WIN_LV1, DoraMachinesKeys.PAY_TO_WIN_LV1);
+        DoraMachinesPages.TOOL.addItem(PAY_TO_WIN_LV1);
+        RebarItem.register(PayToWin.class, PAY_TO_WIN_LV2, DoraMachinesKeys.PAY_TO_WIN_LV2);
+        DoraMachinesPages.TOOL.addItem(PAY_TO_WIN_LV2);
+        RebarItem.register(PayToWin.class, PAY_TO_WIN_LV3, DoraMachinesKeys.PAY_TO_WIN_LV3);
+        DoraMachinesPages.TOOL.addItem(PAY_TO_WIN_LV3);
+        RebarItem.register(PayToWin.class, PAY_TO_WIN_LV4, DoraMachinesKeys.PAY_TO_WIN_LV4);
+        DoraMachinesPages.TOOL.addItem(PAY_TO_WIN_LV4);
+
         RebarItem.register(RebarItem.class, INDUSTRIAL_MINER, DoraMachinesKeys.INDUSTRIAL_MINER);
         DoraMachinesPages.BLOCK.addItem(INDUSTRIAL_MINER);
         RebarItem.register(RebarItem.class, FILTER_BASE, DoraMachinesKeys.FILTER_BASE);

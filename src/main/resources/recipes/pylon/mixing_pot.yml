@@ -1,0 +1,20 @@
+doramachines:pay_to_win_lv2:
+  input-items:
+    - doramachines:pay_to_win_lv1: 1
+    - pylon:shimmer_dust_2: 2
+    - pylon:diamond_dust: 1
+  input-fluid:
+    pylon:plant_oil: 1000
+  output:
+    doramachines:pay_to_win_lv2: 1
+
+doramachines:pay_to_win_lv3:
+  input-items:
+    - doramachines:pay_to_win_lv2: 1
+    - pylon:shimmer_skull: 1
+    - pylon:shimmer_dust_3: 4
+  input-fluid:
+    pylon:gold: 500
+  output:
+    doramachines:pay_to_win_lv3: 1
+  requires-enriched-fire: true

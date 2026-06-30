@@ -165,8 +165,23 @@ item:
       lore: |-
         <green>Right Click <gray>to block
         <arrow> If entity in front of player will be leapt backward
-  pay_to_win:
-    name: "<yellow>Pay to Win"
+  pay_to_win_lv1:
+    name: "<yellow>Pay to Win Lv1"
+    lore: |-
+      <arrow> Spend <yellow>Gold Ingot <gray>to increase damage you cause
+      <arrow> Spend amount each time: <green>%amount%
+  pay_to_win_lv2:
+    name: "<yellow>Pay to Win Lv2"
+    lore: |-
+      <arrow> Spend <yellow>Gold Ingot <gray>to increase damage you cause
+      <arrow> Spend amount each time: <green>%amount%
+  pay_to_win_lv3:
+    name: "<yellow>Pay to Win Lv3"
+    lore: |-
+      <arrow> Spend <yellow>Gold Ingot <gray>to increase damage you cause
+      <arrow> Spend amount each time: <green>%amount%
+  pay_to_win_lv4:
+    name: "<yellow>Pay to Win Lv4"
     lore: |-
       <arrow> Spend <yellow>Gold Ingot <gray>to increase damage you cause
       <arrow> Spend amount each time: <green>%amount%

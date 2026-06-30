@@ -28,7 +28,10 @@ public class DoraMachinesKeys {
     public static final NamespacedKey RUCKUS_MAKER = new NamespacedKey(DoraMachines.getInstance(), "ruckus_maker");
     public static final NamespacedKey DAGGER = new NamespacedKey(DoraMachines.getInstance(), "dagger");
     public static final NamespacedKey ASSAULT_SHIELD = new NamespacedKey(DoraMachines.getInstance(), "assault_shield");
-    public static final NamespacedKey PAY_TO_WIN = new NamespacedKey(DoraMachines.getInstance(), "pay_to_win");
+    public static final NamespacedKey PAY_TO_WIN_LV1 = new NamespacedKey(DoraMachines.getInstance(), "pay_to_win_lv1");
+    public static final NamespacedKey PAY_TO_WIN_LV2 = new NamespacedKey(DoraMachines.getInstance(), "pay_to_win_lv2");
+    public static final NamespacedKey PAY_TO_WIN_LV3 = new NamespacedKey(DoraMachines.getInstance(), "pay_to_win_lv3");
+    public static final NamespacedKey PAY_TO_WIN_LV4 = new NamespacedKey(DoraMachines.getInstance(), "pay_to_win_lv4");
 
     public static final NamespacedKey TEMP_BLOCK = new NamespacedKey(DoraMachines.getInstance(), "temp_block");
 }

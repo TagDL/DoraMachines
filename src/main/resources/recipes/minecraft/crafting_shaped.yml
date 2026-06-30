@@ -229,7 +229,7 @@ doramachines:assault_shield:
   result: doramachines:assault_shield
   category: weapon
 
-doramachines:pay_to_win:
+doramachines:pay_to_win_lv1:
   pattern:
     - " A "
     - "ABA"
@@ -237,5 +237,5 @@ doramachines:pay_to_win:
   key:
     A: pylon:gold_sheet
     B: minecraft:glass_bottle
-  result: doramachines:pay_to_win
+  result: doramachines:pay_to_win_lv1
   category: equipment
