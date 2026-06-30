@@ -168,7 +168,7 @@ item:
         <green>右键 <gray>以格挡
         <arrow> 击退前方的实体
   pay_to_win:
-    name: "充钱制胜"
+    name: "<yellow>充钱制胜"
     lore: |-
       <arrow> 消耗 <yellow>金锭 <gray>以增加造成的伤害
       <arrow> 每次消耗的数量: <green>%amount%
