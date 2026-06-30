@@ -61,13 +61,15 @@ public class AssaultShield extends RebarItem implements
             setMode(!getMode());
             event.setCancelled(true);
         } else if (!getMode()) {
-            player.setVelocity(player.getLocation().getDirection().multiply(1.5));
+            player.setVelocity(player.getLocation().getDirection().multiply(1.5).setY(0.1));
             player.setCooldown(getStack(), COOLDOWN);
             setAttack(player, true);
             for (int i = 0; i < 360; i += 20) 
                 player.getWorld().spawnParticle(
                     Particle.CLOUD, 
-                    player.getLocation().add(new Vector(2, 2, 0.8).rotateAroundZ(Math.toRadians(i)).rotateAroundY(Math.toRadians(-player.getEyeLocation().getYaw()))), 
+                    player.getLocation().add(new Vector(Math.cos(Math.toRadians(i)) * 2, Math.sin(Math.toRadians(i)) * 2, 0.8)
+                        .rotateAroundX(Math.toRadians(player.getEyeLocation().getPitch()))
+                        .rotateAroundY(Math.toRadians(-player.getEyeLocation().getYaw()))), 
                     0);
             Bukkit.getScheduler().runTaskLater(DoraMachines.getInstance(), () -> {
                 if (player.getPersistentDataContainer().has(ATTACK_KEY)) player.getPersistentDataContainer().remove(ATTACK_KEY);
