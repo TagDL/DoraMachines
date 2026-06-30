@@ -4,16 +4,21 @@ import java.util.List;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import com.destroystokyo.paper.ParticleBuilder;
+
 import io.github.pylonmc.pylon.content.talismans.Talisman;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.datatypes.RebarSerializers;
+import io.github.pylonmc.rebar.event.api.annotation.MultiHandler;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.tagdl.DoraMachines.DoraMachines;
 
@@ -43,13 +48,12 @@ public class PayToWin extends Talisman {
         return List.of(RebarArgument.of("amount", PAY_AMOUNT));
     }
     public static class PayToWinListener implements Listener {
-        @EventHandler
+        @EventHandler @MultiHandler(priorities = EventPriority.LOWEST)
         public void onAttack(EntityDamageByEntityEvent event) {
             if (!(event.getDamager() instanceof Player player)) return;
             if (!player.getPersistentDataContainer().has(PAY_KEY)) return;
             int cost = player.getPersistentDataContainer().get(PAY_KEY, RebarSerializers.INTEGER);
             if (!player.getInventory().containsAtLeast(ItemStack.of(Material.GOLD_INGOT), cost)) return;
-            event.setDamage(event.getDamage() + cost);
             for (ItemStack itemStack : player.getInventory().getContents()) {
                 if (cost <= 0) break;
                 if (itemStack == null || itemStack.isEmpty()) continue;
@@ -58,6 +62,9 @@ public class PayToWin extends Talisman {
                 itemStack.subtract(consume);
                 cost -= consume;
             } 
+            new ParticleBuilder(Particle.ITEM).count(5).extra(0.35).offset(0.2, 0.2, 0.2)
+                .location(event.getEntity().getLocation().add(0, 1, 0)).data(ItemStack.of(Material.GOLD_INGOT)).spawn();
+            event.setDamage(event.getDamage() + cost);
         }
     }
 }
