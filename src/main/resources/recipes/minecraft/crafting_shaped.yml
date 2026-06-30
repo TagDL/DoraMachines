@@ -213,6 +213,29 @@ doramachines:dagger:
   key:
     A: "#minecraft:planks"
     B: minecraft:stick
-    D: minecraft:slime_ball
+    D: minecraft:rabbit_foot
   result: doramachines:dagger
   category: weapon
+
+doramachines:assault_shield:
+  pattern:
+    - "ADA"
+    - "ABA"
+    - " A "
+  key:
+    A: "#minecraft:planks"
+    B: minecraft:rabbit_foot
+    D: pylon:iron_sheet
+  result: doramachines:assault_shield
+  category: weapon
+
+doramachines:pay_to_win:
+  pattern:
+    - " A "
+    - "ABA"
+    - " A "
+  key:
+    A: pylon:gold_sheet
+    B: minecraft:glass_bottle
+  result: doramachines:pay_to_win
+  category: equipment

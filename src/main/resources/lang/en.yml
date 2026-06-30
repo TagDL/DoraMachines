@@ -77,6 +77,8 @@ item:
       <arrow> Use <yellow>Shift <gray>+ <green>Right Click <gray>to exchange block type
       <arrow> Toggle: <yellow>%enabled%
       <arrow> Block type: <yellow>%block%
+    enabled: "<green>ON"
+    disabled: "<red>OFF"
   portable_backpack:
     name: "Portable Backpack"
     lore: |-
@@ -145,6 +147,29 @@ item:
       <arrow> If attack entity during dash will leap backward
       <arrow> <yellow>Shift <gray>+ <green>Right Click <gray>to turn on or turn off
       <arrow> Toggle: <yellow>%enabled%
+    enabled: "<green>ON"
+    disabled: "<red>OFF"
+  assault_shield:
+    name: "Assault Shield"
+    lore: |-
+      <arrow> <yellow>Shift <gray>+ <green>Right Click <gray>to switch mode
+      <arrow> Mode: <yellow>%mode%
+      <arrow> <gray>%dist%
+    assault: 
+      name: "Assault"
+      lore: |-
+        <green>Right Click <gray>to dash forward
+        <arrow> If touch entity during dash will leap entity backward
+    push: 
+      name: "Push"
+      lore: |-
+        <green>Right Click <gray>to block
+        <arrow> If entity in front of player will be leapt backward
+  pay_to_win:
+    name: "Pay to Win"
+    lore: |-
+      <arrow> Spend <yellow>Gold Ingot <gray>to increase damage you cause
+      <arrow> Spend amount each time: <green>%amount%
 
 message:
   unbreakable_result:
@@ -178,6 +203,9 @@ message:
   dagger:
     enabled: "<green>Dagger toggled on"
     disabled: "<red>Dagger toggled off"
+  assault_shield:
+    assault: "<yellow>Shield switch mode to <green>Assault"
+    push: "<yellow>Shield switch mode to <green>Push"
 
 guide:
   page:
@@ -219,6 +247,8 @@ gui:
     book_name: "<yellow>Put any enchant book / book"
     progress: "Progress"
   portable_backpack:
+    enabled: "<green>ON"
+    disabled: "<red>OFF"
     backpage: "BACK"
     forwardpage: "FORWARD"
     craft: "Open Crafting Table"

@@ -9,8 +9,10 @@ import io.github.tagdl.DoraMachines.blocks.LiseletteEnchanter;
 import io.github.tagdl.DoraMachines.blocks.RedstoneClock;
 import io.github.tagdl.DoraMachines.blocks.RedstoneLink;
 import io.github.tagdl.DoraMachines.command.PortableBackPackCommand;
+import io.github.tagdl.DoraMachines.items.AssaultShield;
 import io.github.tagdl.DoraMachines.items.Dagger;
 import io.github.tagdl.DoraMachines.items.GoldenBoneMeal;
+import io.github.tagdl.DoraMachines.items.PayToWin;
 import io.github.tagdl.DoraMachines.items.RoadTool;
 import io.github.tagdl.DoraMachines.items.Slingshot;
 import io.github.tagdl.DoraMachines.items.VoidPicker;
@@ -50,6 +52,8 @@ public class DoraMachines extends JavaPlugin implements RebarAddon {
         pm.registerEvents(new VoidPicker.PickupListener(), this);
         pm.registerEvents(new Slingshot.CrossbowLoad(), this);
         pm.registerEvents(new Dagger.PlayerAttack(), this);
+        pm.registerEvents(new AssaultShield.AnvilEnchant(), this);
+        pm.registerEvents(new PayToWin.PayToWinListener(), this);
     }
 
     @Override

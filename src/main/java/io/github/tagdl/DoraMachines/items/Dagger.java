@@ -3,7 +3,6 @@ package io.github.tagdl.DoraMachines.items;
 import java.util.List;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -21,7 +20,6 @@ import io.github.pylonmc.rebar.event.api.annotation.MultiHandler;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.interfaces.InteractRebarItemHandler;
-import io.github.pylonmc.rebar.util.RebarUtils;
 import io.github.tagdl.DoraMachines.DoraMachines;
 import net.kyori.adventure.text.Component;
 
@@ -66,9 +64,8 @@ public class Dagger extends RebarItem implements InteractRebarItemHandler{
     }
     @Override
     public @NotNull List<@NotNull RebarArgument> getPlaceholders() {
-        return List.of(RebarArgument.of("enabled", getStatus()
-                ? Component.text("On").color(RebarUtils.colorToTextColor(Color.LIME))
-                : Component.text("Off").color(RebarUtils.colorToTextColor(Color.RED))));
+        return List.of(RebarArgument.of("enabled",
+                Component.translatable("doramachines.item.dagger." + (getStatus() ? "enabled" : "disabled"))));
     }
     public static final class PlayerAttack implements Listener {
         @EventHandler

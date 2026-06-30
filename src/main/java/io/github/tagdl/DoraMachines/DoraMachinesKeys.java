@@ -27,6 +27,8 @@ public class DoraMachinesKeys {
     public static final NamespacedKey SLINGSHOT = new NamespacedKey(DoraMachines.getInstance(), "slingshot");
     public static final NamespacedKey RUCKUS_MAKER = new NamespacedKey(DoraMachines.getInstance(), "ruckus_maker");
     public static final NamespacedKey DAGGER = new NamespacedKey(DoraMachines.getInstance(), "dagger");
+    public static final NamespacedKey ASSAULT_SHIELD = new NamespacedKey(DoraMachines.getInstance(), "assault_shield");
+    public static final NamespacedKey PAY_TO_WIN = new NamespacedKey(DoraMachines.getInstance(), "pay_to_win");
 
     public static final NamespacedKey TEMP_BLOCK = new NamespacedKey(DoraMachines.getInstance(), "temp_block");
 }

@@ -12,12 +12,14 @@ import io.github.tagdl.DoraMachines.blocks.RedstoneLink;
 import io.github.tagdl.DoraMachines.blocks.DieselWoodcutter;
 import io.github.tagdl.DoraMachines.blocks.HydraulicWoodcutter;
 import io.github.tagdl.DoraMachines.guide.FilterPage;
+import io.github.tagdl.DoraMachines.items.AssaultShield;
 import io.github.tagdl.DoraMachines.items.Dagger;
 import io.github.tagdl.DoraMachines.items.ExplosionPickaxe;
 import io.github.tagdl.DoraMachines.items.ExplosionShovel;
 import io.github.tagdl.DoraMachines.items.Filter;
 import io.github.tagdl.DoraMachines.items.GoldenBoneMeal;
 import io.github.tagdl.DoraMachines.items.LinkedConnector;
+import io.github.tagdl.DoraMachines.items.PayToWin;
 import io.github.tagdl.DoraMachines.items.PlanC;
 import io.github.tagdl.DoraMachines.items.RoadTool;
 import io.github.tagdl.DoraMachines.items.RuckusMaker;
@@ -48,7 +50,8 @@ public final class DoraMachinesItems {
             .build();
     public static final ItemStack FILTER_BASE = ItemStackBuilder.rebar(Material.PRISMARINE_WALL, DoraMachinesKeys.FILTER_BASE)
             .build();
-    public static final ItemStack FILTER = ItemStackBuilder.rebar(Material.FISHING_ROD, DoraMachinesKeys.FILTER)
+    public static final ItemStack FILTER = ItemStackBuilder.rebar(Material.WARPED_FUNGUS_ON_A_STICK, DoraMachinesKeys.FILTER)
+                .set(DataComponentTypes.ITEM_MODEL, Material.FISHING_ROD.getKey())
             .build();
     public static final ItemStack PLAN_C = ItemStackBuilder.rebar(Material.CRIMSON_BUTTON, DoraMachinesKeys.PLAN_C)
             .build();
@@ -93,6 +96,12 @@ public final class DoraMachinesItems {
             .build();
     public static final ItemStack DAGGER = ItemStackBuilder.rebar(Material.WOODEN_SWORD, DoraMachinesKeys.DAGGER)
             .build();
+    public static final ItemStack ASSAULT_SHIELD = ItemStackBuilder.rebar(Material.SHIELD, DoraMachinesKeys.ASSAULT_SHIELD)
+            .build();
+    public static final ItemStack PAY_TO_WIN = ItemStackBuilder.rebar(Material.CLAY_BALL, DoraMachinesKeys.PAY_TO_WIN)
+                .set(DataComponentTypes.MAX_STACK_SIZE, 1)
+                .set(DataComponentTypes.ITEM_MODEL, Material.MUSIC_DISC_PIGSTEP.getKey())
+            .build();
 
     public static final ItemStack TEMP_BLOCK = ItemStackBuilder.rebar(Material.BLUE_WOOL, DoraMachinesKeys.TEMP_BLOCK)
             .build();
@@ -122,6 +131,10 @@ public final class DoraMachinesItems {
         DoraMachinesPages.TOY.addItem(RUCKUS_MAKER);
         RebarItem.register(Dagger.class, DAGGER, DoraMachinesKeys.DAGGER);
         DoraMachinesPages.TOY.addItem(DAGGER);
+        RebarItem.register(AssaultShield.class, ASSAULT_SHIELD, DoraMachinesKeys.ASSAULT_SHIELD);
+        DoraMachinesPages.TOY.addItem(ASSAULT_SHIELD);
+        RebarItem.register(PayToWin.class, PAY_TO_WIN, DoraMachinesKeys.PAY_TO_WIN);
+        DoraMachinesPages.TOOL.addItem(PAY_TO_WIN);
         
         RebarItem.register(RebarItem.class, INDUSTRIAL_MINER, DoraMachinesKeys.INDUSTRIAL_MINER);
         DoraMachinesPages.BLOCK.addItem(INDUSTRIAL_MINER);

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
@@ -45,7 +44,6 @@ import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
 import io.github.pylonmc.rebar.registry.RebarRegistry;
 import io.github.pylonmc.rebar.util.MachineUpdateReason;
 import io.github.pylonmc.rebar.util.ProgressBar;
-import io.github.pylonmc.rebar.util.RebarUtils;
 import io.github.pylonmc.rebar.util.gui.GuiItems;
 import io.github.pylonmc.rebar.util.gui.unit.UnitFormat;
 import io.github.pylonmc.rebar.waila.WailaDisplay;
@@ -293,11 +291,11 @@ public class PortableBackPack extends RebarBlock implements
     private final ConfigSection config = ConfigSection.fromSettings(DoraMachinesKeys.PORTABLE_BACKPACK);
     private final double capacity = config.getOrThrow("capacity", ConfigAdapter.DOUBLE);
     private ItemStack offItemStack = new ItemStackBuilder(ItemStack.of(Material.RED_STAINED_GLASS_PANE))
-                .name(Component.text("OFF").color(RebarUtils.colorToTextColor(Color.RED)))
+                .name(Component.translatable("doramachines.gui.portable_backpack.disabled"))
                 .lore(Component.translatable("doramachines.gui.portable_backpack.lore"))
                 .build();
     private ItemStack onItemStack = new ItemStackBuilder(ItemStack.of(Material.LIME_STAINED_GLASS_PANE))
-                .name(Component.text("ON").color(RebarUtils.colorToTextColor(Color.LIME)))
+                .name(Component.translatable("doramachines.gui.portable_backpack.enabled"))
                 .lore(Component.translatable("doramachines.gui.portable_backpack.lore"))
                 .build();
     private VirtualInventory statusInventory = new VirtualInventory(new ItemStack[]{offItemStack, offItemStack});

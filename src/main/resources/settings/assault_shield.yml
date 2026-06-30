@@ -1,0 +1,4 @@
+damage: 1
+cooldown-ticks: 20
+affect-distance: 2
+affect-angle: 360
