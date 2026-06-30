@@ -64,7 +64,7 @@ public class PayToWin extends Talisman {
             } 
             new ParticleBuilder(Particle.ITEM).count(5).extra(0.35).offset(0.2, 0.2, 0.2)
                 .location(event.getEntity().getLocation().add(0, 1, 0)).data(ItemStack.of(Material.GOLD_INGOT)).spawn();
-            event.setDamage(event.getDamage() + cost);
+            event.setDamage(event.getDamage() + player.getPersistentDataContainer().get(PAY_KEY, RebarSerializers.INTEGER));
         }
     }
 }

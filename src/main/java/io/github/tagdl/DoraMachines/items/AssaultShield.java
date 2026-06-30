@@ -104,11 +104,12 @@ public class AssaultShield extends RebarItem implements
             entity.setVelocity(!getMode() ? player.getLocation().getDirection().multiply(3).setY(0.3)
                 : player.getEyeLocation().getDirection().multiply(player.getVelocity().length() * 3).setY(0.1));
             if (!getMode()) {
-                entity.damage(DAMAGE, player);
+                int damage = DAMAGE;
                 if (shield.getStack().getEnchantments().containsKey(Enchantment.CHANNELING)) {
                     entity.getWorld().strikeLightningEffect(entity.getLocation());
-                    entity.damage(5);
+                    damage += 5;
                 }
+                entity.damage(damage, player);
                 if (shield.getStack().getEnchantments().containsKey(Enchantment.FIRE_ASPECT)) entity.setFireTicks(shield.getStack().getEnchantmentLevel(Enchantment.FIRE_ASPECT) * 80);
             }
             if (player.getGameMode() != GameMode.CREATIVE) RebarUtils.damageItem(shield.getStack(), 1, player.getWorld());
