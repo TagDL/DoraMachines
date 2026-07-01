@@ -169,22 +169,26 @@ item:
     name: "<yellow>Pay to Win Lv1"
     lore: |-
       <arrow> Spend <yellow>Gold Ingot <gray>to increase damage you cause
-      <arrow> Spend amount each time: <green>%amount%
+      <arrow> Spend amount each time: <green>%amount%<gray>
+      <arrow> Damage increase each time: <green>%damage%
   pay_to_win_lv2:
     name: "<yellow>Pay to Win Lv2"
     lore: |-
       <arrow> Spend <yellow>Gold Ingot <gray>to increase damage you cause
-      <arrow> Spend amount each time: <green>%amount%
+      <arrow> Spend amount each time: <green>%amount%<gray>
+      <arrow> Damage increase each time: <green>%damage%
   pay_to_win_lv3:
     name: "<yellow>Pay to Win Lv3"
     lore: |-
       <arrow> Spend <yellow>Gold Ingot <gray>to increase damage you cause
-      <arrow> Spend amount each time: <green>%amount%
+      <arrow> Spend amount each time: <green>%amount%<gray>
+      <arrow> Damage increase each time: <green>%damage%
   pay_to_win_lv4:
     name: "<yellow>Pay to Win Lv4"
     lore: |-
       <arrow> Spend <yellow>Gold Ingot <gray>to increase damage you cause
-      <arrow> Spend amount each time: <green>%amount%
+      <arrow> Spend amount each time: <green>%amount%<gray>
+      <arrow> Damage increase each time: <green>%damage%
 
 message:
   unbreakable_result:

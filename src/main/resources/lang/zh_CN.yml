@@ -171,22 +171,26 @@ item:
     name: "<yellow>充钱制胜 Lv1"
     lore: |-
       <arrow> 消耗 <yellow>金锭 <gray>以增加造成的伤害
-      <arrow> 每次消耗的数量: <green>%amount%
+      <arrow> 每次消耗的数量: <green>%amount%<gray>
+      <arrow> 每次增加的伤害: <green>%damage%
   pay_to_win_lv2:
     name: "<yellow>充钱制胜 Lv2"
     lore: |-
       <arrow> 消耗 <yellow>金锭 <gray>以增加造成的伤害
-      <arrow> 每次消耗的数量: <green>%amount%
+      <arrow> 每次消耗的数量: <green>%amount%<gray>
+      <arrow> 每次增加的伤害: <green>%damage%
   pay_to_win_lv3:
     name: "<yellow>充钱制胜 Lv3"
     lore: |-
       <arrow> 消耗 <yellow>金锭 <gray>以增加造成的伤害
-      <arrow> 每次消耗的数量: <green>%amount%
+      <arrow> 每次消耗的数量: <green>%amount%<gray>
+      <arrow> 每次增加的伤害: <green>%damage%
   pay_to_win_lv4:
     name: "<yellow>充钱制胜 Lv4"
     lore: |-
       <arrow> 消耗 <yellow>金锭 <gray>以增加造成的伤害
-      <arrow> 每次消耗的数量: <green>%amount%
+      <arrow> 每次消耗的数量: <green>%amount%<gray>
+      <arrow> 每次增加的伤害: <green>%damage%
 
 message:
   unbreakable_result:

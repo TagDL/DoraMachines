@@ -24,8 +24,10 @@ import io.github.tagdl.DoraMachines.DoraMachines;
 
 public class PayToWin extends Talisman {
     public final int PAY_AMOUNT = getSettingOrThrow("cost-gold-ingot-amount", ConfigAdapter.INTEGER);
+    public final float DAMAGE_AMOUNT = getSettingOrThrow("damage-amount", ConfigAdapter.FLOAT);
     private static final NamespacedKey PAY_TO_WIN_KEY = new NamespacedKey(DoraMachines.getInstance(), "pay_to_win_key");
     private static final NamespacedKey PAY_KEY = new NamespacedKey(DoraMachines.getInstance(), "pay_key");
+    private static final NamespacedKey DAMAGE_KEY = new NamespacedKey(DoraMachines.getInstance(), "pay_to_win_damage_key");
     public PayToWin(@NotNull ItemStack stack) {
         super(stack);
     }
@@ -37,15 +39,17 @@ public class PayToWin extends Talisman {
     public void applyEffect(@NotNull Player player) {
         super.applyEffect(player);
         player.getPersistentDataContainer().set(PAY_KEY, RebarSerializers.INTEGER, PAY_AMOUNT);
+        player.getPersistentDataContainer().set(DAMAGE_KEY, RebarSerializers.FLOAT, DAMAGE_AMOUNT);
     }
     @Override
     public void removeEffect(@NotNull Player player) {
         super.removeEffect(player);
         player.getPersistentDataContainer().remove(PAY_KEY);
+        player.getPersistentDataContainer().remove(DAMAGE_KEY);
     }
     @Override
     public @NotNull List<@NotNull RebarArgument> getPlaceholders() {
-        return List.of(RebarArgument.of("amount", PAY_AMOUNT));
+        return List.of(RebarArgument.of("amount", PAY_AMOUNT), RebarArgument.of("damage", DAMAGE_AMOUNT));
     }
     public static class PayToWinListener implements Listener {
         @EventHandler @MultiHandler(priorities = EventPriority.LOWEST)
@@ -64,7 +68,7 @@ public class PayToWin extends Talisman {
             } 
             new ParticleBuilder(Particle.ITEM).count(5).extra(0.35).offset(0.2, 0.2, 0.2)
                 .location(event.getEntity().getLocation().add(0, 1, 0)).data(ItemStack.of(Material.GOLD_INGOT)).spawn();
-            event.setDamage(event.getDamage() + player.getPersistentDataContainer().get(PAY_KEY, RebarSerializers.INTEGER));
+            event.setDamage(event.getDamage() + player.getPersistentDataContainer().get(DAMAGE_KEY, RebarSerializers.FLOAT));
         }
     }
 }
