@@ -126,7 +126,7 @@ public class Slingshot extends RebarItem implements InteractRebarItemHandler, En
             if (!(event.getEntity() instanceof Player player)) return;
             if (!(RebarItem.fromStack(event.getBow()) instanceof Slingshot)) return;
             Entity arrow = event.getProjectile();
-            arrow.setInvisible(true);
+            Bukkit.getOnlinePlayers().forEach(p -> p.hideEntity(DoraMachines.getInstance(), arrow));
             if (event.getConsumable().getPersistentDataContainer().has(MOB_KEY)) {
                 EntitySnapshot snapshot = Bukkit.getEntityFactory()
                     .createEntitySnapshot(event.getConsumable().getPersistentDataContainer().get(MOB_KEY, RebarSerializers.STRING));
