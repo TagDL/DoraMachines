@@ -131,7 +131,7 @@ public class AssaultShield extends RebarItem implements
     }
     public static class AnvilEnchant implements Listener {
         @EventHandler
-        public void onPlayerLand(PrepareAnvilEvent event) {
+        public void onPreEnchant(PrepareAnvilEvent event) {
             ItemStack book = event.getInventory().getSecondItem();
             ItemStack raw_shield = event.getResult();
             if (raw_shield == null || raw_shield.isEmpty()) 
