@@ -313,10 +313,10 @@ waila:
     receiver: "模式: <yellow>接收端"
   liselette_enchanter:
     running: "剩余时间: <yellow>%time%<white> 秒"
-    not_running: "<red>暂未运行 <white>|"
+    not_running: "<red>暂未运行 <white>"
   liselette_disenchanter:
     running: "剩余时间: <yellow>%time%<white> 秒"
-    not_running: "<red>暂未运行 <white>|"
+    not_running: "<red>暂未运行 <white>"
   timing_charger:
     delay: "现在延迟: <yellow>%delay% <white>刻"
   redstone_clock:
