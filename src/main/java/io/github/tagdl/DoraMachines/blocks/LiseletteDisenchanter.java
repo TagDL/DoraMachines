@@ -215,7 +215,8 @@ public class LiseletteDisenchanter extends RebarBlock implements
         EnchantmentStorageMeta esmc = (EnchantmentStorageMeta) tempBookItemStack.getItemMeta();
         inputInventory.getItem(0).getItemMeta().getEnchants().forEach((enchantment, level) -> {
             tempItemStack.removeEnchantment(enchantment);
-            esmc.addStoredEnchant(enchantment, level, true);
+            int raw_level = esmc.getStoredEnchants().get(enchantment) == null ? 0 : esmc.getStoredEnchants().get(enchantment);
+            esmc.addStoredEnchant(enchantment, level == raw_level ? level + 1 : Math.max(raw_level, level), true);
         });
         tempBookItemStack.setItemMeta(esmc);
         outputInventory.addItem(new MachineUpdateReason(), tempItemStack);

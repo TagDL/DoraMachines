@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Slab;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.ItemDisplay;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -212,13 +213,18 @@ public class LiseletteEnchanter extends RebarBlock implements
         ItemStack tempEnchantItemStack = enchantInventory.getItem(0).clone();
         EnchantmentStorageMeta esm = (EnchantmentStorageMeta) enchantInventory.getItem(0).getItemMeta();
         EnchantmentStorageMeta esmc = esm;
-        esm.getStoredEnchants().forEach((enchantment, level) -> {
+        boolean has_change = false;
+        for (Enchantment enchantment : esm.getStoredEnchants().keySet()) {
+            int level = esm.getStoredEnchants().get(enchantment);
+            int tool_level = tempItemStack.getItemMeta().getEnchantLevel(enchantment);
             if (enchantment.canEnchantItem(tempItemStack)) {
-                tempItemStack.addUnsafeEnchantment(enchantment, level);
+                if (tool_level > level) continue;
+                has_change = true;
+                tempItemStack.addUnsafeEnchantment(enchantment, level == tool_level ? level + 1 : level);
                 esmc.removeStoredEnchant(enchantment);
             }
-        });
-        tempEnchantItemStack.setItemMeta(esmc);
+        }
+        if (has_change) tempEnchantItemStack.setItemMeta(esmc);
         outputInventory.addItem(new MachineUpdateReason(), tempItemStack);
         outputInventory.addItem(new MachineUpdateReason(), esmc.getStoredEnchants().isEmpty()
                 ? ItemStack.of(Material.BOOK) : tempEnchantItemStack);
